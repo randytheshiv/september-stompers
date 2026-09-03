@@ -33,18 +33,36 @@
     "Emily Jagroop"
   ],
   "weather": {
-    "1": {
-      "temp": 82,
-      "condition": "Sunny",
-      "emoji": "☀️",
-      "humidity": 65
-    },
-    "2": {
-      "temp": 78,
-      "condition": "Partly Cloudy",
-      "emoji": "⛅",
-      "humidity": 72
-    }
+    "1": { "temp": 82, "condition": "Sunny", "emoji": "☀️", "humidity": 65 },
+    "2": { "temp": 78, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 72 },
+    "3": { "temp": 75, "condition": "Overcast", "emoji": "☁️", "humidity": 68 },
+    "4": { "temp": 76, "condition": "Sunny", "emoji": "☀️", "humidity": 60 },
+    "5": { "temp": 79, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 65 },
+    "6": { "temp": 80, "condition": "Sunny", "emoji": "☀️", "humidity": 55 },
+    "7": { "temp": 77, "condition": "Light Rain", "emoji": "🌧️", "humidity": 80 },
+    "8": { "temp": 74, "condition": "Rainy", "emoji": "🌧️", "humidity": 85 },
+    "9": { "temp": 73, "condition": "Overcast", "emoji": "☁️", "humidity": 75 },
+    "10": { "temp": 78, "condition": "Sunny", "emoji": "☀️", "humidity": 62 },
+    "11": { "temp": 81, "condition": "Sunny", "emoji": "☀️", "humidity": 58 },
+    "12": { "temp": 79, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 70 },
+    "13": { "temp": 76, "condition": "Overcast", "emoji": "☁️", "humidity": 72 },
+    "14": { "temp": 75, "condition": "Light Rain", "emoji": "🌧️", "humidity": 78 },
+    "15": { "temp": 77, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 68 },
+    "16": { "temp": 80, "condition": "Sunny", "emoji": "☀️", "humidity": 60 },
+    "17": { "temp": 82, "condition": "Sunny", "emoji": "☀️", "humidity": 55 },
+    "18": { "temp": 78, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 65 },
+    "19": { "temp": 76, "condition": "Overcast", "emoji": "☁️", "humidity": 70 },
+    "20": { "temp": 74, "condition": "Rainy", "emoji": "🌧️", "humidity": 82 },
+    "21": { "temp": 73, "condition": "Rainy", "emoji": "🌧️", "humidity": 80 },
+    "22": { "temp": 75, "condition": "Overcast", "emoji": "☁️", "humidity": 75 },
+    "23": { "temp": 79, "condition": "Sunny", "emoji": "☀️", "humidity": 62 },
+    "24": { "temp": 81, "condition": "Sunny", "emoji": "☀️", "humidity": 58 },
+    "25": { "temp": 80, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 65 },
+    "26": { "temp": 77, "condition": "Light Rain", "emoji": "🌧️", "humidity": 76 },
+    "27": { "temp": 76, "condition": "Overcast", "emoji": "☁️", "humidity": 70 },
+    "28": { "temp": 78, "condition": "Sunny", "emoji": "☀️", "humidity": 60 },
+    "29": { "temp": 79, "condition": "Sunny", "emoji": "☀️", "humidity": 58 },
+    "30": { "temp": 81, "condition": "Sunny", "emoji": "☀️", "humidity": 55 }
   },
   "dailyData": {
     "1": {
