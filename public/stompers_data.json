@@ -1,0 +1,91 @@
+{
+  "challenge": {
+    "name": "September Stompers",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-30",
+    "totalDays": 30,
+    "currentDay": 2,
+    "prizePool": 360,
+    "prizes": {
+      "1st": 252,
+      "2nd": 72,
+      "3rd": 36
+    }
+  },
+  "players": [
+    "Goat InYuhThroat",
+    "Steven SumwhereU",
+    "Rodrick Lalloo",
+    "Randy Shiv",
+    "freshy g",
+    "Kareem Munir",
+    "Vaani",
+    "Jeremy Gobardhan",
+    "Nicholas Ram",
+    "Demiii",
+    "Amanda S",
+    "Tiffenii Devi",
+    "Sonia Shiv",
+    "Boor Paani",
+    "Leon P",
+    "Amelia Sookoo",
+    "Sherrence Phagoo",
+    "Emily Jagroop"
+  ],
+  "weather": {
+    "1": {
+      "temp": 82,
+      "condition": "Sunny",
+      "emoji": "☀️",
+      "humidity": 65
+    },
+    "2": {
+      "temp": 78,
+      "condition": "Partly Cloudy",
+      "emoji": "⛅",
+      "humidity": 72
+    }
+  },
+  "dailyData": {
+    "1": {
+      "Goat InYuhThroat": 21346,
+      "Steven SumwhereU": 19396,
+      "Rodrick Lalloo": 18884,
+      "Randy Shiv": 16490,
+      "freshy g": 14780,
+      "Kareem Munir": 11555,
+      "Vaani": 10088,
+      "Jeremy Gobardhan": 8812,
+      "Nicholas Ram": 6599,
+      "Demiii": 6036,
+      "Amanda S": 5616,
+      "Tiffenii Devi": 4762,
+      "Sonia Shiv": 4313,
+      "Boor Paani": 4044,
+      "Leon P": 3386,
+      "Amelia Sookoo": 3219,
+      "Sherrence Phagoo": 2404,
+      "Emily Jagroop": 2158
+    },
+    "2": {
+      "Goat InYuhThroat": 43750.5,
+      "Steven SumwhereU": 42749,
+      "Rodrick Lalloo": 38643,
+      "freshy g": 28012,
+      "Randy Shiv": 24792,
+      "Demiii": 20363,
+      "Kareem Munir": 18647,
+      "Amanda S": 18451,
+      "Vaani": 16206,
+      "Jeremy Gobardhan": 15787,
+      "Sherrence Phagoo": 14946,
+      "Nicholas Ram": 14323,
+      "Sonia Shiv": 10532,
+      "Boor Paani": 7426,
+      "Leon P": 6922,
+      "Amelia Sookoo": 5822,
+      "Emily Jagroop": 5518,
+      "Tiffenii Devi": 5348
+    }
+  }
+}
