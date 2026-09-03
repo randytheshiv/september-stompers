@@ -700,39 +700,6 @@ export default function StompersApp() {
               </div>
             </div>
           </div>
-            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
-              <Trophy className="text-yellow-400" size={24} />
-              Overall Leaders
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
-              {rankings.slice(0, 3).map((player, idx) => (
-                <div
-                  key={player.name}
-                  className={`rounded-lg p-4 md:p-6 border-2 ${
-                    idx === 0
-                      ? 'bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 border-yellow-500 md:scale-105'
-                      : idx === 1
-                      ? 'bg-gradient-to-br from-gray-700/40 to-gray-600/20 border-gray-400'
-                      : 'bg-gradient-to-br from-orange-900/40 to-orange-800/20 border-orange-500'
-                  }`}
-                >
-                  <div className="text-3xl md:text-4xl mb-2">{getMedalEmoji(idx + 1)}</div>
-                  <div className="text-lg md:text-xl font-bold mb-1 break-words">{getDisplayName(player.name)}</div>
-                  <div className="text-2xl md:text-3xl font-black text-yellow-300 mb-2">
-                    {player.total.toLocaleString()}
-                  </div>
-                  <div className="text-xs md:text-sm text-gray-300 mb-2 leading-tight">
-                    {getUniqueDistance(rankings.indexOf(player), player.total)}
-                  </div>
-                  <div className={`text-base md:text-lg font-bold ${
-                    idx === 0 ? 'text-yellow-400' : idx === 1 ? 'text-gray-300' : 'text-orange-400'
-                  }`}>
-                    ${player.prize}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* Cumulative Chart */}
           <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
