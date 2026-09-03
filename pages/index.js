@@ -333,10 +333,10 @@ export default function StompersApp() {
               </div>
             </div>
 
-            {/* Day Selector */}
-            <div className="bg-gray-700/30 rounded-lg p-4">
-              <div className="flex justify-between items-center mb-3">
-                <p className="text-gray-300 font-semibold">View Daily Steps:</p>
+            {/* Calendar Day Selector */}
+            <div className="bg-gray-700/30 rounded-lg p-6">
+              <div className="flex justify-between items-center mb-4">
+                <p className="text-gray-300 font-semibold text-lg">Select a Day</p>
                 <button
                   onClick={() => setEditingNames(!editingNames)}
                   className="flex items-center gap-2 px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm"
@@ -345,20 +345,92 @@ export default function StompersApp() {
                   {editingNames ? 'Done' : 'Edit Names'}
                 </button>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {Array.from({ length: data.challenge.currentDay }, (_, i) => i + 1).map(day => (
-                  <button
-                    key={day}
-                    onClick={() => setSelectedDay(day)}
-                    className={`px-4 py-2 rounded font-bold transition ${
-                      selectedDay === day
-                        ? 'bg-yellow-500 text-black'
-                        : 'bg-gray-600 hover:bg-gray-500 text-white'
-                    }`}
-                  >
-                    Day {day}
-                  </button>
-                ))}
+              
+              {/* Calendar Display */}
+              <div className="bg-gray-800 rounded-lg p-4 inline-block">
+                <div className="text-center mb-4">
+                  <h3 className="text-white font-bold text-lg">September 2026</h3>
+                  <p className="text-gray-400 text-sm">Current: Day {data.challenge.currentDay}</p>
+                </div>
+                
+                {/* Calendar Grid */}
+                <div className="grid grid-cols-7 gap-2">
+                  {/* Day headers */}
+                  {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+                    <div key={day} className="text-center text-gray-400 font-bold text-sm w-10 h-10 flex items-center justify-center">
+                      {day}
+                    </div>
+                  ))}
+                  
+                  {/* Calendar days */}
+                  {Array.from({ length: 35 }, (_, i) => {
+                    // September 2026 starts on Tuesday (day 2 of week)
+                    // Days 0-1: Previous month (Aug 30-31)
+                    // Days 2-31: September 1-30
+                    // Days 32-34: Next month (Oct 1-3)
+                    
+                    if (i < 1) {
+                      // Previous month days
+                      return (
+                        <div key={`prev-${i}`} className="text-center text-gray-600 text-sm w-10 h-10 flex items-center justify-center">
+                          {30 + i}
+                        </div>
+                      );
+                    } else if (i < 31) {
+                      // September days
+                      const day = i;
+                      const isAvailable = day <= data.challenge.currentDay;
+                      const isSelected = selectedDay === day;
+                      const isToday = day === data.challenge.currentDay;
+                      
+                      return (
+                        <button
+                          key={day}
+                          onClick={() => isAvailable && setSelectedDay(day)}
+                          disabled={!isAvailable}
+                          className={`text-center text-sm font-bold w-10 h-10 rounded flex items-center justify-center transition ${
+                            isSelected
+                              ? 'bg-yellow-500 text-black border-2 border-yellow-400'
+                              : isToday
+                              ? 'bg-blue-500 text-white'
+                              : isAvailable
+                              ? 'bg-gray-700 text-white hover:bg-gray-600 cursor-pointer'
+                              : 'bg-gray-900 text-gray-600 cursor-not-allowed'
+                          }`}
+                        >
+                          {day}
+                        </button>
+                      );
+                    } else {
+                      // Next month days
+                      return (
+                        <div key={`next-${i}`} className="text-center text-gray-600 text-sm w-10 h-10 flex items-center justify-center">
+                          {i - 30}
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+                
+                {/* Legend */}
+                <div className="mt-4 text-xs text-gray-400 space-y-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-yellow-500 rounded"></div>
+                    <span>Selected day</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                    <span>Today</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-gray-700 rounded"></div>
+                    <span>Available</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-gray-900 rounded"></div>
+                    <span>Not yet</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
