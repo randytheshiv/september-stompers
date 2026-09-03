@@ -596,14 +596,51 @@ export default function StompersApp() {
           {/* Daily Steps for Selected Day */}
           <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
             <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6">Day {selectedDay} Steps</h2>
-            <div className="overflow-x-auto -mx-4 md:mx-0 md:overflow-visible">
+            
+            {/* Mobile: Card View */}
+            <div className="md:hidden space-y-2">
+              {dayRankings.map((player, idx) => (
+                <div key={player.name} className="bg-gray-700/30 rounded-lg p-3 border border-gray-600">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-gray-400 w-6">{idx + 1}</span>
+                      <div>
+                        {editingNames ? (
+                          <input
+                            type="text"
+                            value={editedNames[player.name] || player.name}
+                            onChange={(e) => handleNameEdit(player.name, e.target.value)}
+                            className="bg-gray-600 text-white px-2 py-1 rounded text-xs w-32"
+                          />
+                        ) : (
+                          <div className="font-semibold text-sm truncate max-w-xs">{player.displayName}</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between text-xs md:text-sm">
+                    <div>
+                      <div className="text-gray-400">Today</div>
+                      <div className="text-cyan-400 font-bold">{(player.steps || 0).toLocaleString()}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-gray-400">Total</div>
+                      <div className="text-yellow-300 font-bold">{player.cumulative.toLocaleString()}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: Table View */}
+            <div className="hidden md:overflow-x-auto">
               <table className="w-full text-sm md:text-base">
                 <thead>
                   <tr className="border-b border-gray-700 bg-gray-900/50">
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Name</th>
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Today</th>
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Total</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Name</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Today</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -612,10 +649,10 @@ export default function StompersApp() {
                       key={player.name}
                       className="border-b border-gray-700 hover:bg-gray-700/30 transition"
                     >
-                      <td className="px-3 md:px-6 py-2 md:py-4">
+                      <td className="px-6 py-4">
                         <span className="font-bold text-gray-300 text-xs md:text-base">{idx + 1}</span>
                       </td>
-                      <td className="px-3 md:px-6 py-2 md:py-4">
+                      <td className="px-6 py-4">
                         {editingNames ? (
                           <input
                             type="text"
@@ -624,13 +661,13 @@ export default function StompersApp() {
                             className="bg-gray-700 text-white px-2 py-1 rounded w-full text-xs md:text-sm"
                           />
                         ) : (
-                          <span className="font-semibold text-xs md:text-base truncate">{player.displayName}</span>
+                          <span className="font-semibold text-xs md:text-base">{player.displayName}</span>
                         )}
                       </td>
-                      <td className="px-3 md:px-6 py-2 md:py-4 text-right text-cyan-400 font-bold text-xs md:text-base">
+                      <td className="px-6 py-4 text-right text-cyan-400 font-bold text-xs md:text-base">
                         {(player.steps || 0).toLocaleString()}
                       </td>
-                      <td className="px-3 md:px-6 py-2 md:py-4 text-right text-yellow-300 font-bold text-xs md:text-base">
+                      <td className="px-6 py-4 text-right text-yellow-300 font-bold text-xs md:text-base">
                         {player.cumulative.toLocaleString()}
                       </td>
                     </tr>
@@ -645,15 +682,50 @@ export default function StompersApp() {
             <div className="p-4 md:p-6 border-b border-gray-700">
               <h2 className="text-lg md:text-2xl font-bold">Cumulative Leaderboard</h2>
             </div>
-            <div className="overflow-x-auto -mx-4 md:mx-0 md:overflow-visible">
+            
+            {/* Mobile: Card View */}
+            <div className="md:hidden space-y-2 p-4">
+              {rankings.map((player, idx) => (
+                <div
+                  key={player.name}
+                  className={`rounded-lg p-4 border border-gray-600 ${
+                    idx < 3 ? 'bg-gray-700/40' : 'bg-gray-800/40'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold">{getMedalEmoji(idx + 1)}</span>
+                      <div>
+                        <div className="font-bold text-sm text-white truncate">{getDisplayName(player.name)}</div>
+                        <div className="text-xs text-gray-400">#{idx + 1}</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      {player.prize > 0 && (
+                        <div className="font-bold text-green-400 text-sm">${player.prize}</div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-yellow-300 font-bold text-base mb-1">
+                    {player.total.toLocaleString()} steps
+                  </div>
+                  <div className="text-xs text-gray-300">
+                    {getUniqueDistance(idx, player.total)}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: Table View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-sm md:text-base">
                 <thead>
                   <tr className="border-b border-gray-700 bg-gray-900/50">
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Player</th>
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-right text-gray-400 font-semibold text-xs md:text-sm hidden md:table-cell">Steps</th>
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm hidden lg:table-cell">Fact</th>
-                    <th className="px-3 md:px-6 py-2 md:py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Prize</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">#</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Steps</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Fun Fact</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Prize</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -664,26 +736,21 @@ export default function StompersApp() {
                         idx < 3 ? 'bg-gray-700/20' : ''
                       }`}
                     >
-                      <td className="px-3 md:px-6 py-2 md:py-4">
-                        <span className="text-base md:text-lg font-bold">
+                      <td className="px-6 py-4">
+                        <span className="text-lg font-bold">
                           {getMedalEmoji(idx + 1)}
                         </span>
                       </td>
-                      <td className="px-3 md:px-6 py-2 md:py-4 font-semibold text-xs md:text-base">
-                        <div className="truncate">{getDisplayName(player.name)}</div>
-                        <div className="text-yellow-300 text-xs md:hidden font-bold">
-                          {player.total.toLocaleString()}
-                        </div>
-                      </td>
-                      <td className="px-3 md:px-6 py-2 md:py-4 text-right text-yellow-300 font-bold text-xs md:text-base hidden md:table-cell">
+                      <td className="px-6 py-4 font-semibold">{getDisplayName(player.name)}</td>
+                      <td className="px-6 py-4 text-right text-yellow-300 font-bold">
                         {player.total.toLocaleString()}
                       </td>
-                      <td className="px-3 md:px-6 py-2 md:py-4 text-left text-xs md:text-sm text-gray-300 hidden lg:table-cell">
+                      <td className="px-6 py-4 text-left text-sm text-gray-300">
                         {getUniqueDistance(idx, player.total)}
                       </td>
-                      <td className="px-3 md:px-6 py-2 md:py-4 text-right">
+                      <td className="px-6 py-4 text-right">
                         {player.prize > 0 ? (
-                          <span className="font-bold text-green-400 text-xs md:text-base">${player.prize}</span>
+                          <span className="font-bold text-green-400">${player.prize}</span>
                         ) : (
                           <span className="text-gray-500">-</span>
                         )}
