@@ -361,24 +361,24 @@ export default function StompersApp() {
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
         {/* Header */}
         <div className="border-b border-gray-700 bg-gray-800/50 backdrop-blur">
-          <div className="max-w-7xl mx-auto px-6 py-8">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h1 className="text-5xl font-black mb-2 bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
+              <div className="flex-1">
+                <h1 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
                   SEPTEMBER STOMPERS
                 </h1>
-                <p className="text-gray-400 text-lg">
-                  Day {data.challenge.currentDay} of {data.challenge.totalDays} • {data.players.length} Players • ${data.challenge.prizePool} Prize Pool
+                <p className="text-gray-400 text-sm md:text-lg">
+                  Day {data.challenge.currentDay}/{data.challenge.totalDays} • {data.players.length} Players • ${data.challenge.prizePool}
                 </p>
               </div>
               
               {/* Weather Display */}
               {currentWeather && (
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-right relative group">
-                  <div className="text-4xl mb-2">{currentWeather.emoji}</div>
-                  <div className="text-white font-bold mb-1">{currentWeather.condition}</div>
-                  <div className="text-2xl text-blue-100 font-bold">{currentWeather.temp}°F</div>
-                  <div className="text-sm text-blue-200">Humidity: {currentWeather.humidity}%</div>
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 md:p-6 text-center md:text-right relative group w-full md:w-auto">
+                  <div className="text-3xl md:text-4xl mb-2">{currentWeather.emoji}</div>
+                  <div className="text-white font-bold text-sm md:text-base mb-1">{currentWeather.condition}</div>
+                  <div className="text-xl md:text-2xl text-blue-100 font-bold">{currentWeather.temp}°F</div>
+                  <div className="text-xs md:text-sm text-blue-200">Humidity: {currentWeather.humidity}%</div>
                   
                   <button
                     onClick={handleRefreshWeather}
@@ -393,37 +393,40 @@ export default function StompersApp() {
             </div>
             
             {/* Prize Breakdown */}
-            <div className="flex gap-4 flex-wrap mb-4">
-              <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-4 flex items-center gap-3">
-                <Trophy size={24} />
+            <div className="grid grid-cols-3 gap-2 md:flex md:gap-4 mb-4">
+              <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-center gap-2 md:gap-3">
+                <Trophy size={20} className="md:block hidden" />
+                <Trophy size={16} className="md:hidden" />
                 <div>
-                  <div className="text-sm opacity-90">1st Place</div>
-                  <div className="text-2xl font-bold">${data.challenge.prizes['1st']}</div>
+                  <div className="text-xs md:text-sm opacity-90">1st</div>
+                  <div className="text-lg md:text-2xl font-bold">${data.challenge.prizes['1st']}</div>
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-gray-400 to-gray-500 rounded-lg p-4 flex items-center gap-3">
-                <Trophy size={24} />
+              <div className="bg-gradient-to-br from-gray-400 to-gray-500 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-center gap-2 md:gap-3">
+                <Trophy size={20} className="md:block hidden" />
+                <Trophy size={16} className="md:hidden" />
                 <div>
-                  <div className="text-sm opacity-90">2nd Place</div>
-                  <div className="text-2xl font-bold">${data.challenge.prizes['2nd']}</div>
+                  <div className="text-xs md:text-sm opacity-90">2nd</div>
+                  <div className="text-lg md:text-2xl font-bold">${data.challenge.prizes['2nd']}</div>
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-4 flex items-center gap-3">
-                <Trophy size={24} />
+              <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-center gap-2 md:gap-3">
+                <Trophy size={20} className="md:block hidden" />
+                <Trophy size={16} className="md:hidden" />
                 <div>
-                  <div className="text-sm opacity-90">3rd Place</div>
-                  <div className="text-2xl font-bold">${data.challenge.prizes['3rd']}</div>
+                  <div className="text-xs md:text-sm opacity-90">3rd</div>
+                  <div className="text-lg md:text-2xl font-bold">${data.challenge.prizes['3rd']}</div>
                 </div>
               </div>
             </div>
 
             {/* Calendar Day Selector */}
-            <div className="bg-gray-700/30 rounded-lg p-6">
-              <div className="flex justify-between items-center mb-4">
-                <p className="text-gray-300 font-semibold text-lg">Select a Day</p>
+            <div className="bg-gray-700/30 rounded-lg p-4 md:p-6">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-0 mb-4">
+                <p className="text-gray-300 font-semibold text-base md:text-lg">Select a Day</p>
                 <button
                   onClick={() => setEditingNames(!editingNames)}
-                  className="flex items-center gap-2 px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm"
+                  className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 md:px-3 md:py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm font-semibold"
                 >
                   {editingNames ? <X size={16} /> : <Edit2 size={16} />}
                   {editingNames ? 'Done' : 'Edit Names'}
@@ -431,17 +434,17 @@ export default function StompersApp() {
               </div>
               
               {/* Calendar Display */}
-              <div className="bg-gray-800 rounded-lg p-4 inline-block">
-                <div className="text-center mb-4">
-                  <h3 className="text-white font-bold text-lg">September 2026</h3>
-                  <p className="text-gray-400 text-sm">Current: Day {data.challenge.currentDay}</p>
+              <div className="bg-gray-800 rounded-lg p-3 md:p-4 overflow-x-auto">
+                <div className="text-center mb-3 md:mb-4">
+                  <h3 className="text-white font-bold text-base md:text-lg">September 2026</h3>
+                  <p className="text-gray-400 text-xs md:text-sm">Current: Day {data.challenge.currentDay}</p>
                 </div>
                 
                 {/* Calendar Grid */}
-                <div className="grid grid-cols-7 gap-2">
+                <div className="grid grid-cols-7 gap-1 md:gap-2 min-w-max md:min-w-full">
                   {/* Day headers */}
                   {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-                    <div key={day} className="text-center text-gray-400 font-bold text-sm w-10 h-10 flex items-center justify-center">
+                    <div key={day} className="text-center text-gray-400 font-bold text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
                       {day}
                     </div>
                   ))}
@@ -456,7 +459,7 @@ export default function StompersApp() {
                     if (i < 1) {
                       // Previous month days
                       return (
-                        <div key={`prev-${i}`} className="text-center text-gray-600 text-sm w-10 h-10 flex items-center justify-center">
+                        <div key={`prev-${i}`} className="text-center text-gray-600 text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
                           {30 + i}
                         </div>
                       );
@@ -472,13 +475,13 @@ export default function StompersApp() {
                           key={day}
                           onClick={() => isAvailable && setSelectedDay(day)}
                           disabled={!isAvailable}
-                          className={`text-center text-sm font-bold w-10 h-10 rounded flex items-center justify-center transition ${
+                          className={`text-center text-xs md:text-sm font-bold w-8 h-8 md:w-10 md:h-10 rounded flex items-center justify-center transition active:scale-95 ${
                             isSelected
                               ? 'bg-yellow-500 text-black border-2 border-yellow-400'
                               : isToday
                               ? 'bg-blue-500 text-white'
                               : isAvailable
-                              ? 'bg-gray-700 text-white hover:bg-gray-600 cursor-pointer'
+                              ? 'bg-gray-700 text-white active:bg-gray-600 cursor-pointer'
                               : 'bg-gray-900 text-gray-600 cursor-not-allowed'
                           }`}
                         >
@@ -488,7 +491,7 @@ export default function StompersApp() {
                     } else {
                       // Next month days
                       return (
-                        <div key={`next-${i}`} className="text-center text-gray-600 text-sm w-10 h-10 flex items-center justify-center">
+                        <div key={`next-${i}`} className="text-center text-gray-600 text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
                           {i - 30}
                         </div>
                       );
@@ -497,21 +500,21 @@ export default function StompersApp() {
                 </div>
                 
                 {/* Legend */}
-                <div className="mt-4 text-xs text-gray-400 space-y-1">
+                <div className="mt-3 md:mt-4 text-xs md:text-sm text-gray-400 space-y-1 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-0">
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-yellow-500 rounded"></div>
-                    <span>Selected day</span>
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-yellow-500 rounded"></div>
+                    <span>Selected</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-blue-500 rounded"></div>
                     <span>Today</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-gray-700 rounded"></div>
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-gray-700 rounded"></div>
                     <span>Available</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-gray-900 rounded"></div>
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-gray-900 rounded"></div>
                     <span>Not yet</span>
                   </div>
                 </div>
@@ -521,18 +524,18 @@ export default function StompersApp() {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="w-full mx-auto px-4 md:px-6 py-6 md:py-8 max-w-7xl">
           {/* Top 3 Podium */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <Trophy className="text-yellow-400" />
-              Current Overall Leaders
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <Trophy className="text-yellow-400" size={24} />
+              Overall Leaders
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
               {rankings.slice(0, 3).map((player, idx) => (
                 <div
                   key={player.name}
-                  className={`rounded-lg p-6 border-2 ${
+                  className={`rounded-lg p-4 md:p-6 border-2 ${
                     idx === 0
                       ? 'bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 border-yellow-500 md:scale-105'
                       : idx === 1
@@ -540,15 +543,15 @@ export default function StompersApp() {
                       : 'bg-gradient-to-br from-orange-900/40 to-orange-800/20 border-orange-500'
                   }`}
                 >
-                  <div className="text-4xl mb-2">{getMedalEmoji(idx + 1)}</div>
-                  <div className="text-xl font-bold mb-1">{getDisplayName(player.name)}</div>
-                  <div className="text-3xl font-black text-yellow-300 mb-2">
-                    {player.total.toLocaleString()} steps
+                  <div className="text-3xl md:text-4xl mb-2">{getMedalEmoji(idx + 1)}</div>
+                  <div className="text-lg md:text-xl font-bold mb-1 break-words">{getDisplayName(player.name)}</div>
+                  <div className="text-2xl md:text-3xl font-black text-yellow-300 mb-2">
+                    {player.total.toLocaleString()}
                   </div>
-                  <div className="text-sm text-gray-300 mb-2">
+                  <div className="text-xs md:text-sm text-gray-300 mb-2 leading-tight">
                     {getUniqueDistance(rankings.indexOf(player), player.total)}
                   </div>
-                  <div className={`text-lg font-bold ${
+                  <div className={`text-base md:text-lg font-bold ${
                     idx === 0 ? 'text-yellow-400' : idx === 1 ? 'text-gray-300' : 'text-orange-400'
                   }`}>
                     ${player.prize}
@@ -559,21 +562,21 @@ export default function StompersApp() {
           </div>
 
           {/* Cumulative Chart */}
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-6 mb-12">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <TrendingUp className="text-blue-400" />
-              Cumulative Progress (All Days)
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <TrendingUp className="text-blue-400" size={24} />
+              Progress Trend
             </h2>
-            <ResponsiveContainer width="100%" height={400}>
-              <LineChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={chartData} margin={{ top: 5, right: 15, left: -20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                <XAxis dataKey="day" stroke="#888" tick={{ fontSize: 12 }} />
-                <YAxis stroke="#888" />
+                <XAxis dataKey="day" stroke="#888" tick={{ fontSize: 10 }} />
+                <YAxis stroke="#888" tick={{ fontSize: 10 }} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444', borderRadius: '8px' }}
+                  contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444', borderRadius: '8px', fontSize: '12px' }}
                   labelStyle={{ color: '#fff' }}
                 />
-                <Legend />
+                <Legend wrapperStyle={{ fontSize: '12px' }} />
                 {rankings.slice(0, 6).map((player, idx) => (
                   <Line
                     key={player.name}
@@ -587,20 +590,20 @@ export default function StompersApp() {
                 ))}
               </LineChart>
             </ResponsiveContainer>
-            <p className="text-gray-400 text-sm mt-4">Showing cumulative totals for top 6 players</p>
+            <p className="text-gray-400 text-xs md:text-sm mt-4">Top 6 players • Cumulative totals</p>
           </div>
 
           {/* Daily Steps for Selected Day */}
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-6 mb-12">
-            <h2 className="text-2xl font-bold mb-6">Steps on Day {selectedDay}</h2>
-            <div className="overflow-x-auto">
-              <table className="w-full">
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6">Day {selectedDay} Steps</h2>
+            <div className="overflow-x-auto -mx-4 md:mx-0 md:overflow-visible">
+              <table className="w-full text-sm md:text-base">
                 <thead>
                   <tr className="border-b border-gray-700 bg-gray-900/50">
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Rank</th>
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player Name</th>
-                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Day {selectedDay} Steps</th>
-                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Cumulative Total</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Name</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Today</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -609,25 +612,25 @@ export default function StompersApp() {
                       key={player.name}
                       className="border-b border-gray-700 hover:bg-gray-700/30 transition"
                     >
-                      <td className="px-6 py-4">
-                        <span className="font-bold text-gray-300">{idx + 1}</span>
+                      <td className="px-3 md:px-6 py-2 md:py-4">
+                        <span className="font-bold text-gray-300 text-xs md:text-base">{idx + 1}</span>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 md:px-6 py-2 md:py-4">
                         {editingNames ? (
                           <input
                             type="text"
                             value={editedNames[player.name] || player.name}
                             onChange={(e) => handleNameEdit(player.name, e.target.value)}
-                            className="bg-gray-700 text-white px-2 py-1 rounded w-full"
+                            className="bg-gray-700 text-white px-2 py-1 rounded w-full text-xs md:text-sm"
                           />
                         ) : (
-                          <span className="font-semibold">{player.displayName}</span>
+                          <span className="font-semibold text-xs md:text-base truncate">{player.displayName}</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 text-right text-cyan-400 font-bold">
-                        {player.steps.toLocaleString()}
+                      <td className="px-3 md:px-6 py-2 md:py-4 text-right text-cyan-400 font-bold text-xs md:text-base">
+                        {(player.steps || 0).toLocaleString()}
                       </td>
-                      <td className="px-6 py-4 text-right text-yellow-300 font-bold">
+                      <td className="px-3 md:px-6 py-2 md:py-4 text-right text-yellow-300 font-bold text-xs md:text-base">
                         {player.cumulative.toLocaleString()}
                       </td>
                     </tr>
@@ -639,18 +642,18 @@ export default function StompersApp() {
 
           {/* Overall Leaderboard */}
           <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg overflow-hidden">
-            <div className="p-6 border-b border-gray-700">
-              <h2 className="text-2xl font-bold">Cumulative Leaderboard</h2>
+            <div className="p-4 md:p-6 border-b border-gray-700">
+              <h2 className="text-lg md:text-2xl font-bold">Cumulative Leaderboard</h2>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full">
+            <div className="overflow-x-auto -mx-4 md:mx-0 md:overflow-visible">
+              <table className="w-full text-sm md:text-base">
                 <thead>
                   <tr className="border-b border-gray-700 bg-gray-900/50">
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Rank</th>
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player</th>
-                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Total Steps</th>
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Fun Fact</th>
-                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Prize</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Player</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-right text-gray-400 font-semibold text-xs md:text-sm hidden md:table-cell">Steps</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-left text-gray-400 font-semibold text-xs md:text-sm hidden lg:table-cell">Fact</th>
+                    <th className="px-3 md:px-6 py-2 md:py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Prize</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -661,21 +664,26 @@ export default function StompersApp() {
                         idx < 3 ? 'bg-gray-700/20' : ''
                       }`}
                     >
-                      <td className="px-6 py-4">
-                        <span className="text-lg font-bold">
+                      <td className="px-3 md:px-6 py-2 md:py-4">
+                        <span className="text-base md:text-lg font-bold">
                           {getMedalEmoji(idx + 1)}
                         </span>
                       </td>
-                      <td className="px-6 py-4 font-semibold">{getDisplayName(player.name)}</td>
-                      <td className="px-6 py-4 text-right text-yellow-300 font-bold">
+                      <td className="px-3 md:px-6 py-2 md:py-4 font-semibold text-xs md:text-base">
+                        <div className="truncate">{getDisplayName(player.name)}</div>
+                        <div className="text-yellow-300 text-xs md:hidden font-bold">
+                          {player.total.toLocaleString()}
+                        </div>
+                      </td>
+                      <td className="px-3 md:px-6 py-2 md:py-4 text-right text-yellow-300 font-bold text-xs md:text-base hidden md:table-cell">
                         {player.total.toLocaleString()}
                       </td>
-                      <td className="px-6 py-4 text-left text-sm text-gray-300">
+                      <td className="px-3 md:px-6 py-2 md:py-4 text-left text-xs md:text-sm text-gray-300 hidden lg:table-cell">
                         {getUniqueDistance(idx, player.total)}
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td className="px-3 md:px-6 py-2 md:py-4 text-right">
                         {player.prize > 0 ? (
-                          <span className="font-bold text-green-400">${player.prize}</span>
+                          <span className="font-bold text-green-400 text-xs md:text-base">${player.prize}</span>
                         ) : (
                           <span className="text-gray-500">-</span>
                         )}
@@ -688,8 +696,8 @@ export default function StompersApp() {
           </div>
 
           {/* Footer */}
-          <div className="mt-12 text-center text-gray-500 text-sm border-t border-gray-700 pt-8">
-            <p>Updated: Day {data.challenge.currentDay} • Next update: Tomorrow at 9:00pm</p>
+          <div className="mt-8 md:mt-12 text-center text-gray-500 text-xs md:text-sm border-t border-gray-700 pt-6 md:pt-8 pb-4">
+            <p>Day {data.challenge.currentDay} • Update: 9:00pm</p>
             <p className="mt-2">Good luck, Stompers! 👟⚡</p>
           </div>
         </div>
