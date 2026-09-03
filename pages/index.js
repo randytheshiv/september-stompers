@@ -633,7 +633,7 @@ export default function StompersApp() {
             </div>
 
             {/* Desktop: Table View */}
-            <div className="hidden md:overflow-x-auto">
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-sm md:text-base">
                 <thead>
                   <tr className="border-b border-gray-700 bg-gray-900/50">
