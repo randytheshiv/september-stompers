@@ -1,105 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Trophy, TrendingUp, TrendingDown, Award, Zap } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { Trophy, TrendingUp, TrendingDown, Award, Zap, Edit2, Save, X } from 'lucide-react';
 import Head from 'next/head';
-
-// Fun distance comparisons
-const DISTANCE_COMPARISONS = {
-  'Empire State Building Height': 1454,
-  'Central Park Length': 2650,
-  'Golden Gate Bridge Length': 8981,
-  'Statue of Liberty Height': 305,
-  'Washington Monument Height': 555,
-  'Big Ben Height': 316,
-  'Eiffel Tower Height': 1083,
-  'Football Field': 300,
-  'Mile': 5280,
-  'Kilometer': 3281,
-};
-
-// Achievement stickers/emojis
-const ACHIEVEMENTS = {
-  firstPlace: '🥇',
-  secondPlace: '🥈',
-  thirdPlace: '🥉',
-  hottestDay: '🔥',
-  climbed: '📈',
-  fell: '📉',
-  milestone10k: '🎉',
-  milestone20k: '⭐',
-  milestone30k: '✨',
-  personalBest: '💪',
-  consistent: '🔥',
-  comeback: '🚀',
-};
-
-function getDistanceContext(steps) {
-  const feetWalked = steps * 2.5 / 12; // Approximate feet from steps
-  
-  let bestMatch = null;
-  let smallestDifference = Infinity;
-  
-  Object.entries(DISTANCE_COMPARISONS).forEach(([name, distance]) => {
-    const difference = Math.abs(feetWalked - distance);
-    if (difference < smallestDifference) {
-      smallestDifference = difference;
-      bestMatch = { name, distance, feetWalked };
-    }
-  });
-  
-  if (bestMatch && feetWalked >= bestMatch.distance * 0.8) {
-    return `That's about ${(bestMatch.feetWalked / bestMatch.distance).toFixed(1)}x the height of ${bestMatch.name}!`;
-  }
-  
-  return `${steps.toLocaleString()} steps!`;
-}
-
-function getAchievementStickers(player, rank, dayData, previousDayData, totalSteps) {
-  const stickers = [];
-  
-  // Placement medals
-  if (rank === 1) stickers.push({ emoji: '🥇', label: '1st Place' });
-  if (rank === 2) stickers.push({ emoji: '🥈', label: '2nd Place' });
-  if (rank === 3) stickers.push({ emoji: '🥉', label: '3rd Place' });
-  
-  // Daily progress stickers
-  if (dayData && previousDayData) {
-    const dayGain = dayData - previousDayData;
-    const previousDayGain = previousDayData > 0 ? dayData - previousDayData : 0;
-    
-    if (dayGain > 3000) {
-      stickers.push({ emoji: '🚀', label: 'Big Day!' });
-    }
-    if (dayGain > 5000) {
-      stickers.push({ emoji: '💥', label: 'Crushed It!' });
-    }
-  }
-  
-  // Milestone stickers
-  if (totalSteps >= 30000) stickers.push({ emoji: '✨', label: '30k Steps!' });
-  else if (totalSteps >= 20000) stickers.push({ emoji: '⭐', label: '20k Steps!' });
-  else if (totalSteps >= 10000) stickers.push({ emoji: '🎉', label: '10k Steps!' });
-  
-  return stickers;
-}
 
 // NYC/Nassau County coordinates
 const NYC_COORDS = { lat: 40.7128, lon: -74.0060 };
 
-// Get weather emoji based on weather code
+// Unique distance comparisons - one per person
+const UNIQUE_DISTANCES = [
+  { name: 'Empire State Building Height', distance: 1454 },
+  { name: 'Central Park Length', distance: 2650 },
+  { name: 'Golden Gate Bridge Length', distance: 8981 },
+  { name: 'Statue of Liberty Height', distance: 305 },
+  { name: 'Washington Monument Height', distance: 555 },
+  { name: 'Big Ben Height', distance: 316 },
+  { name: 'Eiffel Tower Height', distance: 1083 },
+  { name: 'One Football Field', distance: 300 },
+  { name: 'One Mile', distance: 5280 },
+  { name: 'One Kilometer', distance: 3281 },
+  { name: 'Burj Khalifa Height', distance: 2717 },
+  { name: 'Christ the Redeemer Height', distance: 1145 },
+  { name: 'Leaning Tower of Pisa Height', distance: 183 },
+  { name: 'Sagrada Familia Height', distance: 2555 },
+  { name: 'Arc de Triomphe Height', distance: 49 },
+  { name: 'Tower Bridge Length', distance: 244 },
+  { name: 'Brooklyn Bridge Length', distance: 3455 },
+  { name: 'Sydney Opera House Height', distance: 220 },
+];
+
 function getWeatherEmoji(code, isDay) {
-  // WMO Weather interpretation codes
-  if (code === 0) return '☀️'; // Clear
-  if (code === 1 || code === 2) return '⛅'; // Partly cloudy
-  if (code === 3) return '☁️'; // Overcast
-  if (code === 45 || code === 48) return '🌫️'; // Foggy
-  if (code === 51 || code === 53 || code === 55) return '🌧️'; // Drizzle
-  if (code === 61 || code === 63 || code === 65) return '🌧️'; // Rain
-  if (code === 71 || code === 73 || code === 75 || code === 77 || code === 80 || code === 81 || code === 82) return '❄️'; // Snow/sleet
-  if (code === 85 || code === 86) return '❄️'; // Snow showers
-  if (code === 80 || code === 81 || code === 82) return '🌧️'; // Rain showers
-  if (code === 95 || code === 96 || code === 99) return '⛈️'; // Thunderstorm
-  return '🌤️'; // Default
+  if (code === 0) return '☀️';
+  if (code === 1 || code === 2) return '⛅';
+  if (code === 3) return '☁️';
+  if (code === 45 || code === 48) return '🌫️';
+  if (code === 51 || code === 53 || code === 55) return '🌧️';
+  if (code === 61 || code === 63 || code === 65) return '🌧️';
+  if (code === 71 || code === 73 || code === 75 || code === 77 || code === 80 || code === 81 || code === 82) return '❄️';
+  if (code === 85 || code === 86) return '❄️';
+  if (code === 95 || code === 96 || code === 99) return '⛈️';
+  return '🌤️';
 }
 
 function getWeatherCondition(code) {
@@ -117,7 +56,6 @@ function getWeatherCondition(code) {
   return 'Unknown';
 }
 
-// Fetch weather from Open-Meteo API (free, no API key needed)
 async function fetchCurrentWeather() {
   try {
     const response = await fetch(
@@ -142,14 +80,27 @@ async function fetchCurrentWeather() {
   }
 }
 
+function getUniqueDistance(playerIndex, steps) {
+  const feetWalked = steps * 2.5 / 12;
+  const distance = UNIQUE_DISTANCES[playerIndex % UNIQUE_DISTANCES.length];
+  
+  if (feetWalked >= distance.distance * 0.8) {
+    return `That's about ${(feetWalked / distance.distance).toFixed(1)}x the ${distance.name}!`;
+  }
+  
+  return `${steps.toLocaleString()} steps`;
+}
+
 export default function StompersApp() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentWeather, setCurrentWeather] = useState(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [editingNames, setEditingNames] = useState(false);
+  const [editedNames, setEditedNames] = useState({});
 
-  // Fetch leaderboard data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -157,6 +108,7 @@ export default function StompersApp() {
         if (!response.ok) throw new Error('Failed to load data');
         const jsonData = await response.json();
         setData(jsonData);
+        setSelectedDay(jsonData.challenge.currentDay);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -167,7 +119,6 @@ export default function StompersApp() {
     fetchData();
   }, []);
 
-  // Fetch weather on component mount and when data updates
   useEffect(() => {
     if (data) {
       const loadWeather = async () => {
@@ -180,8 +131,6 @@ export default function StompersApp() {
       };
       
       loadWeather();
-      
-      // Refresh weather every 15 minutes
       const interval = setInterval(loadWeather, 15 * 60 * 1000);
       return () => clearInterval(interval);
     }
@@ -194,6 +143,17 @@ export default function StompersApp() {
       setCurrentWeather(weather);
     }
     setWeatherLoading(false);
+  };
+
+  const handleNameEdit = (playerName, newName) => {
+    setEditedNames({
+      ...editedNames,
+      [playerName]: newName
+    });
+  };
+
+  const getDisplayName = (playerName) => {
+    return editedNames[playerName] || playerName;
   };
 
   if (loading) {
@@ -224,53 +184,46 @@ export default function StompersApp() {
 
   if (!data) return null;
 
-  // Calculate cumulative totals for each player
+  // Get daily steps for selected day
+  const getDailySteps = (day) => {
+    if (day === 1) {
+      // Day 1 is just the daily steps
+      return data.dailyData[1];
+    } else {
+      // Other days: subtract previous day from current day
+      const current = data.dailyData[day] || {};
+      const previous = data.dailyData[day - 1] || {};
+      const dailySteps = {};
+      
+      data.players.forEach(player => {
+        const curr = current[player] || 0;
+        const prev = previous[player] || 0;
+        dailySteps[player] = curr - prev;
+      });
+      
+      return dailySteps;
+    }
+  };
+
+  // Get cumulative totals
   const calculateCumulatives = () => {
     const cumulatives = {};
-    const dailyDataArray = Object.keys(data.dailyData)
-      .sort((a, b) => parseInt(a) - parseInt(b))
-      .map(day => parseInt(day));
-
     data.players.forEach(player => {
       cumulatives[player] = 0;
     });
 
-    dailyDataArray.forEach(day => {
+    for (let day = 1; day <= data.challenge.currentDay; day++) {
       data.players.forEach(player => {
         if (data.dailyData[day] && data.dailyData[day][player]) {
-          cumulatives[player] += data.dailyData[day][player];
+          cumulatives[player] = data.dailyData[day][player];
         }
       });
-    });
+    }
 
     return cumulatives;
   };
 
   const cumulatives = calculateCumulatives();
-
-  // Calculate climb/fall changes
-  const calculateClimbFall = () => {
-    const climbFall = {};
-    
-    data.players.forEach(player => {
-      const currentDay = data.challenge.currentDay;
-      const previousDay = currentDay - 1;
-      
-      if (previousDay > 0 && data.dailyData[currentDay] && data.dailyData[previousDay]) {
-        const currentTotal = data.dailyData[currentDay][player] || 0;
-        const previousTotal = data.dailyData[previousDay][player] || 0;
-        const dailyGain = currentTotal - previousTotal;
-        
-        climbFall[player] = dailyGain;
-      } else {
-        climbFall[player] = 0;
-      }
-    });
-    
-    return climbFall;
-  };
-  
-  const climbFall = calculateClimbFall();
 
   // Sort players by cumulative total
   const rankings = data.players
@@ -278,44 +231,34 @@ export default function StompersApp() {
       rank: idx + 1,
       name: player,
       total: cumulatives[player],
-      dailyGain: climbFall[player],
       prize: idx === 0 ? data.challenge.prizes['1st'] : idx === 1 ? data.challenge.prizes['2nd'] : idx === 2 ? data.challenge.prizes['3rd'] : 0
     }))
     .sort((a, b) => b.total - a.total);
 
-  // Prepare chart data
+  const daySteps = getDailySteps(selectedDay);
+  
+  // Get daily data for selected day
+  const dayRankings = data.players
+    .map((player, idx) => ({
+      name: player,
+      displayName: getDisplayName(player),
+      steps: daySteps[player] || 0,
+      cumulative: cumulatives[player]
+    }))
+    .sort((a, b) => b.steps - a.steps);
+
+  // Prepare cumulative chart data
   const chartData = [];
-  Object.keys(data.dailyData)
-    .sort((a, b) => parseInt(a) - parseInt(b))
-    .forEach(day => {
-      const dayData = { day: `Day ${day}` };
-      const dailyCumulative = {};
-
-      // Reset cumulatives for this day
-      data.players.forEach(player => {
-        dailyCumulative[player] = 0;
-      });
-
-      // Calculate cumulative up to this day
-      for (let d = 1; d <= parseInt(day); d++) {
-        data.players.forEach(player => {
-          if (data.dailyData[d] && data.dailyData[d][player]) {
-            dailyCumulative[player] += data.dailyData[d][player];
-          }
-        });
-      }
-
-      // Add top 6 to chart for readability
-      rankings.slice(0, 6).forEach(player => {
-        dayData[player.name] = dailyCumulative[player.name];
-      });
-
-      chartData.push(dayData);
+  for (let day = 1; day <= data.challenge.currentDay; day++) {
+    const dayData = { day: `Day ${day}` };
+    rankings.slice(0, 6).forEach(player => {
+      const cumTotal = data.dailyData[day]?.[player.name] || 0;
+      dayData[player.name] = cumTotal;
     });
+    chartData.push(dayData);
+  }
 
-  const colors = [
-    '#FFD700', '#C0C0C0', '#CD7F32', '#FF6B6B', '#4ECDC4', '#45B7D1'
-  ];
+  const colors = ['#FFD700', '#C0C0C0', '#CD7F32', '#FF6B6B', '#4ECDC4', '#45B7D1'];
 
   const getMedalEmoji = (rank) => {
     if (rank === 1) return '🥇';
@@ -327,9 +270,8 @@ export default function StompersApp() {
   return (
     <>
       <Head>
-        <title>September Stompers - Step Challenge Leaderboard</title>
+        <title>September Stompers - Live Leaderboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Real-time leaderboard for the September Stompers 30-day step challenge" />
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
@@ -346,16 +288,14 @@ export default function StompersApp() {
                 </p>
               </div>
               
-              {/* Weather Display - Auto-fetched from Open-Meteo API */}
+              {/* Weather Display */}
               {currentWeather && (
                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-right relative group">
                   <div className="text-4xl mb-2">{currentWeather.emoji}</div>
                   <div className="text-white font-bold mb-1">{currentWeather.condition}</div>
                   <div className="text-2xl text-blue-100 font-bold">{currentWeather.temp}°F</div>
                   <div className="text-sm text-blue-200">Humidity: {currentWeather.humidity}%</div>
-                  <div className="text-xs text-blue-200 mt-2 opacity-75">{currentWeather.location}</div>
                   
-                  {/* Refresh button */}
                   <button
                     onClick={handleRefreshWeather}
                     disabled={weatherLoading}
@@ -369,7 +309,7 @@ export default function StompersApp() {
             </div>
             
             {/* Prize Breakdown */}
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex gap-4 flex-wrap mb-4">
               <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-4 flex items-center gap-3">
                 <Trophy size={24} />
                 <div>
@@ -392,6 +332,35 @@ export default function StompersApp() {
                 </div>
               </div>
             </div>
+
+            {/* Day Selector */}
+            <div className="bg-gray-700/30 rounded-lg p-4">
+              <div className="flex justify-between items-center mb-3">
+                <p className="text-gray-300 font-semibold">View Daily Steps:</p>
+                <button
+                  onClick={() => setEditingNames(!editingNames)}
+                  className="flex items-center gap-2 px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm"
+                >
+                  {editingNames ? <X size={16} /> : <Edit2 size={16} />}
+                  {editingNames ? 'Done' : 'Edit Names'}
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {Array.from({ length: data.challenge.currentDay }, (_, i) => i + 1).map(day => (
+                  <button
+                    key={day}
+                    onClick={() => setSelectedDay(day)}
+                    className={`px-4 py-2 rounded font-bold transition ${
+                      selectedDay === day
+                        ? 'bg-yellow-500 text-black'
+                        : 'bg-gray-600 hover:bg-gray-500 text-white'
+                    }`}
+                  >
+                    Day {day}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -401,74 +370,48 @@ export default function StompersApp() {
           <div className="mb-12">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               <Trophy className="text-yellow-400" />
-              Current Leaders
+              Current Overall Leaders
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {rankings.slice(0, 3).map((player, idx) => {
-                const stickers = getAchievementStickers(player.name, idx + 1, data.dailyData[data.challenge.currentDay]?.[player.name], data.dailyData[data.challenge.currentDay - 1]?.[player.name], player.total);
-                return (
-                  <div
-                    key={player.name}
-                    className={`rounded-lg p-6 border-2 ${
-                      idx === 0
-                        ? 'bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 border-yellow-500 md:scale-105'
-                        : idx === 1
-                        ? 'bg-gradient-to-br from-gray-700/40 to-gray-600/20 border-gray-400'
-                        : 'bg-gradient-to-br from-orange-900/40 to-orange-800/20 border-orange-500'
-                    }`}
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="text-4xl">{getMedalEmoji(idx + 1)}</div>
-                      {player.dailyGain !== 0 && (
-                        <div className={`flex items-center gap-1 text-sm font-bold ${player.dailyGain > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                          {player.dailyGain > 0 ? '↑' : '↓'} {Math.abs(player.dailyGain).toLocaleString()}
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-xl font-bold mb-1">{player.name}</div>
-                    <div className="text-3xl font-black text-yellow-300 mb-2">
-                      {player.total.toLocaleString()} steps
-                    </div>
-                    
-                    {/* Achievement Stickers */}
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {stickers.map((sticker, i) => (
-                        <div key={i} className="text-lg" title={sticker.label}>
-                          {sticker.emoji}
-                        </div>
-                      ))}
-                    </div>
-                    
-                    {/* Fun Measurement */}
-                    <div className="text-xs text-gray-300 mb-2">
-                      {getDistanceContext(player.total)}
-                    </div>
-                    
-                    <div className={`text-lg font-bold ${
-                      idx === 0 ? 'text-yellow-400' : idx === 1 ? 'text-gray-300' : 'text-orange-400'
-                    }`}>
-                      ${player.prize}
-                    </div>
+              {rankings.slice(0, 3).map((player, idx) => (
+                <div
+                  key={player.name}
+                  className={`rounded-lg p-6 border-2 ${
+                    idx === 0
+                      ? 'bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 border-yellow-500 md:scale-105'
+                      : idx === 1
+                      ? 'bg-gradient-to-br from-gray-700/40 to-gray-600/20 border-gray-400'
+                      : 'bg-gradient-to-br from-orange-900/40 to-orange-800/20 border-orange-500'
+                  }`}
+                >
+                  <div className="text-4xl mb-2">{getMedalEmoji(idx + 1)}</div>
+                  <div className="text-xl font-bold mb-1">{getDisplayName(player.name)}</div>
+                  <div className="text-3xl font-black text-yellow-300 mb-2">
+                    {player.total.toLocaleString()} steps
                   </div>
-                );
-              })}
+                  <div className="text-sm text-gray-300 mb-2">
+                    {getUniqueDistance(rankings.indexOf(player), player.total)}
+                  </div>
+                  <div className={`text-lg font-bold ${
+                    idx === 0 ? 'text-yellow-400' : idx === 1 ? 'text-gray-300' : 'text-orange-400'
+                  }`}>
+                    ${player.prize}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Chart */}
+          {/* Cumulative Chart */}
           <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-6 mb-12">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               <TrendingUp className="text-blue-400" />
-              Cumulative Progress
+              Cumulative Progress (All Days)
             </h2>
             <ResponsiveContainer width="100%" height={400}>
               <LineChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                <XAxis 
-                  dataKey="day" 
-                  stroke="#888"
-                  tick={{ fontSize: 12 }}
-                />
+                <XAxis dataKey="day" stroke="#888" tick={{ fontSize: 12 }} />
                 <YAxis stroke="#888" />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444', borderRadius: '8px' }}
@@ -488,13 +431,60 @@ export default function StompersApp() {
                 ))}
               </LineChart>
             </ResponsiveContainer>
-            <p className="text-gray-400 text-sm mt-4">Showing top 6 players for clarity</p>
+            <p className="text-gray-400 text-sm mt-4">Showing cumulative totals for top 6 players</p>
           </div>
 
-          {/* Full Leaderboard */}
+          {/* Daily Steps for Selected Day */}
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-6 mb-12">
+            <h2 className="text-2xl font-bold mb-6">Steps on Day {selectedDay}</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-700 bg-gray-900/50">
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Rank</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player Name</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Day {selectedDay} Steps</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Cumulative Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dayRankings.map((player, idx) => (
+                    <tr
+                      key={player.name}
+                      className="border-b border-gray-700 hover:bg-gray-700/30 transition"
+                    >
+                      <td className="px-6 py-4">
+                        <span className="font-bold text-gray-300">{idx + 1}</span>
+                      </td>
+                      <td className="px-6 py-4">
+                        {editingNames ? (
+                          <input
+                            type="text"
+                            value={editedNames[player.name] || player.name}
+                            onChange={(e) => handleNameEdit(player.name, e.target.value)}
+                            className="bg-gray-700 text-white px-2 py-1 rounded w-full"
+                          />
+                        ) : (
+                          <span className="font-semibold">{player.displayName}</span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 text-right text-cyan-400 font-bold">
+                        {player.steps.toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-right text-yellow-300 font-bold">
+                        {player.cumulative.toLocaleString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Overall Leaderboard */}
           <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg overflow-hidden">
             <div className="p-6 border-b border-gray-700">
-              <h2 className="text-2xl font-bold">Full Leaderboard</h2>
+              <h2 className="text-2xl font-bold">Cumulative Leaderboard</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -502,74 +492,42 @@ export default function StompersApp() {
                   <tr className="border-b border-gray-700 bg-gray-900/50">
                     <th className="px-6 py-3 text-left text-gray-400 font-semibold">Rank</th>
                     <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player</th>
-                    <th className="px-6 py-3 text-center text-gray-400 font-semibold">Today</th>
                     <th className="px-6 py-3 text-right text-gray-400 font-semibold">Total Steps</th>
-                    <th className="px-6 py-3 text-center text-gray-400 font-semibold">Achievements</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Fun Fact</th>
                     <th className="px-6 py-3 text-right text-gray-400 font-semibold">Prize</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {rankings.map((player, idx) => {
-                    const stickers = getAchievementStickers(player.name, idx + 1, data.dailyData[data.challenge.currentDay]?.[player.name], data.dailyData[data.challenge.currentDay - 1]?.[player.name], player.total);
-                    return (
-                      <tr
-                        key={player.name}
-                        className={`border-b border-gray-700 hover:bg-gray-700/30 transition ${
-                          idx < 3 ? 'bg-gray-700/20' : ''
-                        }`}
-                      >
-                        <td className="px-6 py-4">
-                          <span className="text-lg font-bold">
-                            {getMedalEmoji(idx + 1)}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 font-semibold">{player.name}</td>
-                        <td className="px-6 py-4 text-center">
-                          {player.dailyGain !== 0 && (
-                            <span className={`font-bold text-sm ${player.dailyGain > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                              {player.dailyGain > 0 ? '↑' : '↓'} {Math.abs(player.dailyGain).toLocaleString()}
-                            </span>
-                          )}
-                          {player.dailyGain === 0 && <span className="text-gray-500">-</span>}
-                        </td>
-                        <td className="px-6 py-4 text-right text-yellow-300 font-bold">
-                          {player.total.toLocaleString()}
-                        </td>
-                        <td className="px-6 py-4 text-center">
-                          <div className="flex flex-wrap gap-1 justify-center">
-                            {stickers.map((sticker, i) => (
-                              <span key={i} className="text-lg" title={sticker.label}>
-                                {sticker.emoji}
-                              </span>
-                            ))}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          {player.prize > 0 ? (
-                            <span className="font-bold text-green-400">${player.prize}</span>
-                          ) : (
-                            <span className="text-gray-500">-</span>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {rankings.map((player, idx) => (
+                    <tr
+                      key={player.name}
+                      className={`border-b border-gray-700 hover:bg-gray-700/30 transition ${
+                        idx < 3 ? 'bg-gray-700/20' : ''
+                      }`}
+                    >
+                      <td className="px-6 py-4">
+                        <span className="text-lg font-bold">
+                          {getMedalEmoji(idx + 1)}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 font-semibold">{getDisplayName(player.name)}</td>
+                      <td className="px-6 py-4 text-right text-yellow-300 font-bold">
+                        {player.total.toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-left text-sm text-gray-300">
+                        {getUniqueDistance(idx, player.total)}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        {player.prize > 0 ? (
+                          <span className="font-bold text-green-400">${player.prize}</span>
+                        ) : (
+                          <span className="text-gray-500">-</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
-            </div>
-          </div>
-
-          {/* Fun Facts Section */}
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-6 mb-12 mt-12">
-            <h2 className="text-2xl font-bold mb-6">🎯 Fun Facts & Measurements</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {rankings.slice(0, 6).map((player) => (
-                <div key={player.name} className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
-                  <div className="font-bold text-yellow-300 mb-2">{player.name}</div>
-                  <div className="text-2xl font-black text-white mb-2">{player.total.toLocaleString()}</div>
-                  <div className="text-sm text-gray-300">{getDistanceContext(player.total)}</div>
-                </div>
-              ))}
             </div>
           </div>
 
