@@ -572,36 +572,72 @@ export default function StompersApp() {
               {/* Biggest Gainers */}
               <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 border border-green-600 rounded-lg p-4 md:p-6">
                 <h3 className="text-green-400 font-bold mb-4 flex items-center gap-2">
-                  🚀 Biggest Gainers Today
+                  🚀 Biggest Gainers (vs Yesterday)
                 </h3>
                 <div className="space-y-3">
-                  {dayRankings.slice(0, 3).map((player, idx) => (
-                    <div key={player.name} className="flex justify-between items-center">
-                      <div>
-                        <div className="font-semibold text-sm md:text-base">{getDisplayName(player.name)}</div>
-                        <div className="text-xs text-gray-400">+{player.steps.toLocaleString()} steps</div>
+                  {(() => {
+                    if (selectedDay === 1) {
+                      return <div className="text-gray-400 text-sm">No previous day to compare</div>;
+                    }
+                    
+                    const todaySteps = getDailySteps(selectedDay);
+                    const yesterdaySteps = getDailySteps(selectedDay - 1);
+                    
+                    const changes = data.players.map(player => ({
+                      name: player,
+                      today: todaySteps[player] || 0,
+                      yesterday: yesterdaySteps[player] || 0,
+                      change: (todaySteps[player] || 0) - (yesterdaySteps[player] || 0)
+                    }))
+                    .sort((a, b) => b.change - a.change)
+                    .slice(0, 3);
+                    
+                    return changes.map((player) => (
+                      <div key={player.name} className="flex justify-between items-center">
+                        <div>
+                          <div className="font-semibold text-sm md:text-base">{getDisplayName(player.name)}</div>
+                          <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
+                        </div>
+                        <div className="text-green-400 font-bold">+{player.change.toLocaleString()}</div>
                       </div>
-                      <div className="text-green-400 font-bold">#{idx + 1}</div>
-                    </div>
-                  ))}
+                    ));
+                  })()}
                 </div>
               </div>
 
               {/* Biggest Losers */}
               <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-600 rounded-lg p-4 md:p-6">
                 <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
-                  📉 Slowest Today
+                  📉 Biggest Fallers (vs Yesterday)
                 </h3>
                 <div className="space-y-3">
-                  {dayRankings.slice(-3).reverse().map((player, idx) => (
-                    <div key={player.name} className="flex justify-between items-center">
-                      <div>
-                        <div className="font-semibold text-sm md:text-base">{getDisplayName(player.name)}</div>
-                        <div className="text-xs text-gray-400">{player.steps.toLocaleString()} steps</div>
+                  {(() => {
+                    if (selectedDay === 1) {
+                      return <div className="text-gray-400 text-sm">No previous day to compare</div>;
+                    }
+                    
+                    const todaySteps = getDailySteps(selectedDay);
+                    const yesterdaySteps = getDailySteps(selectedDay - 1);
+                    
+                    const changes = data.players.map(player => ({
+                      name: player,
+                      today: todaySteps[player] || 0,
+                      yesterday: yesterdaySteps[player] || 0,
+                      change: (todaySteps[player] || 0) - (yesterdaySteps[player] || 0)
+                    }))
+                    .sort((a, b) => a.change - b.change)
+                    .slice(0, 3);
+                    
+                    return changes.map((player) => (
+                      <div key={player.name} className="flex justify-between items-center">
+                        <div>
+                          <div className="font-semibold text-sm md:text-base">{getDisplayName(player.name)}</div>
+                          <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
+                        </div>
+                        <div className="text-red-400 font-bold">{player.change.toLocaleString()}</div>
                       </div>
-                      <div className="text-red-400 font-bold">#{dayRankings.length - dayRankings.indexOf(player)}</div>
-                    </div>
-                  ))}
+                    ));
+                  })()}
                 </div>
               </div>
 
