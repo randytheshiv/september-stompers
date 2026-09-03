@@ -372,22 +372,14 @@ export default function StompersApp() {
                 </p>
               </div>
               
-              {/* Weather Display */}
-              {currentWeather && (
+              {/* Weather Display for Selected Day */}
+              {data.weather && data.weather[selectedDay] && (
                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 md:p-6 text-center md:text-right relative group w-full md:w-auto">
-                  <div className="text-3xl md:text-4xl mb-2">{currentWeather.emoji}</div>
-                  <div className="text-white font-bold text-sm md:text-base mb-1">{currentWeather.condition}</div>
-                  <div className="text-xl md:text-2xl text-blue-100 font-bold">{currentWeather.temp}°F</div>
-                  <div className="text-xs md:text-sm text-blue-200">Humidity: {currentWeather.humidity}%</div>
-                  
-                  <button
-                    onClick={handleRefreshWeather}
-                    disabled={weatherLoading}
-                    className="absolute top-2 right-2 bg-blue-400 hover:bg-blue-300 disabled:bg-blue-500 text-white rounded-full p-1 transition text-xs"
-                    title="Refresh weather"
-                  >
-                    {weatherLoading ? '⟳' : '↻'}
-                  </button>
+                  <div className="text-3xl md:text-4xl mb-2">{data.weather[selectedDay].emoji}</div>
+                  <div className="text-white font-bold text-sm md:text-base mb-1">Day {selectedDay}</div>
+                  <div className="text-white font-bold text-sm md:text-base mb-1">{data.weather[selectedDay].condition}</div>
+                  <div className="text-xl md:text-2xl text-blue-100 font-bold">{data.weather[selectedDay].temp}°F</div>
+                  <div className="text-xs md:text-sm text-blue-200">Humidity: {data.weather[selectedDay].humidity}%</div>
                 </div>
               )}
             </div>
