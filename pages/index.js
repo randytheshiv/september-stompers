@@ -6,8 +6,9 @@ import Head from 'next/head';
 // NYC/Nassau County coordinates
 const NYC_COORDS = { lat: 40.7128, lon: -74.0060 };
 
-// Unique distance comparisons - one per person
+// Unique distance comparisons - one per person (80+ landmarks!)
 const UNIQUE_DISTANCES = [
+  // Original 18
   { name: 'Empire State Building Height', distance: 1454 },
   { name: 'Central Park Length', distance: 2650 },
   { name: 'Golden Gate Bridge Length', distance: 8981 },
@@ -26,6 +27,89 @@ const UNIQUE_DISTANCES = [
   { name: 'Tower Bridge Length', distance: 244 },
   { name: 'Brooklyn Bridge Length', distance: 3455 },
   { name: 'Sydney Opera House Height', distance: 220 },
+  
+  // Additional Famous Landmarks
+  { name: 'Statue of Christ the Redeemer Length', distance: 98 },
+  { name: 'One-Twenty Story Building', distance: 1200 },
+  { name: 'Mount Everest Base Camp to Summit', distance: 26246 },
+  { name: 'Great Wall of China (one section)', distance: 13100 },
+  { name: 'Taj Mahal Length', distance: 561 },
+  { name: 'Colosseum Perimeter', distance: 1837 },
+  { name: 'Lincoln Memorial Height', distance: 190 },
+  { name: 'Space Needle Height', distance: 605 },
+  { name: 'CN Tower Height', distance: 1136 },
+  { name: 'Petronas Twin Towers Height', distance: 1483 },
+  { name: 'One World Trade Center Height', distance: 1776 },
+  { name: 'Chrysler Building Height', distance: 1046 },
+  { name: 'Woolworth Building Height', distance: 792 },
+  { name: 'Transamerica Pyramid Height', distance: 853 },
+  { name: 'Willis Tower Height', distance: 1450 },
+  { name: 'Trump Tower Height', distance: 664 },
+  
+  // Bridges & Structures
+  { name: 'Suspension Bridge (average)', distance: 3280 },
+  { name: 'George Washington Bridge', distance: 3500 },
+  { name: 'Verrazano Bridge', distance: 13632 },
+  { name: 'London Bridge', distance: 928 },
+  { name: 'Millennium Bridge', distance: 330 },
+  { name: 'Akashi Kaikyo Bridge', distance: 30105 },
+  { name: 'Forth Bridge', distance: 8296 },
+  
+  // Geographic Distances
+  { name: 'New York to Boston', distance: 215136 },
+  { name: 'San Francisco to Los Angeles', distance: 383040 },
+  { name: 'New York to Philadelphia', distance: 95040 },
+  { name: 'Manhattan Length', distance: 33660 },
+  { name: 'Manhattan Width', distance: 11484 },
+  { name: 'Lake Michigan Length', distance: 307680 },
+  { name: 'English Channel Width', distance: 106920 },
+  { name: 'Grand Canyon Width', distance: 264480 },
+  
+  // Sports Distances
+  { name: 'American Football Field (100 yards)', distance: 300 },
+  { name: 'Soccer Field Length', distance: 360 },
+  { name: 'Basketball Court Length', distance: 94 },
+  { name: 'Tennis Court Length', distance: 78 },
+  { name: 'Baseball Infield', distance: 360 },
+  { name: 'Track & Field Circuit', distance: 1312 },
+  { name: 'Olympic Marathon Distance', distance: 138336 },
+  { name: 'Ironman Triathlon Run', distance: 138336 },
+  
+  // Nature & Geology
+  { name: 'Mount Fuji Height', distance: 12388 },
+  { name: 'Mount Kilimanjaro Height', distance: 19341 },
+  { name: 'Machu Picchu Elevation', distance: 7970 },
+  { name: 'Dead Sea Depth', distance: 1410 },
+  { name: 'Mariana Trench Depth', distance: 358367 },
+  { name: 'Victoria Falls Height', distance: 355 },
+  { name: 'Niagara Falls Height', distance: 188 },
+  { name: 'Yellowstone Geyser Height', distance: 180 },
+  
+  // Historical Routes
+  { name: 'Route 66 (Chicago to LA)', distance: 2448960 },
+  { name: 'Oregon Trail Length', distance: 2170560 },
+  { name: 'Appalachian Trail Length', distance: 2190240 },
+  { name: 'Trans-Siberian Railway', distance: 5815200 },
+  
+  // Speed Records & Distances
+  { name: 'Speed of Sound (1 second)', distance: 1125 },
+  { name: 'Usain Bolt 100m Record', distance: 328 },
+  { name: 'Marathon Distance', distance: 138336 },
+  { name: 'Half Marathon Distance', distance: 69168 },
+  { name: '5K Race', distance: 16404 },
+  { name: '10K Race', distance: 32808 },
+  
+  // Other Famous Attractions
+  { name: 'Disneyland Park Perimeter', distance: 15840 },
+  { name: 'Times Square Length', distance: 900 },
+  { name: 'Shibuya Crossing Width', distance: 492 },
+  { name: 'Red Square Moscow', distance: 2330 },
+  { name: 'St. Peter\'s Basilica Height', distance: 448 },
+  { name: 'Vatican City Width', distance: 2625 },
+  { name: 'The Great Sphinx Height', distance: 240 },
+  { name: 'Parthenon Length', distance: 228 },
+  { name: 'Angkor Wat Perimeter', distance: 5280 },
+  { name: 'Great Pyramid Height', distance: 481 },
 ];
 
 function getWeatherEmoji(code, isDay) {
