@@ -286,7 +286,7 @@ export default function StompersApp() {
     for (let day = 1; day <= data.challenge.currentDay; day++) {
       data.players.forEach(player => {
         if (data.dailyData[day] && data.dailyData[day][player]) {
-          cumulatives[player] = data.dailyData[day][player];
+          cumulatives[player] += data.dailyData[day][player];
         }
       });
     }
@@ -327,7 +327,10 @@ export default function StompersApp() {
   for (let day = 1; day <= data.challenge.currentDay; day++) {
     const dayData = { day: `Day ${day}` };
     rankings.slice(0, 6).forEach(player => {
-      const cumTotal = data.dailyData[day]?.[player.name] || 0;
+      let cumTotal = 0;
+      for (let d = 1; d <= day; d++) {
+        cumTotal += data.dailyData[d]?.[player.name] || 0;
+      }
       dayData[player.name] = cumTotal;
     });
     chartData.push(dayData);
