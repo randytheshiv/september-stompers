@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import { Trophy, TrendingUp, TrendingDown, Award, Zap, Edit2, Save, X } from 'lucide-react';
+import { Trophy, TrendingUp, TrendingDown, Award, Zap, Save } from 'lucide-react';
 import Head from 'next/head';
 
 // NYC/Nassau County coordinates
@@ -182,8 +182,6 @@ export default function StompersApp() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [editingNames, setEditingNames] = useState(false);
-  const [editedNames, setEditedNames] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -227,17 +225,6 @@ export default function StompersApp() {
       setCurrentWeather(weather);
     }
     setWeatherLoading(false);
-  };
-
-  const handleNameEdit = (playerName, newName) => {
-    setEditedNames({
-      ...editedNames,
-      [playerName]: newName
-    });
-  };
-
-  const getDisplayName = (playerName) => {
-    return editedNames[playerName] || playerName;
   };
 
   if (loading) {
@@ -329,7 +316,7 @@ export default function StompersApp() {
   const dayRankings = data.players
     .map((player, idx) => ({
       name: player,
-      displayName: getDisplayName(player),
+      displayName: player.name,
       steps: daySteps[player] || 0,
       cumulative: cumulatives[player]
     }))
@@ -418,18 +405,9 @@ export default function StompersApp() {
 
             {/* Calendar Day Selector */}
             <div className="bg-gray-700/30 rounded-lg p-4 md:p-6">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-0 mb-4">
+              <div className="mb-4">
                 <p className="text-gray-300 font-semibold text-base md:text-lg">Select a Day</p>
-                <button
-                  onClick={() => setEditingNames(!editingNames)}
-                  className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 md:px-3 md:py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm font-semibold"
-                >
-                  {editingNames ? <X size={16} /> : <Edit2 size={16} />}
-                  {editingNames ? 'Done' : 'Edit Names'}
-                </button>
               </div>
-              
-              {/* Calendar Display */}
               <div className="bg-gray-800 rounded-lg p-3 md:p-4 overflow-x-auto">
                 <div className="text-center mb-3 md:mb-4">
                   <h3 className="text-white font-bold text-base md:text-lg">September 2026</h3>
@@ -540,7 +518,7 @@ export default function StompersApp() {
                   }`}
                 >
                   <div className="text-3xl md:text-4xl mb-2">{getMedalEmoji(idx + 1)}</div>
-                  <div className="text-lg md:text-xl font-bold mb-1 break-words">{getDisplayName(player.name)}</div>
+                  <div className="text-lg md:text-xl font-bold mb-1 break-words">{player.name}</div>
                   <div className="text-2xl md:text-3xl font-black text-yellow-300 mb-2">
                     {player.total.toLocaleString()}
                   </div>
@@ -591,7 +569,7 @@ export default function StompersApp() {
                     return changes.map((player) => (
                       <div key={player.name} className="flex justify-between items-center">
                         <div>
-                          <div className="font-semibold text-sm md:text-base">{getDisplayName(player.name)}</div>
+                          <div className="font-semibold text-sm md:text-base">{player.name}</div>
                           <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
                         </div>
                         <div className="text-green-400 font-bold">+{player.change.toLocaleString()}</div>
@@ -627,7 +605,7 @@ export default function StompersApp() {
                     return changes.map((player) => (
                       <div key={player.name} className="flex justify-between items-center">
                         <div>
-                          <div className="font-semibold text-sm md:text-base">{getDisplayName(player.name)}</div>
+                          <div className="font-semibold text-sm md:text-base">{player.name}</div>
                           <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
                         </div>
                         <div className="text-red-400 font-bold">{player.change.toLocaleString()}</div>
@@ -671,7 +649,7 @@ export default function StompersApp() {
                       climbers.map((player, idx) => (
                         <div key={player.name} className="flex justify-between items-center">
                           <div>
-                            <div className="font-semibold text-sm md:text-base">{getDisplayName(player.name)}</div>
+                            <div className="font-semibold text-sm md:text-base">{player.name}</div>
                             <div className="text-xs text-gray-400">#{player.day1Rank} → #{player.currentRank}</div>
                           </div>
                           <div className="text-blue-400 font-bold">+{player.movement}</div>
@@ -718,7 +696,7 @@ export default function StompersApp() {
                       fallers.map((player, idx) => (
                         <div key={player.name} className="flex justify-between items-center">
                           <div>
-                            <div className="font-semibold text-sm md:text-base">{getDisplayName(player.name)}</div>
+                            <div className="font-semibold text-sm md:text-base">{player.name}</div>
                             <div className="text-xs text-gray-400">#{player.day1Rank} → #{player.currentRank}</div>
                           </div>
                           <div className="text-orange-400 font-bold">{player.movement}</div>
@@ -777,16 +755,7 @@ export default function StompersApp() {
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-gray-400 w-6">{idx + 1}</span>
                       <div>
-                        {editingNames ? (
-                          <input
-                            type="text"
-                            value={editedNames[player.name] || player.name}
-                            onChange={(e) => handleNameEdit(player.name, e.target.value)}
-                            className="bg-gray-600 text-white px-2 py-1 rounded text-xs w-32"
-                          />
-                        ) : (
-                          <div className="font-semibold text-sm truncate max-w-xs">{player.displayName}</div>
-                        )}
+                        <div className="font-semibold text-sm truncate max-w-xs">{player.name}</div>
                       </div>
                     </div>
                   </div>
@@ -825,16 +794,7 @@ export default function StompersApp() {
                         <span className="font-bold text-gray-300 text-xs md:text-base">{idx + 1}</span>
                       </td>
                       <td className="px-6 py-4">
-                        {editingNames ? (
-                          <input
-                            type="text"
-                            value={editedNames[player.name] || player.name}
-                            onChange={(e) => handleNameEdit(player.name, e.target.value)}
-                            className="bg-gray-700 text-white px-2 py-1 rounded w-full text-xs md:text-sm"
-                          />
-                        ) : (
-                          <span className="font-semibold text-xs md:text-base">{player.displayName}</span>
-                        )}
+                        <div className="font-semibold text-sm truncate max-w-xs">{player.name}</div>
                       </td>
                       <td className="px-6 py-4 text-right text-cyan-400 font-bold text-xs md:text-base">
                         {(player.steps || 0).toLocaleString()}
@@ -868,7 +828,7 @@ export default function StompersApp() {
                     <div className="flex items-center gap-3">
                       <span className="text-2xl font-bold">{getMedalEmoji(idx + 1)}</span>
                       <div>
-                        <div className="font-bold text-sm text-white truncate">{getDisplayName(player.name)}</div>
+                        <div className="font-bold text-sm text-white truncate">{player.name}</div>
                         <div className="text-xs text-gray-400">#{idx + 1}</div>
                       </div>
                     </div>
@@ -913,7 +873,7 @@ export default function StompersApp() {
                           {getMedalEmoji(idx + 1)}
                         </span>
                       </td>
-                      <td className="px-6 py-4 font-semibold">{getDisplayName(player.name)}</td>
+                      <td className="px-6 py-4 font-semibold">{player.name}</td>
                       <td className="px-6 py-4 text-right text-yellow-300 font-bold">
                         {player.total.toLocaleString()}
                       </td>
