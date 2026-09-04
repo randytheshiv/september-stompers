@@ -257,23 +257,8 @@ export default function StompersApp() {
 
   // Get daily steps for selected day
   const getDailySteps = (day) => {
-    if (day === 1) {
-      // Day 1 is just the daily steps
-      return data.dailyData[1];
-    } else {
-      // Other days: subtract previous day from current day
-      const current = data.dailyData[day] || {};
-      const previous = data.dailyData[day - 1] || {};
-      const dailySteps = {};
-      
-      data.players.forEach(player => {
-        const curr = current[player] || 0;
-        const prev = previous[player] || 0;
-        dailySteps[player] = curr - prev;
-      });
-      
-      return dailySteps;
-    }
+    // All days in dailyData are already DAILY steps, just return as-is
+    return data.dailyData[day] || {};
   };
 
   // Get cumulative totals
