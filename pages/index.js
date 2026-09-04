@@ -794,7 +794,7 @@ export default function StompersApp() {
             </div>
           </div>
           </div>
-          {/* END TAB 1: TODAY */}
+          )}
 
           {/* TAB 2: OVERALL */}
           {activeTab === 'overall' && (
@@ -1128,7 +1128,7 @@ export default function StompersApp() {
             </div>
           </div>
           </div>
-          {/* END TAB 2: OVERALL */}
+          )}
 
           {/* Footer */}
           <div className="mt-8 md:mt-12 text-center text-gray-500 text-xs md:text-sm border-t border-gray-700 pt-6 md:pt-8 pb-4">
