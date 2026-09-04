@@ -182,6 +182,7 @@ export default function StompersApp() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [activeTab, setActiveTab] = useState('today');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -523,6 +524,34 @@ export default function StompersApp() {
             </div>
           </div>
 
+          {/* Tab Navigation */}
+          <div className="mb-8 flex gap-2 border-b border-gray-700">
+            <button
+              onClick={() => setActiveTab('today')}
+              className={`px-6 py-3 font-semibold text-sm md:text-base transition ${
+                activeTab === 'today'
+                  ? 'text-orange-400 border-b-2 border-orange-400'
+                  : 'text-gray-400 hover:text-gray-300'
+              }`}
+            >
+              📊 Today's Steps & Drama
+            </button>
+            <button
+              onClick={() => setActiveTab('overall')}
+              className={`px-6 py-3 font-semibold text-sm md:text-base transition ${
+                activeTab === 'overall'
+                  ? 'text-blue-400 border-b-2 border-blue-400'
+                  : 'text-gray-400 hover:text-gray-300'
+              }`}
+            >
+              🏆 Overall Steps & Records
+            </button>
+          </div>
+
+          {/* TAB 1: TODAY */}
+          {activeTab === 'today' && (
+          <div>
+
           {/* Daily Insights */}
           <div className="mb-8 md:mb-12">
             <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
@@ -764,6 +793,12 @@ export default function StompersApp() {
               </table>
             </div>
           </div>
+          </div>
+          {/* END TAB 1: TODAY */}
+
+          {/* TAB 2: OVERALL */}
+          {activeTab === 'overall' && (
+          <div>
 
           {/* Cumulative Chart */}
           <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
@@ -1092,6 +1127,8 @@ export default function StompersApp() {
               </div>
             </div>
           </div>
+          </div>
+          {/* END TAB 2: OVERALL */}
 
           {/* Footer */}
           <div className="mt-8 md:mt-12 text-center text-gray-500 text-xs md:text-sm border-t border-gray-700 pt-6 md:pt-8 pb-4">
