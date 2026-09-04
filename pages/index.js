@@ -523,6 +523,365 @@ export default function StompersApp() {
             </div>
           </div>
 
+          {/* Daily Insights */}
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <Zap className="text-orange-400" size={24} />
+              Today's Drama
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Biggest Gainers */}
+              <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 border border-green-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-green-400 font-bold mb-4 flex items-center gap-2">
+                  🚀 Biggest Gainers (vs Yesterday)
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    if (selectedDay === 1) {
+                      return <div className="text-gray-400 text-sm">No previous day to compare</div>;
+                    }
+                    
+                    const todaySteps = getDailySteps(selectedDay);
+                    const yesterdaySteps = getDailySteps(selectedDay - 1);
+                    
+                    const changes = data.players.map(player => ({
+                      name: player,
+                      today: todaySteps[player] || 0,
+                      yesterday: yesterdaySteps[player] || 0,
+                      change: (todaySteps[player] || 0) - (yesterdaySteps[player] || 0)
+                    }))
+                    .sort((a, b) => b.change - a.change)
+                    .slice(0, 3);
+                    
+                    return changes.map((player) => (
+                      <div key={player.name} className="flex justify-between items-center">
+                        <div>
+                          <div className="font-semibold text-sm md:text-base">{player.name}</div>
+                          <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
+                        </div>
+                        <div className="text-green-400 font-bold">+{player.change.toLocaleString()}</div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>
+
+              {/* Biggest Losers */}
+              <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
+                  📉 Biggest Fallers (vs Yesterday)
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    if (selectedDay === 1) {
+                      return <div className="text-gray-400 text-sm">No previous day to compare</div>;
+                    }
+                    
+                    const todaySteps = getDailySteps(selectedDay);
+                    const yesterdaySteps = getDailySteps(selectedDay - 1);
+                    
+                    const changes = data.players.map(player => ({
+                      name: player,
+                      today: todaySteps[player] || 0,
+                      yesterday: yesterdaySteps[player] || 0,
+                      change: (todaySteps[player] || 0) - (yesterdaySteps[player] || 0)
+                    }))
+                    .sort((a, b) => a.change - b.change)
+                    .slice(0, 3);
+                    
+                    return changes.map((player) => (
+                      <div key={player.name} className="flex justify-between items-center">
+                        <div>
+                          <div className="font-semibold text-sm md:text-base">{player.name}</div>
+                          <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
+                        </div>
+                        <div className="text-red-400 font-bold">{player.change.toLocaleString()}</div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>
+
+              {/* Rank Climbers */}
+              <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 border border-blue-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-blue-400 font-bold mb-4 flex items-center gap-2">
+                  ⬆️ Rank Climbers
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    // Calculate Day 1 rankings
+                    const day1Data = data.dailyData[1] || {};
+                    const day1Rankings = data.players
+                      .map((player, idx) => ({
+                        name: player,
+                        rank: idx + 1,
+                        total: day1Data[player] || 0
+                      }))
+                      .sort((a, b) => b.total - a.total)
+                      .map((p, idx) => ({ ...p, rank: idx + 1 }));
+
+                    // Find climbers (moved up from Day 1)
+                    const climbers = rankings
+                      .map(r => {
+                        const day1Rank = day1Rankings.find(d => d.name === r.name)?.rank || 999;
+                        const currentRank = rankings.indexOf(r) + 1;
+                        const movement = day1Rank - currentRank;
+                        return { ...r, movement, day1Rank, currentRank };
+                      })
+                      .filter(c => c.movement > 0)
+                      .sort((a, b) => b.movement - a.movement)
+                      .slice(0, 3);
+
+                    return climbers.length > 0 ? (
+                      climbers.map((player, idx) => (
+                        <div key={player.name} className="flex justify-between items-center">
+                          <div>
+                            <div className="font-semibold text-sm md:text-base">{player.name}</div>
+                            <div className="text-xs text-gray-400">#{player.day1Rank} → #{player.currentRank}</div>
+                          </div>
+                          <div className="text-blue-400 font-bold">+{player.movement}</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No changes yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Rank Fallers */}
+              <div className="bg-gradient-to-br from-orange-900/30 to-orange-800/20 border border-orange-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-orange-400 font-bold mb-4 flex items-center gap-2">
+                  ⬇️ Rank Fallers
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    // Calculate Day 1 rankings
+                    const day1Data = data.dailyData[1] || {};
+                    const day1Rankings = data.players
+                      .map((player, idx) => ({
+                        name: player,
+                        rank: idx + 1,
+                        total: day1Data[player] || 0
+                      }))
+                      .sort((a, b) => b.total - a.total)
+                      .map((p, idx) => ({ ...p, rank: idx + 1 }));
+
+                    // Find fallers (moved down from Day 1)
+                    const fallers = rankings
+                      .map(r => {
+                        const day1Rank = day1Rankings.find(d => d.name === r.name)?.rank || 999;
+                        const currentRank = rankings.indexOf(r) + 1;
+                        const movement = day1Rank - currentRank;
+                        return { ...r, movement, day1Rank, currentRank };
+                      })
+                      .filter(c => c.movement < 0)
+                      .sort((a, b) => a.movement - b.movement)
+                      .slice(0, 3);
+
+                    return fallers.length > 0 ? (
+                      fallers.map((player, idx) => (
+                        <div key={player.name} className="flex justify-between items-center">
+                          <div>
+                            <div className="font-semibold text-sm md:text-base">{player.name}</div>
+                            <div className="text-xs text-gray-400">#{player.day1Rank} → #{player.currentRank}</div>
+                          </div>
+                          <div className="text-orange-400 font-bold">{player.movement}</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No changes yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Daily Steps for Selected Day */}
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6">Day {selectedDay} Steps</h2>
+            
+            {/* Mobile: Card View */}
+            <div className="md:hidden space-y-2">
+              {dayRankings.map((player, idx) => (
+                <div key={player.name} className="bg-gray-700/30 rounded-lg p-3 border border-gray-600">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-gray-400 w-6">{idx + 1}</span>
+                      <div>
+                        <div className="font-semibold text-sm truncate max-w-xs">{player.name}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between text-xs md:text-sm">
+                    <div>
+                      <div className="text-gray-400">Today</div>
+                      <div className="text-cyan-400 font-bold">{(player.steps || 0).toLocaleString()}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-gray-400">Total</div>
+                      <div className="text-yellow-300 font-bold">{player.cumulative.toLocaleString()}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-sm md:text-base">
+                <thead>
+                  <tr className="border-b border-gray-700 bg-gray-900/50">
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Name</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Today</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dayRankings.map((player, idx) => (
+                    <tr
+                      key={player.name}
+                      className="border-b border-gray-700 hover:bg-gray-700/30 transition"
+                    >
+                      <td className="px-6 py-4">
+                        <span className="font-bold text-gray-300 text-xs md:text-base">{idx + 1}</span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="font-semibold text-sm truncate max-w-xs">{player.name}</div>
+                      </td>
+                      <td className="px-6 py-4 text-right text-cyan-400 font-bold text-xs md:text-base">
+                        {(player.steps || 0).toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-right text-yellow-300 font-bold text-xs md:text-base">
+                        {player.cumulative.toLocaleString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Cumulative Chart */}
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <TrendingUp className="text-blue-400" size={24} />
+              Progress Trend
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={chartData} margin={{ top: 5, right: 15, left: -20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                <XAxis dataKey="day" stroke="#888" tick={{ fontSize: 10 }} />
+                <YAxis stroke="#888" tick={{ fontSize: 10 }} />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444', borderRadius: '8px', fontSize: '12px' }}
+                  labelStyle={{ color: '#fff' }}
+                />
+                <Legend wrapperStyle={{ fontSize: '12px' }} />
+                {rankings.slice(0, 6).map((player, idx) => (
+                  <Line
+                    key={player.name}
+                    type="monotone"
+                    dataKey={player.name}
+                    stroke={colors[idx]}
+                    strokeWidth={2}
+                    dot={false}
+                    isAnimationActive={true}
+                  />
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+            <p className="text-gray-400 text-xs md:text-sm mt-4">Top 6 players • Cumulative totals</p>
+          </div>
+
+          {/* Overall Leaderboard */}
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg overflow-hidden">
+            <div className="p-4 md:p-6 border-b border-gray-700">
+              <h2 className="text-lg md:text-2xl font-bold">Cumulative Leaderboard</h2>
+            </div>
+            
+            {/* Mobile: Card View */}
+            <div className="md:hidden space-y-2 p-4">
+              {rankings.map((player, idx) => (
+                <div
+                  key={player.name}
+                  className={`rounded-lg p-4 border border-gray-600 ${
+                    idx < 3 ? 'bg-gray-700/40' : 'bg-gray-800/40'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold">{getMedalEmoji(idx + 1)}</span>
+                      <div>
+                        <div className="font-bold text-sm text-white truncate">{player.name}</div>
+                        <div className="text-xs text-gray-400">#{idx + 1}</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      {player.prize > 0 && (
+                        <div className="font-bold text-green-400 text-sm">${player.prize}</div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-yellow-300 font-bold text-base mb-1">
+                    {player.total.toLocaleString()} steps
+                  </div>
+                  <div className="text-xs text-gray-300">
+                    {getUniqueDistance(idx, player.total)}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-sm md:text-base">
+                <thead>
+                  <tr className="border-b border-gray-700 bg-gray-900/50">
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">#</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Steps</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Fun Fact</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Prize</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rankings.map((player, idx) => (
+                    <tr
+                      key={player.name}
+                      className={`border-b border-gray-700 hover:bg-gray-700/30 transition ${
+                        idx < 3 ? 'bg-gray-700/20' : ''
+                      }`}
+                    >
+                      <td className="px-6 py-4">
+                        <span className="text-lg font-bold">
+                          {getMedalEmoji(idx + 1)}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 font-semibold">{player.name}</td>
+                      <td className="px-6 py-4 text-right text-yellow-300 font-bold">
+                        {player.total.toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-left text-sm text-gray-300">
+                        {getUniqueDistance(idx, player.total)}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        {player.prize > 0 ? (
+                          <span className="font-bold text-green-400">${player.prize}</span>
+                        ) : (
+                          <span className="text-gray-500">-</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           {/* Personal Performance Stats */}
           <div className="mb-8 md:mb-12">
             <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
@@ -534,7 +893,7 @@ export default function StompersApp() {
               {/* Current Streaks */}
               <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-600 rounded-lg p-4 md:p-6">
                 <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
-                  🔥 Current Streaks (5k+ steps)
+                  🔥 Current Streaks (10k+ steps)
                 </h3>
                 <div className="space-y-3">
                   {(() => {
@@ -551,7 +910,7 @@ export default function StompersApp() {
                         const dailyData = data.dailyData[day] || {};
                         const daySteps = day === 1 ? dailyData[player] : (dailyData[player] || 0) - (data.dailyData[day - 1]?.[player] || 0);
                         
-                        if (daySteps >= 5000) {
+                        if (daySteps >= 10000) {
                           tempStreak++;
                           currentStreak = tempStreak;
                         } else {
@@ -739,365 +1098,6 @@ export default function StompersApp() {
                   })()}
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Daily Insights */}
-          <div className="mb-8 md:mb-12">
-            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
-              <Zap className="text-orange-400" size={24} />
-              Today's Drama
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Biggest Gainers */}
-              <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 border border-green-600 rounded-lg p-4 md:p-6">
-                <h3 className="text-green-400 font-bold mb-4 flex items-center gap-2">
-                  🚀 Biggest Gainers (vs Yesterday)
-                </h3>
-                <div className="space-y-3">
-                  {(() => {
-                    if (selectedDay === 1) {
-                      return <div className="text-gray-400 text-sm">No previous day to compare</div>;
-                    }
-                    
-                    const todaySteps = getDailySteps(selectedDay);
-                    const yesterdaySteps = getDailySteps(selectedDay - 1);
-                    
-                    const changes = data.players.map(player => ({
-                      name: player,
-                      today: todaySteps[player] || 0,
-                      yesterday: yesterdaySteps[player] || 0,
-                      change: (todaySteps[player] || 0) - (yesterdaySteps[player] || 0)
-                    }))
-                    .sort((a, b) => b.change - a.change)
-                    .slice(0, 3);
-                    
-                    return changes.map((player) => (
-                      <div key={player.name} className="flex justify-between items-center">
-                        <div>
-                          <div className="font-semibold text-sm md:text-base">{player.name}</div>
-                          <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
-                        </div>
-                        <div className="text-green-400 font-bold">+{player.change.toLocaleString()}</div>
-                      </div>
-                    ));
-                  })()}
-                </div>
-              </div>
-
-              {/* Biggest Losers */}
-              <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-600 rounded-lg p-4 md:p-6">
-                <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
-                  📉 Biggest Fallers (vs Yesterday)
-                </h3>
-                <div className="space-y-3">
-                  {(() => {
-                    if (selectedDay === 1) {
-                      return <div className="text-gray-400 text-sm">No previous day to compare</div>;
-                    }
-                    
-                    const todaySteps = getDailySteps(selectedDay);
-                    const yesterdaySteps = getDailySteps(selectedDay - 1);
-                    
-                    const changes = data.players.map(player => ({
-                      name: player,
-                      today: todaySteps[player] || 0,
-                      yesterday: yesterdaySteps[player] || 0,
-                      change: (todaySteps[player] || 0) - (yesterdaySteps[player] || 0)
-                    }))
-                    .sort((a, b) => a.change - b.change)
-                    .slice(0, 3);
-                    
-                    return changes.map((player) => (
-                      <div key={player.name} className="flex justify-between items-center">
-                        <div>
-                          <div className="font-semibold text-sm md:text-base">{player.name}</div>
-                          <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
-                        </div>
-                        <div className="text-red-400 font-bold">{player.change.toLocaleString()}</div>
-                      </div>
-                    ));
-                  })()}
-                </div>
-              </div>
-
-              {/* Rank Climbers */}
-              <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 border border-blue-600 rounded-lg p-4 md:p-6">
-                <h3 className="text-blue-400 font-bold mb-4 flex items-center gap-2">
-                  ⬆️ Rank Climbers
-                </h3>
-                <div className="space-y-3">
-                  {(() => {
-                    // Calculate Day 1 rankings
-                    const day1Data = data.dailyData[1] || {};
-                    const day1Rankings = data.players
-                      .map((player, idx) => ({
-                        name: player,
-                        rank: idx + 1,
-                        total: day1Data[player] || 0
-                      }))
-                      .sort((a, b) => b.total - a.total)
-                      .map((p, idx) => ({ ...p, rank: idx + 1 }));
-
-                    // Find climbers (moved up from Day 1)
-                    const climbers = rankings
-                      .map(r => {
-                        const day1Rank = day1Rankings.find(d => d.name === r.name)?.rank || 999;
-                        const currentRank = rankings.indexOf(r) + 1;
-                        const movement = day1Rank - currentRank;
-                        return { ...r, movement, day1Rank, currentRank };
-                      })
-                      .filter(c => c.movement > 0)
-                      .sort((a, b) => b.movement - a.movement)
-                      .slice(0, 3);
-
-                    return climbers.length > 0 ? (
-                      climbers.map((player, idx) => (
-                        <div key={player.name} className="flex justify-between items-center">
-                          <div>
-                            <div className="font-semibold text-sm md:text-base">{player.name}</div>
-                            <div className="text-xs text-gray-400">#{player.day1Rank} → #{player.currentRank}</div>
-                          </div>
-                          <div className="text-blue-400 font-bold">+{player.movement}</div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-gray-400 text-sm">No changes yet</div>
-                    );
-                  })()}
-                </div>
-              </div>
-
-              {/* Rank Fallers */}
-              <div className="bg-gradient-to-br from-orange-900/30 to-orange-800/20 border border-orange-600 rounded-lg p-4 md:p-6">
-                <h3 className="text-orange-400 font-bold mb-4 flex items-center gap-2">
-                  ⬇️ Rank Fallers
-                </h3>
-                <div className="space-y-3">
-                  {(() => {
-                    // Calculate Day 1 rankings
-                    const day1Data = data.dailyData[1] || {};
-                    const day1Rankings = data.players
-                      .map((player, idx) => ({
-                        name: player,
-                        rank: idx + 1,
-                        total: day1Data[player] || 0
-                      }))
-                      .sort((a, b) => b.total - a.total)
-                      .map((p, idx) => ({ ...p, rank: idx + 1 }));
-
-                    // Find fallers (moved down from Day 1)
-                    const fallers = rankings
-                      .map(r => {
-                        const day1Rank = day1Rankings.find(d => d.name === r.name)?.rank || 999;
-                        const currentRank = rankings.indexOf(r) + 1;
-                        const movement = day1Rank - currentRank;
-                        return { ...r, movement, day1Rank, currentRank };
-                      })
-                      .filter(c => c.movement < 0)
-                      .sort((a, b) => a.movement - b.movement)
-                      .slice(0, 3);
-
-                    return fallers.length > 0 ? (
-                      fallers.map((player, idx) => (
-                        <div key={player.name} className="flex justify-between items-center">
-                          <div>
-                            <div className="font-semibold text-sm md:text-base">{player.name}</div>
-                            <div className="text-xs text-gray-400">#{player.day1Rank} → #{player.currentRank}</div>
-                          </div>
-                          <div className="text-orange-400 font-bold">{player.movement}</div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-gray-400 text-sm">No changes yet</div>
-                    );
-                  })()}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Cumulative Chart */}
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
-            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
-              <TrendingUp className="text-blue-400" size={24} />
-              Progress Trend
-            </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={chartData} margin={{ top: 5, right: 15, left: -20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                <XAxis dataKey="day" stroke="#888" tick={{ fontSize: 10 }} />
-                <YAxis stroke="#888" tick={{ fontSize: 10 }} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444', borderRadius: '8px', fontSize: '12px' }}
-                  labelStyle={{ color: '#fff' }}
-                />
-                <Legend wrapperStyle={{ fontSize: '12px' }} />
-                {rankings.slice(0, 6).map((player, idx) => (
-                  <Line
-                    key={player.name}
-                    type="monotone"
-                    dataKey={player.name}
-                    stroke={colors[idx]}
-                    strokeWidth={2}
-                    dot={false}
-                    isAnimationActive={true}
-                  />
-                ))}
-              </LineChart>
-            </ResponsiveContainer>
-            <p className="text-gray-400 text-xs md:text-sm mt-4">Top 6 players • Cumulative totals</p>
-          </div>
-
-          {/* Daily Steps for Selected Day */}
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
-            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6">Day {selectedDay} Steps</h2>
-            
-            {/* Mobile: Card View */}
-            <div className="md:hidden space-y-2">
-              {dayRankings.map((player, idx) => (
-                <div key={player.name} className="bg-gray-700/30 rounded-lg p-3 border border-gray-600">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-gray-400 w-6">{idx + 1}</span>
-                      <div>
-                        <div className="font-semibold text-sm truncate max-w-xs">{player.name}</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between text-xs md:text-sm">
-                    <div>
-                      <div className="text-gray-400">Today</div>
-                      <div className="text-cyan-400 font-bold">{(player.steps || 0).toLocaleString()}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-gray-400">Total</div>
-                      <div className="text-yellow-300 font-bold">{player.cumulative.toLocaleString()}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Desktop: Table View */}
-            <div className="hidden md:block overflow-x-auto">
-              <table className="w-full text-sm md:text-base">
-                <thead>
-                  <tr className="border-b border-gray-700 bg-gray-900/50">
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Name</th>
-                    <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Today</th>
-                    <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dayRankings.map((player, idx) => (
-                    <tr
-                      key={player.name}
-                      className="border-b border-gray-700 hover:bg-gray-700/30 transition"
-                    >
-                      <td className="px-6 py-4">
-                        <span className="font-bold text-gray-300 text-xs md:text-base">{idx + 1}</span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="font-semibold text-sm truncate max-w-xs">{player.name}</div>
-                      </td>
-                      <td className="px-6 py-4 text-right text-cyan-400 font-bold text-xs md:text-base">
-                        {(player.steps || 0).toLocaleString()}
-                      </td>
-                      <td className="px-6 py-4 text-right text-yellow-300 font-bold text-xs md:text-base">
-                        {player.cumulative.toLocaleString()}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Overall Leaderboard */}
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg overflow-hidden">
-            <div className="p-4 md:p-6 border-b border-gray-700">
-              <h2 className="text-lg md:text-2xl font-bold">Cumulative Leaderboard</h2>
-            </div>
-            
-            {/* Mobile: Card View */}
-            <div className="md:hidden space-y-2 p-4">
-              {rankings.map((player, idx) => (
-                <div
-                  key={player.name}
-                  className={`rounded-lg p-4 border border-gray-600 ${
-                    idx < 3 ? 'bg-gray-700/40' : 'bg-gray-800/40'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl font-bold">{getMedalEmoji(idx + 1)}</span>
-                      <div>
-                        <div className="font-bold text-sm text-white truncate">{player.name}</div>
-                        <div className="text-xs text-gray-400">#{idx + 1}</div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      {player.prize > 0 && (
-                        <div className="font-bold text-green-400 text-sm">${player.prize}</div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="text-yellow-300 font-bold text-base mb-1">
-                    {player.total.toLocaleString()} steps
-                  </div>
-                  <div className="text-xs text-gray-300">
-                    {getUniqueDistance(idx, player.total)}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Desktop: Table View */}
-            <div className="hidden md:block overflow-x-auto">
-              <table className="w-full text-sm md:text-base">
-                <thead>
-                  <tr className="border-b border-gray-700 bg-gray-900/50">
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">#</th>
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player</th>
-                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Steps</th>
-                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Fun Fact</th>
-                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Prize</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rankings.map((player, idx) => (
-                    <tr
-                      key={player.name}
-                      className={`border-b border-gray-700 hover:bg-gray-700/30 transition ${
-                        idx < 3 ? 'bg-gray-700/20' : ''
-                      }`}
-                    >
-                      <td className="px-6 py-4">
-                        <span className="text-lg font-bold">
-                          {getMedalEmoji(idx + 1)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 font-semibold">{player.name}</td>
-                      <td className="px-6 py-4 text-right text-yellow-300 font-bold">
-                        {player.total.toLocaleString()}
-                      </td>
-                      <td className="px-6 py-4 text-left text-sm text-gray-300">
-                        {getUniqueDistance(idx, player.total)}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        {player.prize > 0 ? (
-                          <span className="font-bold text-green-400">${player.prize}</span>
-                        ) : (
-                          <span className="text-gray-500">-</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
             </div>
           </div>
 
