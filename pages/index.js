@@ -535,6 +535,225 @@ export default function StompersApp() {
             </div>
           </div>
 
+          {/* Personal Performance Stats */}
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <Zap className="text-red-400" size={24} />
+              Personal Performance
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Current Streaks */}
+              <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
+                  🔥 Current Streaks (5k+ steps)
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const streaks = {};
+                    
+                    // Calculate current streak for each player
+                    data.players.forEach(player => {
+                      let currentStreak = 0;
+                      let longestStreak = 0;
+                      let tempStreak = 0;
+                      
+                      // Loop through all days
+                      for (let day = 1; day <= data.challenge.currentDay; day++) {
+                        const dailyData = data.dailyData[day] || {};
+                        const daySteps = day === 1 ? dailyData[player] : (dailyData[player] || 0) - (data.dailyData[day - 1]?.[player] || 0);
+                        
+                        if (daySteps >= 5000) {
+                          tempStreak++;
+                          currentStreak = tempStreak;
+                        } else {
+                          if (tempStreak > longestStreak) {
+                            longestStreak = tempStreak;
+                          }
+                          tempStreak = 0;
+                        }
+                      }
+                      if (tempStreak > longestStreak) {
+                        longestStreak = tempStreak;
+                      }
+                      
+                      streaks[player] = { current: currentStreak, longest: longestStreak };
+                    });
+                    
+                    // Sort by current streak
+                    const sortedStreaks = Object.entries(streaks)
+                      .sort((a, b) => b[1].current - a[1].current)
+                      .filter(([_, s]) => s.current > 0)
+                      .slice(0, 8);
+                    
+                    return sortedStreaks.length > 0 ? (
+                      sortedStreaks.map(([name, streak]) => (
+                        <div key={name} className="flex justify-between items-center">
+                          <div>
+                            <div className="font-semibold text-sm md:text-base">{name}</div>
+                            <div className="text-xs text-gray-400">Best: {streak.longest} days</div>
+                          </div>
+                          <div className="text-red-400 font-bold text-lg bg-red-900/40 px-3 py-1 rounded">{streak.current}🔥</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No active streaks yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Personal Bests */}
+              <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 border border-green-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-green-400 font-bold mb-4 flex items-center gap-2">
+                  💪 Personal Bests (Single Day)
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const personalBests = {};
+                    
+                    // Calculate personal best for each player
+                    data.players.forEach(player => {
+                      let bestDay = 0;
+                      let bestDayNum = 0;
+                      
+                      for (let day = 1; day <= data.challenge.currentDay; day++) {
+                        const dailyData = data.dailyData[day] || {};
+                        let daySteps = 0;
+                        
+                        if (day === 1) {
+                          daySteps = dailyData[player] || 0;
+                        } else {
+                          const today = dailyData[player] || 0;
+                          const yesterday = data.dailyData[day - 1]?.[player] || 0;
+                          daySteps = today - yesterday;
+                        }
+                        
+                        if (daySteps > bestDay) {
+                          bestDay = daySteps;
+                          bestDayNum = day;
+                        }
+                      }
+                      
+                      personalBests[player] = { steps: bestDay, day: bestDayNum };
+                    });
+                    
+                    // Sort by personal best
+                    const sortedBests = Object.entries(personalBests)
+                      .sort((a, b) => b[1].steps - a[1].steps)
+                      .slice(0, 8);
+                    
+                    return sortedBests.map(([name, best]) => (
+                      <div key={name} className="flex justify-between items-center">
+                        <div>
+                          <div className="font-semibold text-sm md:text-base">{name}</div>
+                          <div className="text-xs text-gray-400">Day {best.day}</div>
+                        </div>
+                        <div className="text-green-400 font-bold text-lg bg-green-900/40 px-3 py-1 rounded">{best.steps.toLocaleString()}</div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Leaderboard Stats */}
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <Award className="text-purple-400" size={24} />
+              Leaderboard Stats
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* 1st Place Most */}
+              <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/20 border border-yellow-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-yellow-400 font-bold mb-4 flex items-center gap-2">
+                  🥇 1st Place Most
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const firstPlaceTally = {};
+                    
+                    // Count how many times each player was 1st
+                    for (let day = 1; day <= data.challenge.currentDay; day++) {
+                      const dayRankings = data.players
+                        .map(player => ({
+                          name: player,
+                          total: data.dailyData[day]?.[player] || 0
+                        }))
+                        .sort((a, b) => b.total - a.total);
+                      
+                      if (dayRankings.length > 0) {
+                        const firstPlace = dayRankings[0].name;
+                        firstPlaceTally[firstPlace] = (firstPlaceTally[firstPlace] || 0) + 1;
+                      }
+                    }
+                    
+                    // Get top 5 most frequent 1st place finishers
+                    const top5First = Object.entries(firstPlaceTally)
+                      .sort((a, b) => b[1] - a[1])
+                      .slice(0, 5);
+                    
+                    return top5First.length > 0 ? (
+                      top5First.map(([name, count]) => (
+                        <div key={name} className="flex justify-between items-center">
+                          <div className="font-semibold text-sm md:text-base">{name}</div>
+                          <div className="text-yellow-400 font-bold bg-yellow-900/40 px-3 py-1 rounded">{count}x</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No data yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Last Place Most */}
+              <div className="bg-gradient-to-br from-gray-900/30 to-gray-800/20 border border-gray-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-gray-400 font-bold mb-4 flex items-center gap-2">
+                  📉 Last Place Most
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const lastPlaceTally = {};
+                    
+                    // Count how many times each player was last
+                    for (let day = 1; day <= data.challenge.currentDay; day++) {
+                      const dayRankings = data.players
+                        .map(player => ({
+                          name: player,
+                          total: data.dailyData[day]?.[player] || 0
+                        }))
+                        .sort((a, b) => b.total - a.total);
+                      
+                      if (dayRankings.length > 0) {
+                        const lastPlace = dayRankings[dayRankings.length - 1].name;
+                        lastPlaceTally[lastPlace] = (lastPlaceTally[lastPlace] || 0) + 1;
+                      }
+                    }
+                    
+                    // Get top 5 most frequent last place finishers
+                    const top5Last = Object.entries(lastPlaceTally)
+                      .sort((a, b) => b[1] - a[1])
+                      .slice(0, 5);
+                    
+                    return top5Last.length > 0 ? (
+                      top5Last.map(([name, count]) => (
+                        <div key={name} className="flex justify-between items-center">
+                          <div className="font-semibold text-sm md:text-base">{name}</div>
+                          <div className="text-gray-400 font-bold bg-gray-800/40 px-3 py-1 rounded">{count}x</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No data yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Daily Insights */}
           <div className="mb-8 md:mb-12">
             <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
