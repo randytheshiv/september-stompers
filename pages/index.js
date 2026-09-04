@@ -311,13 +311,17 @@ export default function StompersApp() {
 
   // Sort players by cumulative total
   const rankings = data.players
+    .map((player) => ({
+      name: player,
+      total: cumulatives[player]
+    }))
+    .sort((a, b) => b.total - a.total)
     .map((player, idx) => ({
       rank: idx + 1,
-      name: player,
-      total: cumulatives[player],
+      name: player.name,
+      total: player.total,
       prize: idx === 0 ? data.challenge.prizes['1st'] : idx === 1 ? data.challenge.prizes['2nd'] : idx === 2 ? data.challenge.prizes['3rd'] : 0
-    }))
-    .sort((a, b) => b.total - a.total);
+    }));
 
   const daySteps = getDailySteps(selectedDay);
   
