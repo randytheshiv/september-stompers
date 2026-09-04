@@ -908,7 +908,7 @@ export default function StompersApp() {
                       // Loop through all days
                       for (let day = 1; day <= data.challenge.currentDay; day++) {
                         const dailyData = data.dailyData[day] || {};
-                        const daySteps = day === 1 ? dailyData[player] : (dailyData[player] || 0) - (data.dailyData[day - 1]?.[player] || 0);
+                        const daySteps = dailyData[player] || 0;
                         
                         if (daySteps >= 10000) {
                           tempStreak++;
@@ -966,15 +966,7 @@ export default function StompersApp() {
                       
                       for (let day = 1; day <= data.challenge.currentDay; day++) {
                         const dailyData = data.dailyData[day] || {};
-                        let daySteps = 0;
-                        
-                        if (day === 1) {
-                          daySteps = dailyData[player] || 0;
-                        } else {
-                          const today = dailyData[player] || 0;
-                          const yesterday = data.dailyData[day - 1]?.[player] || 0;
-                          daySteps = today - yesterday;
-                        }
+                        const daySteps = dailyData[player] || 0;
                         
                         if (daySteps > bestDay) {
                           bestDay = daySteps;
