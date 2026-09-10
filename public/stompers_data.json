@@ -4,7 +4,7 @@
     "startDate": "2026-09-01",
     "endDate": "2026-09-30",
     "totalDays": 30,
-    "currentDay": 8,
+    "currentDay": 9,
     "prizePool": 360,
     "prizes": {
       "1st": 252,
@@ -42,6 +42,7 @@
     "6": { "temp": 78, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 62 },
     "7": { "temp": 76, "condition": "Sunny", "emoji": "☀️", "humidity": 61 },
     "8": { "temp": 80, "condition": "Sunny", "emoji": "☀️", "humidity": 55 },
+    "9": { "temp": 81, "condition": "Sunny", "emoji": "☀️", "humidity": 52 },
     "4": { "temp": 76, "condition": "Sunny", "emoji": "☀️", "humidity": 60 },
     "5": { "temp": 79, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 65 },
     "6": { "temp": 80, "condition": "Sunny", "emoji": "☀️", "humidity": 55 },
@@ -235,6 +236,27 @@
       "Emily Jagroop": 5706,
       "Bindi Budhu": 2172,
       "Sonia Shiv": 471
+    },
+    "9": {
+      "Rodrick Lalloo": 21492,
+      "Goat InYuhThroat": 14268,
+      "Tiffenii Devi": 13494,
+      "Randy Shiv": 12290,
+      "Reshy G": 11684,
+      "Nicholas Ram": 11313.5,
+      "Vaani": 10564,
+      "Demiii": 8645,
+      "Boor Paani": 7092,
+      "Bindi Budhu": 6955,
+      "Sherrence Phagoo": 6229,
+      "Amanda S": 6045,
+      "Steven SumwhereU": 5927,
+      "Kareem Munir": 4734,
+      "Leon P": 4608,
+      "Jeremy Gobardhan": 4275,
+      "Amelia Sookoo": 2998,
+      "Emily Jagroop": 2403,
+      "Sonia Shiv": 619
     }
   }
 }
