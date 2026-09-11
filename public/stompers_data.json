@@ -4,7 +4,7 @@
     "startDate": "2026-09-01",
     "endDate": "2026-09-30",
     "totalDays": 30,
-    "currentDay": 9,
+    "currentDay": 10,
     "prizePool": 360,
     "prizes": {
       "1st": 252,
@@ -257,6 +257,27 @@
       "Amelia Sookoo": 2998,
       "Emily Jagroop": 2403,
       "Sonia Shiv": 619
+    },
+    "10": {
+      "Rodrick Lalloo": 19671,
+      "Goat InYuhThroat": 15411.5,
+      "Nicholas Ram": 15057,
+      "Reshy G": 11979,
+      "Boor Paani": 11163,
+      "Kareem Munir": 8900,
+      "Sherrence Phagoo": 8547,
+      "Amanda S": 7399,
+      "Tiffenii Devi": 6685,
+      "Randy Shiv": 6557,
+      "Demiii": 6364,
+      "Jeremy Gobardhan": 6309,
+      "Leon P": 4917,
+      "Emily Jagroop": 4206,
+      "Vaani": 3312,
+      "Amelia Sookoo": 2407,
+      "Bindi Budhu": 1939,
+      "Steven SumwhereU": 1731,
+      "Sonia Shiv": 1471
     }
   }
 }
