@@ -184,7 +184,6 @@ export default function StompersApp() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [activeTab, setActiveTab] = useState('today');
   const [selectedMonth, setSelectedMonth] = useState(null);
-  const [viewTab, setViewTab] = useState('competition'); // 'competition' or 'justforfun'
 
   useEffect(() => {
     const fetchData = async () => {
@@ -218,11 +217,8 @@ export default function StompersApp() {
     const dailyData = monthData.dailyData[day];
     if (!dailyData) return 0;
     
-    // October: check if it has competition/justforfun structure
+    // October: use competition branch
     if (dailyData.competition !== undefined) {
-      if (viewTab === 'justforfun' && dailyData.justforfun) {
-        return dailyData.justforfun[playerName] || 0;
-      }
       return dailyData.competition[playerName] || 0;
     }
     
@@ -239,18 +235,11 @@ export default function StompersApp() {
     const allPlayers = getPlayers();
     const result = {};
     
-    // October: extract from correct branch
+    // October: extract from competition branch
     if (dailyData.competition !== undefined) {
-      if (viewTab === 'justforfun' && dailyData.justforfun) {
-        allPlayers.forEach(player => {
-          result[player] = dailyData.justforfun[player] || 0;
-        });
-      } else {
-        // Competition view
-        allPlayers.forEach(player => {
-          result[player] = dailyData.competition[player] || 0;
-        });
-      }
+      allPlayers.forEach(player => {
+        result[player] = dailyData.competition[player] || 0;
+      });
     } else {
       // September: flat structure
       allPlayers.forEach(player => {
@@ -265,17 +254,12 @@ export default function StompersApp() {
     const monthData = getMonthData();
     if (!monthData) return [];
     
-    // October with view toggle
+    // October: show only paying competition players
     if (selectedMonth === 'october') {
-      // If viewing "Just For Fun", show all players from day 1 justforfun data
-      if (viewTab === 'justforfun' && monthData.dailyData[1]?.justforfun) {
-        return Object.keys(monthData.dailyData[1].justforfun).sort();
-      }
-      // Otherwise show competition players
       return monthData.challenge.payingPlayers || [];
     }
     
-    // September: always show all players
+    // September: show all players
     return monthData.players || [];
   };
 
@@ -417,7 +401,6 @@ export default function StompersApp() {
                 onClick={() => {
                   setSelectedMonth('september');
                   setSelectedDay(data.months.september.challenge.currentDay);
-                  setViewTab('competition');
                 }}
                 className={`px-4 py-2 rounded-lg font-bold transition ${
                   selectedMonth === 'september'
@@ -441,32 +424,6 @@ export default function StompersApp() {
                 October
               </button>
             </div>
-            
-            {/* View Toggle (October only) */}
-            {selectedMonth === 'october' && (
-              <div className="flex gap-2 mb-4">
-                <button
-                  onClick={() => setViewTab('competition')}
-                  className={`px-4 py-2 rounded-lg font-bold transition ${
-                    viewTab === 'competition'
-                      ? 'bg-purple-500 text-white'
-                      : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
-                  }`}
-                >
-                  💰 Competition (Paying)
-                </button>
-                <button
-                  onClick={() => setViewTab('justforfun')}
-                  className={`px-4 py-2 rounded-lg font-bold transition ${
-                    viewTab === 'justforfun'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
-                  }`}
-                >
-                  🎮 Just For Fun
-                </button>
-              </div>
-            )}
             
             <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
               <div className="flex-1">
