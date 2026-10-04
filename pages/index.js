@@ -983,9 +983,13 @@ export default function StompersApp() {
               {rankings.map((player, idx) => (
                 <div
                   key={player.name}
-                  className={`rounded-lg p-4 border border-gray-600 ${
+                  onClick={() => {
+                    setSelectedPlayer(selectedPlayer === player.name ? null : player.name);
+                    setShowCompletedDistances(false);
+                  }}
+                  className={`rounded-lg p-4 border cursor-pointer transition ${
                     idx < 3 ? 'bg-gray-700/40' : 'bg-gray-800/40'
-                  }`}
+                  } ${selectedPlayer === player.name ? 'border-blue-500 bg-blue-900/30' : 'border-gray-600'}`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-3">
