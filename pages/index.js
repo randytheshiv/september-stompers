@@ -183,6 +183,7 @@ export default function StompersApp() {
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const [activeTab, setActiveTab] = useState('today');
+  const [selectedMonth, setSelectedMonth] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -191,7 +192,10 @@ export default function StompersApp() {
         if (!response.ok) throw new Error('Failed to load data');
         const jsonData = await response.json();
         setData(jsonData);
-        setSelectedDay(jsonData.challenge.currentDay);
+        const initMonth = jsonData.currentMonth || 'october';
+        setSelectedMonth(initMonth);
+        const monthData = jsonData.months[initMonth];
+        setSelectedDay(monthData.challenge.currentDay);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -201,6 +205,63 @@ export default function StompersApp() {
 
     fetchData();
   }, []);
+  
+  const getMonthData = () => {
+    if (!data || !selectedMonth) return null;
+    return data.months[selectedMonth];
+  };
+  
+  const getDailySteps = (day, playerName) => {
+    const monthData = getMonthData();
+    if (!monthData) return 0;
+    const dailyData = monthData.dailyData[day];
+    if (!dailyData) return 0;
+    
+    // October: check if it has competition/justforfun structure
+    if (dailyData.competition !== undefined) {
+      return dailyData.competition[playerName] || 0;
+    }
+    
+    // September: flat structure
+    return dailyData[playerName] || 0;
+  };
+  
+  const getDailyStepsForAllPlayers = (day) => {
+    const monthData = getMonthData();
+    if (!monthData) return {};
+    const dailyData = monthData.dailyData[day];
+    if (!dailyData) return {};
+    
+    const allPlayers = getPlayers();
+    const result = {};
+    
+    // October: extract from competition branch
+    if (dailyData.competition !== undefined) {
+      allPlayers.forEach(player => {
+        result[player] = dailyData.competition[player] || 0;
+      });
+    } else {
+      // September: flat structure
+      allPlayers.forEach(player => {
+        result[player] = dailyData[player] || 0;
+      });
+    }
+    
+    return result;
+  };
+  
+  const getPlayers = () => {
+    const monthData = getMonthData();
+    if (!monthData) return [];
+    
+    // October: use only competition players
+    if (selectedMonth === 'october' && monthData.challenge.payingPlayers) {
+      return monthData.challenge.payingPlayers;
+    }
+    
+    // September: use all players
+    return monthData.players || [];
+  };
 
   useEffect(() => {
     if (data) {
@@ -254,26 +315,21 @@ export default function StompersApp() {
     );
   }
 
-  if (!data) return null;
+  if (!data || !selectedMonth) return null;
 
-  // Get daily steps for selected day
-  const getDailySteps = (day) => {
-    // All days in dailyData are already DAILY steps, just return as-is
-    return data.dailyData[day] || {};
-  };
+  const monthData = getMonthData();
+  const players = getPlayers();
 
   // Get cumulative totals
   const calculateCumulatives = () => {
     const cumulatives = {};
-    data.players.forEach(player => {
+    players.forEach(player => {
       cumulatives[player] = 0;
     });
 
-    for (let day = 1; day <= data.challenge.currentDay; day++) {
-      data.players.forEach(player => {
-        if (data.dailyData[day] && data.dailyData[day][player]) {
-          cumulatives[player] += data.dailyData[day][player];
-        }
+    for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+      players.forEach(player => {
+        cumulatives[player] += getDailySteps(day, player);
       });
     }
 
@@ -283,7 +339,7 @@ export default function StompersApp() {
   const cumulatives = calculateCumulatives();
 
   // Sort players by cumulative total
-  const rankings = data.players
+  const rankings = players
     .map((player) => ({
       name: player,
       total: cumulatives[player]
@@ -293,29 +349,26 @@ export default function StompersApp() {
       rank: idx + 1,
       name: player.name,
       total: player.total,
-      prize: idx === 0 ? data.challenge.prizes['1st'] : idx === 1 ? data.challenge.prizes['2nd'] : idx === 2 ? data.challenge.prizes['3rd'] : 0
+      prize: idx === 0 ? monthData.challenge.prizes['1st'] : idx === 1 ? monthData.challenge.prizes['2nd'] : idx === 2 ? monthData.challenge.prizes['3rd'] : 0
     }));
 
-  const daySteps = getDailySteps(selectedDay);
-  
   // Get daily data for selected day
-  const dayRankings = data.players
-    .map((player, idx) => ({
+  const dayRankings = players
+    .map((player) => ({
       name: player,
-      displayName: player.name,
-      steps: daySteps[player] || 0,
+      steps: getDailySteps(selectedDay, player),
       cumulative: cumulatives[player]
     }))
     .sort((a, b) => b.steps - a.steps);
 
   // Prepare cumulative chart data
   const chartData = [];
-  for (let day = 1; day <= data.challenge.currentDay; day++) {
+  for (let day = 1; day <= monthData.challenge.currentDay; day++) {
     const dayData = { day: `Day ${day}` };
     rankings.slice(0, 6).forEach(player => {
       let cumTotal = 0;
       for (let d = 1; d <= day; d++) {
-        cumTotal += data.dailyData[d]?.[player.name] || 0;
+        cumTotal += getDailySteps(d, player.name);
       }
       dayData[player.name] = cumTotal;
     });
@@ -334,7 +387,7 @@ export default function StompersApp() {
   return (
     <>
       <Head>
-        <title>September Stompers - Live Leaderboard</title>
+        <title>{monthData.challenge.name} - Live Leaderboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
@@ -342,24 +395,54 @@ export default function StompersApp() {
         {/* Header */}
         <div className="border-b border-gray-700 bg-gray-800/50 backdrop-blur">
           <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+            {/* Month Toggle */}
+            <div className="flex gap-2 mb-4">
+              <button
+                onClick={() => {
+                  setSelectedMonth('september');
+                  setSelectedDay(data.months.september.challenge.currentDay);
+                }}
+                className={`px-4 py-2 rounded-lg font-bold transition ${
+                  selectedMonth === 'september'
+                    ? 'bg-yellow-500 text-black'
+                    : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+                }`}
+              >
+                September
+              </button>
+              <button
+                onClick={() => {
+                  setSelectedMonth('october');
+                  setSelectedDay(data.months.october.challenge.currentDay);
+                }}
+                className={`px-4 py-2 rounded-lg font-bold transition ${
+                  selectedMonth === 'october'
+                    ? 'bg-orange-500 text-black'
+                    : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+                }`}
+              >
+                October
+              </button>
+            </div>
+            
             <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
               <div className="flex-1">
                 <h1 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
-                  SEPTEMBER STOMPERS
+                  {monthData.challenge.name.toUpperCase()}
                 </h1>
                 <p className="text-gray-400 text-sm md:text-lg">
-                  Day {data.challenge.currentDay}/{data.challenge.totalDays} • {data.players.length} Players • ${data.challenge.prizePool}
+                  Day {monthData.challenge.currentDay}/{monthData.challenge.totalDays} • {players.length} Players • ${monthData.challenge.prizePool}
                 </p>
               </div>
               
               {/* Weather Display for Selected Day */}
-              {data.weather && data.weather[selectedDay] && (
+              {monthData.weather && monthData.weather[selectedDay] && (
                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 md:p-6 text-center md:text-right relative group w-full md:w-auto">
-                  <div className="text-3xl md:text-4xl mb-2">{data.weather[selectedDay].emoji}</div>
+                  <div className="text-3xl md:text-4xl mb-2">{monthData.weather[selectedDay].emoji}</div>
                   <div className="text-white font-bold text-sm md:text-base mb-1">Day {selectedDay}</div>
-                  <div className="text-white font-bold text-sm md:text-base mb-1">{data.weather[selectedDay].condition}</div>
-                  <div className="text-xl md:text-2xl text-blue-100 font-bold">{data.weather[selectedDay].temp}°F</div>
-                  <div className="text-xs md:text-sm text-blue-200">Humidity: {data.weather[selectedDay].humidity}%</div>
+                  <div className="text-white font-bold text-sm md:text-base mb-1">{monthData.weather[selectedDay].condition}</div>
+                  <div className="text-xl md:text-2xl text-blue-100 font-bold">{monthData.weather[selectedDay].temp}°F</div>
+                  <div className="text-xs md:text-sm text-blue-200">Humidity: {monthData.weather[selectedDay].humidity}%</div>
                 </div>
               )}
             </div>
@@ -371,7 +454,7 @@ export default function StompersApp() {
                 <Trophy size={16} className="md:hidden" />
                 <div>
                   <div className="text-xs md:text-sm opacity-90">1st</div>
-                  <div className="text-lg md:text-2xl font-bold">${data.challenge.prizes['1st']}</div>
+                  <div className="text-lg md:text-2xl font-bold">${monthData.challenge.prizes['1st']}</div>
                 </div>
               </div>
               <div className="bg-gradient-to-br from-gray-400 to-gray-500 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-center gap-2 md:gap-3">
@@ -379,7 +462,7 @@ export default function StompersApp() {
                 <Trophy size={16} className="md:hidden" />
                 <div>
                   <div className="text-xs md:text-sm opacity-90">2nd</div>
-                  <div className="text-lg md:text-2xl font-bold">${data.challenge.prizes['2nd']}</div>
+                  <div className="text-lg md:text-2xl font-bold">${monthData.challenge.prizes['2nd']}</div>
                 </div>
               </div>
               <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-center gap-2 md:gap-3">
@@ -387,7 +470,7 @@ export default function StompersApp() {
                 <Trophy size={16} className="md:hidden" />
                 <div>
                   <div className="text-xs md:text-sm opacity-90">3rd</div>
-                  <div className="text-lg md:text-2xl font-bold">${data.challenge.prizes['3rd']}</div>
+                  <div className="text-lg md:text-2xl font-bold">${monthData.challenge.prizes['3rd']}</div>
                 </div>
               </div>
             </div>
@@ -399,8 +482,8 @@ export default function StompersApp() {
               </div>
               <div className="bg-gray-800 rounded-lg p-3 md:p-4 overflow-x-auto">
                 <div className="text-center mb-3 md:mb-4">
-                  <h3 className="text-white font-bold text-base md:text-lg">September 2026</h3>
-                  <p className="text-gray-400 text-xs md:text-sm">Current: Day {data.challenge.currentDay}</p>
+                  <h3 className="text-white font-bold text-base md:text-lg">{monthData.challenge.name} 2026</h3>
+                  <p className="text-gray-400 text-xs md:text-sm">Current: Day {monthData.challenge.currentDay}</p>
                 </div>
                 
                 {/* Calendar Grid */}
@@ -426,12 +509,12 @@ export default function StompersApp() {
                           {30 + i}
                         </div>
                       );
-                    } else if (i < 31) {
-                      // September days
+                    } else if (i < monthData.challenge.totalDays + 1) {
+                      // Challenge days
                       const day = i;
-                      const isAvailable = day <= data.challenge.currentDay;
+                      const isAvailable = day <= monthData.challenge.currentDay;
                       const isSelected = selectedDay === day;
-                      const isToday = day === data.challenge.currentDay;
+                      const isToday = day === monthData.challenge.currentDay;
                       
                       return (
                         <button
@@ -599,10 +682,10 @@ export default function StompersApp() {
                       return <div className="text-gray-400 text-sm">No previous day to compare</div>;
                     }
                     
-                    const todaySteps = getDailySteps(selectedDay);
-                    const yesterdaySteps = getDailySteps(selectedDay - 1);
+                    const todaySteps = getDailyStepsForAllPlayers(selectedDay);
+                    const yesterdaySteps = getDailyStepsForAllPlayers(selectedDay - 1);
                     
-                    const changes = data.players.map(player => ({
+                    const changes = players.map(player => ({
                       name: player,
                       today: todaySteps[player] || 0,
                       yesterday: yesterdaySteps[player] || 0,
@@ -635,10 +718,10 @@ export default function StompersApp() {
                       return <div className="text-gray-400 text-sm">No previous day to compare</div>;
                     }
                     
-                    const todaySteps = getDailySteps(selectedDay);
-                    const yesterdaySteps = getDailySteps(selectedDay - 1);
+                    const todaySteps = getDailyStepsForAllPlayers(selectedDay);
+                    const yesterdaySteps = getDailyStepsForAllPlayers(selectedDay - 1);
                     
-                    const changes = data.players.map(player => ({
+                    const changes = players.map(player => ({
                       name: player,
                       today: todaySteps[player] || 0,
                       yesterday: yesterdaySteps[player] || 0,
@@ -668,8 +751,8 @@ export default function StompersApp() {
                 <div className="space-y-3">
                   {(() => {
                     // Calculate Day 1 rankings
-                    const day1Data = data.dailyData[1] || {};
-                    const day1Rankings = data.players
+                    const day1Data = getDailyStepsForAllPlayers(1);
+                    const day1Rankings = players
                       .map((player, idx) => ({
                         name: player,
                         rank: idx + 1,
@@ -715,8 +798,8 @@ export default function StompersApp() {
                 <div className="space-y-3">
                   {(() => {
                     // Calculate Day 1 rankings
-                    const day1Data = data.dailyData[1] || {};
-                    const day1Rankings = data.players
+                    const day1Data = getDailyStepsForAllPlayers(1);
+                    const day1Rankings = players
                       .map((player, idx) => ({
                         name: player,
                         rank: idx + 1,
@@ -963,15 +1046,15 @@ export default function StompersApp() {
                     const streaks = {};
                     
                     // Calculate current streak for each player
-                    data.players.forEach(player => {
+                    players.forEach(player => {
                       let currentStreak = 0;
                       let longestStreak = 0;
                       let tempStreak = 0;
                       
                       // Loop through all days
-                      for (let day = 1; day <= data.challenge.currentDay; day++) {
-                        const dailyData = data.dailyData[day] || {};
-                        const daySteps = dailyData[player] || 0;
+                      for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+                        
+                        const daySteps = getDailySteps(day, player);
                         
                         if (daySteps >= 10000) {
                           tempStreak++;
@@ -1023,13 +1106,13 @@ export default function StompersApp() {
                     const personalBests = {};
                     
                     // Calculate personal best for each player
-                    data.players.forEach(player => {
+                    players.forEach(player => {
                       let bestDay = 0;
                       let bestDayNum = 0;
                       
-                      for (let day = 1; day <= data.challenge.currentDay; day++) {
-                        const dailyData = data.dailyData[day] || {};
-                        const daySteps = dailyData[player] || 0;
+                      for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+                        
+                        const daySteps = getDailySteps(day, player);
                         
                         if (daySteps > bestDay) {
                           bestDay = daySteps;
@@ -1078,11 +1161,11 @@ export default function StompersApp() {
                     const firstPlaceTally = {};
                     
                     // Count how many times each player was 1st
-                    for (let day = 1; day <= data.challenge.currentDay; day++) {
-                      const dayRankings = data.players
+                    for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+                      const dayRankings = players
                         .map(player => ({
                           name: player,
-                          total: data.dailyData[day]?.[player] || 0
+                          total: getDailySteps(day, player) || 0
                         }))
                         .sort((a, b) => b.total - a.total);
                       
@@ -1121,11 +1204,11 @@ export default function StompersApp() {
                     const lastPlaceTally = {};
                     
                     // Count how many times each player was last
-                    for (let day = 1; day <= data.challenge.currentDay; day++) {
-                      const dayRankings = data.players
+                    for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+                      const dayRankings = players
                         .map(player => ({
                           name: player,
-                          total: data.dailyData[day]?.[player] || 0
+                          total: getDailySteps(day, player) || 0
                         }))
                         .sort((a, b) => b.total - a.total);
                       
@@ -1160,7 +1243,7 @@ export default function StompersApp() {
 
           {/* Footer */}
           <div className="mt-8 md:mt-12 text-center text-gray-500 text-xs md:text-sm border-t border-gray-700 pt-6 md:pt-8 pb-4">
-            <p>Day {data.challenge.currentDay} • Update: 9:00pm</p>
+            <p>Day {monthData.challenge.currentDay} • Update: 9:00pm</p>
             <p className="mt-2">Good luck, Stompers! 👟⚡</p>
           </div>
         </div>
