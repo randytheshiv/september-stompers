@@ -6,70 +6,46 @@ import Head from 'next/head';
 // NYC/Nassau County coordinates
 const NYC_COORDS = { lat: 40.7128, lon: -74.0060 };
 
-// Unique distance comparisons - Trinidad, Guyana, and NYC cities
+// West Indian distances - show progress as percentage (in feet)
 const UNIQUE_DISTANCES = [
-  // Trinidad Cities
-  { name: 'Port of Spain to San Fernando', distance: 77408 },
-  { name: 'Port of Spain to Arima', distance: 21120 },
-  { name: 'Port of Spain to Point Fortin', distance: 84480 },
-  { name: 'Port of Spain to Chaguanas', distance: 26400 },
-  { name: 'San Fernando to Siparia', distance: 39600 },
-  { name: 'Arima to Blanchisseuse', distance: 47520 },
-  { name: 'Scarborough (Tobago) Beach', distance: 10560 },
-  { name: 'Port of Spain to Maracas Beach', distance: 26400 },
-  { name: 'Port of Spain to Pigeon Point Beach', distance: 163680 },
+  // Trinidad to Guyana
+  { name: 'Port of Spain to Georgetown', distance: 316800 },
+  { name: 'San Fernando to Georgetown', distance: 355200 },
+  { name: 'Port of Spain to Linden', distance: 369600 },
+  { name: 'Port of Spain to New Amsterdam', distance: 329600 },
   
-  // Guyana Cities
+  // Trinidad Local
+  { name: 'Port of Spain to San Fernando', distance: 77408 },
+  { name: 'Port of Spain to Chaguanas', distance: 26400 },
+  { name: 'Port of Spain to Point Fortin', distance: 84480 },
+  { name: 'Port of Spain to Arima', distance: 21120 },
+  { name: 'San Fernando to Siparia', distance: 39600 },
+  { name: 'Port of Spain to Maracas Beach', distance: 26400 },
+  
+  // Guyana Local
   { name: 'Georgetown to Linden', distance: 87120 },
   { name: 'Georgetown to New Amsterdam', distance: 79200 },
   { name: 'Georgetown to Bartica', distance: 105600 },
   { name: 'Linden to Ituni', distance: 39600 },
-  { name: 'Georgetown to Mahdia', distance: 198000 },
-  { name: 'New Amsterdam to Corriverton', distance: 79200 },
-  { name: 'Georgetown to Lethem', distance: 660000 },
-  { name: 'Parika to Bartica', distance: 66000 },
+  { name: 'Georgetown to Corriverton', distance: 184800 },
   { name: 'Georgetown to Kaieteur Falls', distance: 198000 },
   
-  // Trinidad to Guyana
-  { name: 'Port of Spain to Georgetown', distance: 316800 },
-  { name: 'Port of Spain to Linden', distance: 369600 },
-  { name: 'San Fernando to Georgetown', distance: 355200 },
+  // Trinidad to other Caribbean
+  { name: 'Port of Spain to Grenada', distance: 79200 },
+  { name: 'Port of Spain to Barbados', distance: 158400 },
+  { name: 'Port of Spain to St. Lucia', distance: 184800 },
+  { name: 'Port of Spain to Jamaica', distance: 580000 },
   
-  // NYC to Caribbean
-  { name: 'NYC to Port of Spain', distance: 2073600 },
-  { name: 'NYC to Georgetown', distance: 2145600 },
-  { name: 'NYC to San Juan, PR', distance: 1584000 },
-  { name: 'NYC to Montego Bay, Jamaica', distance: 1620000 },
+  // Guyana to other Caribbean
+  { name: 'Georgetown to Suriname', distance: 105600 },
+  { name: 'Georgetown to Cayenne, Guadeloupe', distance: 264000 },
   
-  // NYC Boroughs & Landmarks
-  { name: 'Times Square to Central Park', distance: 21120 },
-  { name: 'Brooklyn Bridge Span', distance: 3455 },
-  { name: 'Manhattan Length (tip to tip)', distance: 33660 },
-  { name: 'Manhattan Width', distance: 11484 },
-  { name: 'JFK Airport to Times Square', distance: 31680 },
-  { name: 'NYC to Albany', distance: 150480 },
-  { name: 'NYC to Montauk Point', distance: 166320 },
-  { name: 'NYC to Philadelphia', distance: 95040 },
-  { name: 'NYC to Boston', distance: 215136 },
-  { name: 'NYC to Washington DC', distance: 225600 },
-  { name: 'Central Park to Yankee Stadium', distance: 21120 },
-  { name: 'Statue of Liberty to Wall Street', distance: 10560 },
-  
-  // Caribbean to Caribbean
-  { name: 'Trinidad to Barbados', distance: 158400 },
-  { name: 'Trinidad to Grenada', distance: 79200 },
-  { name: 'Port of Spain to Castries (St. Lucia)', distance: 184800 },
-  { name: 'Guyana to Suriname', distance: 105600 },
-  { name: 'Guyana to Belem, Brazil', distance: 316800 },
-  
-  // Reference Distances
-  { name: 'One Marathon', distance: 138336 },
-  { name: 'One Mile', distance: 5280 },
-  { name: 'One Kilometer', distance: 3281 },
-  { name: 'One Football Field', distance: 300 },
+  // Reference standards
+  { name: 'Full Marathon', distance: 138336 },
   { name: 'Half Marathon', distance: 69168 },
   { name: '10K Race', distance: 32808 },
   { name: '5K Race', distance: 16404 },
+  { name: 'One Mile', distance: 5280 },
 ];
 
 function getWeatherEmoji(code, isDay) {
@@ -127,12 +103,9 @@ async function fetchCurrentWeather() {
 function getUniqueDistance(playerIndex, steps) {
   const feetWalked = steps * 2.5 / 12;
   const distance = UNIQUE_DISTANCES[playerIndex % UNIQUE_DISTANCES.length];
+  const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
   
-  if (feetWalked >= distance.distance * 0.8) {
-    return `That's about ${(feetWalked / distance.distance).toFixed(1)}x the ${distance.name}!`;
-  }
-  
-  return `${steps.toLocaleString()} steps`;
+  return `${percentage}% of the way to ${distance.name}`;
 }
 
 export default function StompersApp() {
