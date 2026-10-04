@@ -1039,13 +1039,23 @@ export default function StompersApp() {
                     const playerData = rankings.find(r => r.name === selectedPlayer);
                     if (!playerData) return null;
                     
-                    return UNIQUE_DISTANCES.map((distance, idx) => {
-                      const feetWalked = playerData.total * 2.5;
-                      const percentage = parseFloat(((feetWalked / distance.distance) * 100).toFixed(1));
-                      const isCompleted = percentage > 100;
-                      
-                      // Filter: show if under 100%, or if over 100% and showCompletedDistances is true
-                      if (isCompleted && !showCompletedDistances) return null;
+                    const feetWalked = playerData.total * 2.5;
+                    
+                    // Create array with distances and percentages, then sort by percentage descending
+                    const distancesWithProgress = UNIQUE_DISTANCES
+                      .map(distance => ({
+                        ...distance,
+                        percentage: parseFloat(((feetWalked / distance.distance) * 100).toFixed(1))
+                      }))
+                      .filter(item => {
+                        const isCompleted = item.percentage > 100;
+                        // Filter: show if under 100%, or if over 100% and showCompletedDistances is true
+                        return isCompleted ? showCompletedDistances : true;
+                      })
+                      .sort((a, b) => b.percentage - a.percentage); // Sort descending by percentage
+                    
+                    return distancesWithProgress.map(distance => {
+                      const isCompleted = distance.percentage > 100;
                       
                       return (
                         <div key={distance.name} className={`p-3 rounded border ${
@@ -1057,19 +1067,19 @@ export default function StompersApp() {
                           <div className={`text-lg font-bold mt-1 ${
                             isCompleted ? 'text-green-400' : 'text-blue-300'
                           }`}>
-                            {percentage.toFixed(1)}%
+                            {distance.percentage.toFixed(1)}%
                           </div>
                           <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
                             <div 
                               className={`h-2 rounded-full transition-all ${
                                 isCompleted ? 'bg-green-500' : 'bg-blue-500'
                               }`}
-                              style={{ width: `${Math.min(percentage, 100)}%` }}
+                              style={{ width: `${Math.min(distance.percentage, 100)}%` }}
                             ></div>
                           </div>
                         </div>
                       );
-                    }).filter(Boolean);
+                    });
                   })()}
                 </div>
               </div>
