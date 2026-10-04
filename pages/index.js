@@ -6,110 +6,70 @@ import Head from 'next/head';
 // NYC/Nassau County coordinates
 const NYC_COORDS = { lat: 40.7128, lon: -74.0060 };
 
-// Unique distance comparisons - one per person (80+ landmarks!)
+// Unique distance comparisons - Trinidad, Guyana, and NYC cities
 const UNIQUE_DISTANCES = [
-  // Original 18
-  { name: 'Empire State Building Height', distance: 1454 },
-  { name: 'Central Park Length', distance: 2650 },
-  { name: 'Golden Gate Bridge Length', distance: 8981 },
-  { name: 'Statue of Liberty Height', distance: 305 },
-  { name: 'Washington Monument Height', distance: 555 },
-  { name: 'Big Ben Height', distance: 316 },
-  { name: 'Eiffel Tower Height', distance: 1083 },
-  { name: 'One Football Field', distance: 300 },
+  // Trinidad Cities
+  { name: 'Port of Spain to San Fernando', distance: 77408 },
+  { name: 'Port of Spain to Arima', distance: 21120 },
+  { name: 'Port of Spain to Point Fortin', distance: 84480 },
+  { name: 'Port of Spain to Chaguanas', distance: 26400 },
+  { name: 'San Fernando to Siparia', distance: 39600 },
+  { name: 'Arima to Blanchisseuse', distance: 47520 },
+  { name: 'Scarborough (Tobago) Beach', distance: 10560 },
+  { name: 'Port of Spain to Maracas Beach', distance: 26400 },
+  { name: 'Port of Spain to Pigeon Point Beach', distance: 163680 },
+  
+  // Guyana Cities
+  { name: 'Georgetown to Linden', distance: 87120 },
+  { name: 'Georgetown to New Amsterdam', distance: 79200 },
+  { name: 'Georgetown to Bartica', distance: 105600 },
+  { name: 'Linden to Ituni', distance: 39600 },
+  { name: 'Georgetown to Mahdia', distance: 198000 },
+  { name: 'New Amsterdam to Corriverton', distance: 79200 },
+  { name: 'Georgetown to Lethem', distance: 660000 },
+  { name: 'Parika to Bartica', distance: 66000 },
+  { name: 'Georgetown to Kaieteur Falls', distance: 198000 },
+  
+  // Trinidad to Guyana
+  { name: 'Port of Spain to Georgetown', distance: 316800 },
+  { name: 'Port of Spain to Linden', distance: 369600 },
+  { name: 'San Fernando to Georgetown', distance: 355200 },
+  
+  // NYC to Caribbean
+  { name: 'NYC to Port of Spain', distance: 2073600 },
+  { name: 'NYC to Georgetown', distance: 2145600 },
+  { name: 'NYC to San Juan, PR', distance: 1584000 },
+  { name: 'NYC to Montego Bay, Jamaica', distance: 1620000 },
+  
+  // NYC Boroughs & Landmarks
+  { name: 'Times Square to Central Park', distance: 21120 },
+  { name: 'Brooklyn Bridge Span', distance: 3455 },
+  { name: 'Manhattan Length (tip to tip)', distance: 33660 },
+  { name: 'Manhattan Width', distance: 11484 },
+  { name: 'JFK Airport to Times Square', distance: 31680 },
+  { name: 'NYC to Albany', distance: 150480 },
+  { name: 'NYC to Montauk Point', distance: 166320 },
+  { name: 'NYC to Philadelphia', distance: 95040 },
+  { name: 'NYC to Boston', distance: 215136 },
+  { name: 'NYC to Washington DC', distance: 225600 },
+  { name: 'Central Park to Yankee Stadium', distance: 21120 },
+  { name: 'Statue of Liberty to Wall Street', distance: 10560 },
+  
+  // Caribbean to Caribbean
+  { name: 'Trinidad to Barbados', distance: 158400 },
+  { name: 'Trinidad to Grenada', distance: 79200 },
+  { name: 'Port of Spain to Castries (St. Lucia)', distance: 184800 },
+  { name: 'Guyana to Suriname', distance: 105600 },
+  { name: 'Guyana to Belem, Brazil', distance: 316800 },
+  
+  // Reference Distances
+  { name: 'One Marathon', distance: 138336 },
   { name: 'One Mile', distance: 5280 },
   { name: 'One Kilometer', distance: 3281 },
-  { name: 'Burj Khalifa Height', distance: 2717 },
-  { name: 'Christ the Redeemer Height', distance: 1145 },
-  { name: 'Leaning Tower of Pisa Height', distance: 183 },
-  { name: 'Sagrada Familia Height', distance: 2555 },
-  { name: 'Arc de Triomphe Height', distance: 49 },
-  { name: 'Tower Bridge Length', distance: 244 },
-  { name: 'Brooklyn Bridge Length', distance: 3455 },
-  { name: 'Sydney Opera House Height', distance: 220 },
-  
-  // Additional Famous Landmarks
-  { name: 'Statue of Christ the Redeemer Length', distance: 98 },
-  { name: 'One-Twenty Story Building', distance: 1200 },
-  { name: 'Mount Everest Base Camp to Summit', distance: 26246 },
-  { name: 'Great Wall of China (one section)', distance: 13100 },
-  { name: 'Taj Mahal Length', distance: 561 },
-  { name: 'Colosseum Perimeter', distance: 1837 },
-  { name: 'Lincoln Memorial Height', distance: 190 },
-  { name: 'Space Needle Height', distance: 605 },
-  { name: 'CN Tower Height', distance: 1136 },
-  { name: 'Petronas Twin Towers Height', distance: 1483 },
-  { name: 'One World Trade Center Height', distance: 1776 },
-  { name: 'Chrysler Building Height', distance: 1046 },
-  { name: 'Woolworth Building Height', distance: 792 },
-  { name: 'Transamerica Pyramid Height', distance: 853 },
-  { name: 'Willis Tower Height', distance: 1450 },
-  { name: 'Trump Tower Height', distance: 664 },
-  
-  // Bridges & Structures
-  { name: 'Suspension Bridge (average)', distance: 3280 },
-  { name: 'George Washington Bridge', distance: 3500 },
-  { name: 'Verrazano Bridge', distance: 13632 },
-  { name: 'London Bridge', distance: 928 },
-  { name: 'Millennium Bridge', distance: 330 },
-  { name: 'Akashi Kaikyo Bridge', distance: 30105 },
-  { name: 'Forth Bridge', distance: 8296 },
-  
-  // Geographic Distances
-  { name: 'New York to Boston', distance: 215136 },
-  { name: 'San Francisco to Los Angeles', distance: 383040 },
-  { name: 'New York to Philadelphia', distance: 95040 },
-  { name: 'Manhattan Length', distance: 33660 },
-  { name: 'Manhattan Width', distance: 11484 },
-  { name: 'Lake Michigan Length', distance: 307680 },
-  { name: 'English Channel Width', distance: 106920 },
-  { name: 'Grand Canyon Width', distance: 264480 },
-  
-  // Sports Distances
-  { name: 'American Football Field (100 yards)', distance: 300 },
-  { name: 'Soccer Field Length', distance: 360 },
-  { name: 'Basketball Court Length', distance: 94 },
-  { name: 'Tennis Court Length', distance: 78 },
-  { name: 'Baseball Infield', distance: 360 },
-  { name: 'Track & Field Circuit', distance: 1312 },
-  { name: 'Olympic Marathon Distance', distance: 138336 },
-  { name: 'Ironman Triathlon Run', distance: 138336 },
-  
-  // Nature & Geology
-  { name: 'Mount Fuji Height', distance: 12388 },
-  { name: 'Mount Kilimanjaro Height', distance: 19341 },
-  { name: 'Machu Picchu Elevation', distance: 7970 },
-  { name: 'Dead Sea Depth', distance: 1410 },
-  { name: 'Mariana Trench Depth', distance: 358367 },
-  { name: 'Victoria Falls Height', distance: 355 },
-  { name: 'Niagara Falls Height', distance: 188 },
-  { name: 'Yellowstone Geyser Height', distance: 180 },
-  
-  // Historical Routes
-  { name: 'Route 66 (Chicago to LA)', distance: 2448960 },
-  { name: 'Oregon Trail Length', distance: 2170560 },
-  { name: 'Appalachian Trail Length', distance: 2190240 },
-  { name: 'Trans-Siberian Railway', distance: 5815200 },
-  
-  // Speed Records & Distances
-  { name: 'Speed of Sound (1 second)', distance: 1125 },
-  { name: 'Usain Bolt 100m Record', distance: 328 },
-  { name: 'Marathon Distance', distance: 138336 },
-  { name: 'Half Marathon Distance', distance: 69168 },
-  { name: '5K Race', distance: 16404 },
+  { name: 'One Football Field', distance: 300 },
+  { name: 'Half Marathon', distance: 69168 },
   { name: '10K Race', distance: 32808 },
-  
-  // Other Famous Attractions
-  { name: 'Disneyland Park Perimeter', distance: 15840 },
-  { name: 'Times Square Length', distance: 900 },
-  { name: 'Shibuya Crossing Width', distance: 492 },
-  { name: 'Red Square Moscow', distance: 2330 },
-  { name: 'St. Peter\'s Basilica Height', distance: 448 },
-  { name: 'Vatican City Width', distance: 2625 },
-  { name: 'The Great Sphinx Height', distance: 240 },
-  { name: 'Parthenon Length', distance: 228 },
-  { name: 'Angkor Wat Perimeter', distance: 5280 },
-  { name: 'Great Pyramid Height', distance: 481 },
+  { name: '5K Race', distance: 16404 },
 ];
 
 function getWeatherEmoji(code, isDay) {
@@ -398,7 +358,7 @@ export default function StompersApp() {
   const chartData = [];
   for (let day = 1; day <= monthData.challenge.currentDay; day++) {
     const dayData = { day: `Day ${day}` };
-    rankings.slice(0, 6).forEach(player => {
+    rankings.forEach(player => {
       let cumTotal = 0;
       for (let d = 1; d <= day; d++) {
         cumTotal += getDailySteps(d, player.name);
@@ -408,7 +368,7 @@ export default function StompersApp() {
     chartData.push(dayData);
   }
 
-  const colors = ['#FFD700', '#C0C0C0', '#CD7F32', '#FF6B6B', '#4ECDC4', '#45B7D1'];
+  const colors = ['#FFD700', '#C0C0C0', '#CD7F32', '#FF6B6B', '#4ECDC4', '#45B7D1', '#A78BFA', '#F472B6', '#38BDF8', '#34D399'];
 
   const getMedalEmoji = (rank) => {
     if (rank === 1) return '🥇';
@@ -960,12 +920,12 @@ export default function StompersApp() {
                   labelStyle={{ color: '#fff' }}
                 />
                 <Legend wrapperStyle={{ fontSize: '12px' }} />
-                {rankings.slice(0, 6).map((player, idx) => (
+                {rankings.map((player, idx) => (
                   <Line
                     key={player.name}
                     type="monotone"
                     dataKey={player.name}
-                    stroke={colors[idx]}
+                    stroke={colors[idx % colors.length]}
                     strokeWidth={2}
                     dot={false}
                     isAnimationActive={true}
@@ -973,7 +933,7 @@ export default function StompersApp() {
                 ))}
               </LineChart>
             </ResponsiveContainer>
-            <p className="text-gray-400 text-xs md:text-sm mt-4">Top 6 players • Cumulative totals</p>
+            <p className="text-gray-400 text-xs md:text-sm mt-4">All {players.length} players • Cumulative totals</p>
           </div>
 
           {/* Overall Leaderboard */}
