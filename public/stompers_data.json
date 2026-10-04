@@ -108,7 +108,7 @@
         "startDate": "2026-10-01",
         "endDate": "2026-10-31",
         "totalDays": 31,
-        "currentDay": 1,
+        "currentDay": 2,
         "prizePool": 500,
         "prizes": {
           "1st": 150,
@@ -129,7 +129,8 @@
         ]
       },
       "weather": {
-        "1": { "temp": 65, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 60 }
+        "1": { "temp": 65, "condition": "Partly Cloudy", "emoji": "⛅", "humidity": 60 },
+        "2": { "temp": 68, "condition": "Sunny", "emoji": "☀️", "humidity": 58 }
       },
       "dailyData": {
         "1": {
@@ -144,6 +145,20 @@
             "Ray Sawh U": 4346,
             "Shivaani": 3174,
             "Tiffenii Devi": 1071
+          }
+        },
+        "2": {
+          "competition": {
+            "Rodrick Lalloo": 18497.5,
+            "Goat InYuhThroat": 14573,
+            "Reshma": 13340,
+            "Randy Shiv": 12867.5,
+            "Ray Sawh U": 10901,
+            "Amelia Sookoo": 10863,
+            "Boor Paani": 9680,
+            "Tiffenii Devi": 7165,
+            "Shivaani": 6527,
+            "Sonia Shiv": 2084
           },
           "justforfun": {
             "Randy Shiv": 18412,
