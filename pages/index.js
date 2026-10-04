@@ -9,7 +9,7 @@ const NYC_COORDS = { lat: 40.7128, lon: -74.0060 };
 // Trinidad distances - show progress as percentage (in feet)
 const UNIQUE_DISTANCES = [
   // Trinidad City to City
-  { name: 'Port of Spain to San Fernando', distance: 77408 },
+  { name: 'Port of Spain to San Fernando', distance: 142560 }, // 27 miles
   { name: 'San Fernando to Point Fortin', distance: 39600 },
   { name: 'Port of Spain to Arima', distance: 21120 },
   { name: 'Arima to Blanchisseuse', distance: 47520 },
