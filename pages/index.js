@@ -1,986 +1,1375 @@
-{
-  "currentMonth": "october",
-  "months": {
-    "september": {
-      "challenge": {
-        "name": "September Stompers",
-        "startDate": "2026-09-01",
-        "endDate": "2026-09-30",
-        "totalDays": 30,
-        "currentDay": 30,
-        "prizePool": 360,
-        "prizes": {
-          "1st": 252,
-          "2nd": 72,
-          "3rd": 36
-        }
-      },
-      "players": [
-        "Goat InYuhThroat",
-        "Steven SumwhereU",
-        "Rodrick Lalloo",
-        "Randy Shiv",
-        "Reshy G",
-        "Kareem Munir",
-        "Vaani",
-        "Jeremy Gobardhan",
-        "Nicholas Ram",
-        "Demiii",
-        "Amanda S",
-        "Tiffenii Devi",
-        "Sonia Shiv",
-        "Boor Paani",
-        "Leon P",
-        "Amelia Sookoo",
-        "Sherrence Phagoo",
-        "Bindi Budhu",
-        "Emily Jagroop",
-        "Ray Sawh U"
-      ],
-      "weather": {
-        "1": {
-          "temp": 82,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 65
-        },
-        "2": {
-          "temp": 78,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 72
-        },
-        "3": {
-          "temp": 75,
-          "condition": "Overcast",
-          "emoji": "☁️",
-          "humidity": 68
-        },
-        "4": {
-          "temp": 77,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 60
-        },
-        "5": {
-          "temp": 79,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 58
-        },
-        "6": {
-          "temp": 78,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 62
-        },
-        "7": {
-          "temp": 76,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 61
-        },
-        "8": {
-          "temp": 80,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 55
-        },
-        "9": {
-          "temp": 81,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 52
-        },
-        "10": {
-          "temp": 78,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 62
-        },
-        "11": {
-          "temp": 77,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 59
-        },
-        "12": {
-          "temp": 79,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 61
-        },
-        "13": {
-          "temp": 80,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 57
-        },
-        "14": {
-          "temp": 81,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 54
-        },
-        "15": {
-          "temp": 82,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 51
-        },
-        "16": {
-          "temp": 80,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 58
-        },
-        "17": {
-          "temp": 79,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 56
-        },
-        "18": {
-          "temp": 78,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 59
-        },
-        "19": {
-          "temp": 77,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 62
-        },
-        "20": {
-          "temp": 75,
-          "condition": "Overcast",
-          "emoji": "☁️",
-          "humidity": 68
-        },
-        "21": {
-          "temp": 76,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 65
-        },
-        "22": {
-          "temp": 78,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 59
-        },
-        "23": {
-          "temp": 77,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 63
-        },
-        "24": {
-          "temp": 79,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 58
-        },
-        "25": {
-          "temp": 76,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 65
-        },
-        "26": {
-          "temp": 75,
-          "condition": "Overcast",
-          "emoji": "☁️",
-          "humidity": 70
-        },
-        "27": {
-          "temp": 75,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 65
-        },
-        "28": {
-          "temp": 72,
-          "condition": "Overcast",
-          "emoji": "☁️",
-          "humidity": 70
-        },
-        "29": {
-          "temp": 68,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 68
-        },
-        "30": {
-          "temp": 81,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 55
-        }
-      },
-      "dailyData": {
-        "1": {
-          "Goat InYuhThroat": 21355,
-          "Steven SumwhereU": 19622,
-          "Rodrick Lalloo": 18919,
-          "Randy Shiv": 16571,
-          "Reshy G": 15536,
-          "Kareem Munir": 11632,
-          "Vaani": 10203,
-          "Jeremy Gobardhan": 8968,
-          "Boor Paani": 8144,
-          "Nicholas Ram": 6742,
-          "Demiii": 6125,
-          "Amanda S": 5745,
-          "Tiffenii Devi": 4762,
-          "Sonia Shiv": 4395,
-          "Leon P": 3874,
-          "Amelia Sookoo": 3748,
-          "Sherrence Phagoo": 2662,
-          "Emily Jagroop": 2400
-        },
-        "2": {
-          "Steven SumwhereU": 23571,
-          "Goat InYuhThroat": 22404.5,
-          "Rodrick Lalloo": 19854,
-          "Demiii": 14410,
-          "Reshy G": 13336,
-          "Amanda S": 13216,
-          "Sherrence Phagoo": 12542,
-          "Randy Shiv": 8302,
-          "Nicholas Ram": 7730,
-          "Kareem Munir": 7092,
-          "Jeremy Gobardhan": 6975,
-          "Sonia Shiv": 6236,
-          "Vaani": 6156,
-          "Amelia Sookoo": 4612,
-          "Leon P": 3483,
-          "Boor Paani": 3412,
-          "Emily Jagroop": 3360,
-          "Tiffenii Devi": 685
-        },
-        "3": {
-          "Randy Shiv": 21795,
-          "Rodrick Lalloo": 20987.5,
-          "Sonia Shiv": 18532,
-          "Tiffenii Devi": 16647,
-          "Goat InYuhThroat": 14853,
-          "Jeremy Gobardhan": 10468,
-          "Steven SumwhereU": 10425,
-          "Vaani": 10277,
-          "Nicholas Ram": 9130,
-          "Amanda S": 8340.5,
-          "Amelia Sookoo": 7171,
-          "Kareem Munir": 6959,
-          "Reshy G": 6788,
-          "Demiii": 6218,
-          "Leon P": 5134,
-          "Sherrence Phagoo": 4762,
-          "Boor Paani": 3848,
-          "Emily Jagroop": 2252
-        },
-        "4": {
-          "Randy Shiv": 19842,
-          "Rodrick Lalloo": 19404.5,
-          "Goat InYuhThroat": 14772,
-          "Demiii": 12731,
-          "Amelia Sookoo": 12727,
-          "Reshy G": 11119,
-          "Sonia Shiv": 10775.5,
-          "Tiffenii Devi": 9953,
-          "Kareem Munir": 9180,
-          "Nicholas Ram": 8658,
-          "Vaani": 7991,
-          "Jeremy Gobardhan": 7719,
-          "Leon P": 6900,
-          "Steven SumwhereU": 5061,
-          "Boor Paani": 4029,
-          "Sherrence Phagoo": 3958,
-          "Amanda S": 3270,
-          "Bindi Budhu": 2238,
-          "Emily Jagroop": 598
-        },
-        "5": {
-          "Randy Shiv": 25394.5,
-          "Goat InYuhThroat": 16397.5,
-          "Sonia Shiv": 13882,
-          "Sherrence Phagoo": 12438,
-          "Rodrick Lalloo": 12317.5,
-          "Demiii": 9888,
-          "Steven SumwhereU": 9480,
-          "Nicholas Ram": 9341,
-          "Tiffenii Devi": 9228,
-          "Leon P": 6565,
-          "Amelia Sookoo": 6520,
-          "Boor Paani": 6078,
-          "Jeremy Gobardhan": 4455,
-          "Vaani": 4302,
-          "Reshy G": 3755,
-          "Emily Jagroop": 3639,
-          "Kareem Munir": 3218,
-          "Amanda S": 2793,
-          "Bindi Budhu": 2321
-        },
-        "6": {
-          "Randy Shiv": 18394,
-          "Goat InYuhThroat": 17428,
-          "Vaani": 17181,
-          "Reshy G": 15508,
-          "Sherrence Phagoo": 15443,
-          "Kareem Munir": 12973,
-          "Sonia Shiv": 10856,
-          "Rodrick Lalloo": 7781,
-          "Bindi Budhu": 6729.5,
-          "Jeremy Gobardhan": 4985,
-          "Nicholas Ram": 4853,
-          "Demiii": 3198,
-          "Leon P": 2904,
-          "Tiffenii Devi": 2744,
-          "Amelia Sookoo": 2088,
-          "Emily Jagroop": 1700,
-          "Amanda S": 1392,
-          "Steven SumwhereU": 1058,
-          "Boor Paani": 557
-        },
-        "7": {
-          "Rodrick Lalloo": 15492,
-          "Goat InYuhThroat": 13832,
-          "Tiffenii Devi": 11699,
-          "Boor Paani": 10613,
-          "Nicholas Ram": 9609,
-          "Randy Shiv": 8581,
-          "Bindi Budhu": 7397,
-          "Vaani": 4721,
-          "Leon P": 4549,
-          "Reshy G": 4127,
-          "Sherrence Phagoo": 4041,
-          "Kareem Munir": 3336,
-          "Amelia Sookoo": 3047,
-          "Jeremy Gobardhan": 2717,
-          "Emily Jagroop": 2543,
-          "Steven SumwhereU": 2254,
-          "Demiii": 2137,
-          "Amanda S": 1040,
-          "Sonia Shiv": 256
-        },
-        "8": {
-          "Rodrick Lalloo": 20476,
-          "Randy Shiv": 19058,
-          "Goat InYuhThroat": 16717,
-          "Nicholas Ram": 15951.5,
-          "Demiii": 12650,
-          "Reshy G": 11205,
-          "Boor Paani": 11176,
-          "Vaani": 10962,
-          "Amanda S": 7358,
-          "Leon P": 6689,
-          "Kareem Munir": 6010,
-          "Sherrence Phagoo": 5632,
-          "Jeremy Gobardhan": 5267,
-          "Steven SumwhereU": 4642,
-          "Tiffenii Devi": 3570,
-          "Amelia Sookoo": 3510,
-          "Emily Jagroop": 5706,
-          "Bindi Budhu": 2172,
-          "Sonia Shiv": 471
-        },
-        "9": {
-          "Rodrick Lalloo": 21492,
-          "Goat InYuhThroat": 14268,
-          "Tiffenii Devi": 13494,
-          "Randy Shiv": 12290,
-          "Reshy G": 11684,
-          "Nicholas Ram": 11313.5,
-          "Vaani": 10564,
-          "Demiii": 8645,
-          "Boor Paani": 7092,
-          "Bindi Budhu": 6955,
-          "Sherrence Phagoo": 6229,
-          "Amanda S": 6045,
-          "Steven SumwhereU": 5927,
-          "Kareem Munir": 4734,
-          "Leon P": 4608,
-          "Jeremy Gobardhan": 4275,
-          "Amelia Sookoo": 2998,
-          "Emily Jagroop": 2403,
-          "Sonia Shiv": 619
-        },
-        "10": {
-          "Rodrick Lalloo": 19671,
-          "Goat InYuhThroat": 15411.5,
-          "Nicholas Ram": 15057,
-          "Reshy G": 11979,
-          "Boor Paani": 11163,
-          "Kareem Munir": 8900,
-          "Sherrence Phagoo": 8547,
-          "Amanda S": 7399,
-          "Tiffenii Devi": 6685,
-          "Randy Shiv": 6557,
-          "Demiii": 6364,
-          "Jeremy Gobardhan": 6309,
-          "Leon P": 4917,
-          "Emily Jagroop": 4206,
-          "Vaani": 3312,
-          "Amelia Sookoo": 2407,
-          "Bindi Budhu": 1939,
-          "Steven SumwhereU": 1731,
-          "Sonia Shiv": 1471
-        },
-        "11": {
-          "Rodrick Lalloo": 19579.5,
-          "Reshy G": 14298,
-          "Goat InYuhThroat": 12056,
-          "Steven SumwhereU": 8628,
-          "Nicholas Ram": 7812,
-          "Jeremy Gobardhan": 5820,
-          "Boor Paani": 5815,
-          "Demiii": 5649,
-          "Randy Shiv": 5351,
-          "Tiffenii Devi": 5178,
-          "Bindi Budhu": 5092,
-          "Amelia Sookoo": 4131,
-          "Leon P": 3254,
-          "Vaani": 3222,
-          "Kareem Munir": 2813,
-          "Sherrence Phagoo": 2643,
-          "Emily Jagroop": 2611,
-          "Amanda S": 820,
-          "Sonia Shiv": 213,
-          "Ray Sawh U": 0
-        },
-        "12": {
-          "Goat InYuhThroat": 14470,
-          "Reshy G": 14398,
-          "Rodrick Lalloo": 12904,
-          "Ray Sawh U": 10965,
-          "Vaani": 10005,
-          "Randy Shiv": 8022,
-          "Nicholas Ram": 7635,
-          "Tiffenii Devi": 6691,
-          "Amanda S": 6205,
-          "Jeremy Gobardhan": 4984,
-          "Leon P": 4816,
-          "Boor Paani": 4700,
-          "Amelia Sookoo": 4096,
-          "Sherrence Phagoo": 3574,
-          "Sonia Shiv": 3540,
-          "Kareem Munir": 2971,
-          "Demiii": 1871,
-          "Bindi Budhu": 1568,
-          "Steven SumwhereU": 267,
-          "Emily Jagroop": 0
-        },
-        "13": {
-          "Randy Shiv": 10819,
-          "Rodrick Lalloo": 9967,
-          "Ray Sawh U": 7351,
-          "Tiffenii Devi": 7226,
-          "Goat InYuhThroat": 7028,
-          "Demiii": 6837,
-          "Kareem Munir": 6200,
-          "Leon P": 6115.5,
-          "Reshy G": 6069.5,
-          "Nicholas Ram": 5742,
-          "Steven SumwhereU": 5002,
-          "Sonia Shiv": 4654,
-          "Sherrence Phagoo": 3958,
-          "Amanda S": 3375,
-          "Boor Paani": 3176,
-          "Jeremy Gobardhan": 3159,
-          "Vaani": 2950,
-          "Amelia Sookoo": 1900,
-          "Emily Jagroop": 1551,
-          "Bindi Budhu": 1179
-        },
-        "14": {
-          "Rodrick Lalloo": 15318.5,
-          "Goat InYuhThroat": 9502,
-          "Boor Paani": 9169,
-          "Nicholas Ram": 8880,
-          "Jeremy Gobardhan": 7922,
-          "Sherrence Phagoo": 6718,
-          "Kareem Munir": 6045,
-          "Demiii": 6026,
-          "Vaani": 5764,
-          "Randy Shiv": 4937,
-          "Leon P": 4865,
-          "Reshy G": 3785,
-          "Amelia Sookoo": 3034,
-          "Sonia Shiv": 2663,
-          "Ray Sawh U": 2354,
-          "Amanda S": 2084,
-          "Steven SumwhereU": 1112,
-          "Tiffenii Devi": 904,
-          "Bindi Budhu": 327,
-          "Emily Jagroop": 0
-        },
-        "15": {
-          "Boor Paani": 15721,
-          "Rodrick Lalloo": 15017,
-          "Randy Shiv": 14442,
-          "Nicholas Ram": 11451,
-          "Vaani": 9636,
-          "Goat InYuhThroat": 8944.5,
-          "Sherrence Phagoo": 7870,
-          "Kareem Munir": 7742,
-          "Steven SumwhereU": 7276,
-          "Amanda S": 6758,
-          "Reshy G": 5593,
-          "Demiii": 5374,
-          "Leon P": 4625,
-          "Jeremy Gobardhan": 4272,
-          "Amelia Sookoo": 2372,
-          "Tiffenii Devi": 1440,
-          "Bindi Budhu": 1154,
-          "Sonia Shiv": 732,
-          "Ray Sawh U": 0,
-          "Emily Jagroop": 0
-        },
-        "16": {
-          "Boor Paani": 16496,
-          "Randy Shiv": 16149,
-          "Reshy G": 15642,
-          "Rodrick Lalloo": 13421.5,
-          "Goat InYuhThroat": 12722,
-          "Nicholas Ram": 9909,
-          "Leon P": 8883.5,
-          "Demiii": 8218,
-          "Kareem Munir": 7872,
-          "Steven SumwhereU": 7073,
-          "Sherrence Phagoo": 6319,
-          "Amanda S": 6267.5,
-          "Jeremy Gobardhan": 4652,
-          "Amelia Sookoo": 3060,
-          "Sonia Shiv": 2803,
-          "Emily Jagroop": 2415,
-          "Tiffenii Devi": 1783,
-          "Bindi Budhu": 1570,
-          "Vaani": 1457,
-          "Ray Sawh U": 0
-        },
-        "17": {
-          "Boor Paani": 15778,
-          "Goat InYuhThroat": 15679,
-          "Reshy G": 15638,
-          "Rodrick Lalloo": 15216,
-          "Nicholas Ram": 13624,
-          "Randy Shiv": 12770.5,
-          "Steven SumwhereU": 10848,
-          "Kareem Munir": 9045,
-          "Vaani": 9031,
-          "Jeremy Gobardhan": 7555,
-          "Emily Jagroop": 7067,
-          "Sherrence Phagoo": 6791,
-          "Amanda S": 4466,
-          "Sonia Shiv": 4295,
-          "Demiii": 3876,
-          "Amelia Sookoo": 3812,
-          "Leon P": 1841,
-          "Bindi Budhu": 1603,
-          "Tiffenii Devi": 1557,
-          "Ray Sawh U": 0
-        },
-        "18": {
-          "Rodrick Lalloo": 17002.5,
-          "Goat InYuhThroat": 13033,
-          "Reshy G": 11179,
-          "Vaani": 10321,
-          "Nicholas Ram": 7382,
-          "Boor Paani": 7280,
-          "Jeremy Gobardhan": 6122,
-          "Demiii": 5957,
-          "Amelia Sookoo": 5614,
-          "Emily Jagroop": 5081,
-          "Tiffenii Devi": 4701,
-          "Sherrence Phagoo": 4450,
-          "Randy Shiv": 4441,
-          "Steven SumwhereU": 4368,
-          "Kareem Munir": 3782,
-          "Leon P": 3533,
-          "Sonia Shiv": 2777,
-          "Amanda S": 0,
-          "Bindi Budhu": 0,
-          "Ray Sawh U": 0
-        },
-        "19": {
-          "Goat InYuhThroat": 14779,
-          "Rodrick Lalloo": 9773,
-          "Randy Shiv": 9042,
-          "Kareem Munir": 8907,
-          "Demiii": 8222,
-          "Sherrence Phagoo": 7100,
-          "Amelia Sookoo": 5263,
-          "Vaani": 5045,
-          "Tiffenii Devi": 4895,
-          "Leon P": 4544,
-          "Nicholas Ram": 4529,
-          "Boor Paani": 4034,
-          "Jeremy Gobardhan": 3497,
-          "Steven SumwhereU": 2941,
-          "Sonia Shiv": 2214,
-          "Reshy G": 2048,
-          "Emily Jagroop": 70,
-          "Amanda S": 0,
-          "Bindi Budhu": 0,
-          "Ray Sawh U": 0
-        },
-        "20": {
-          "Goat InYuhThroat": 7553,
-          "Rodrick Lalloo": 7368,
-          "Nicholas Ram": 6308,
-          "Reshy G": 6269,
-          "Randy Shiv": 6057,
-          "Vaani": 3637,
-          "Amelia Sookoo": 3494,
-          "Jeremy Gobardhan": 3280,
-          "Sonia Shiv": 3030,
-          "Boor Paani": 2704,
-          "Leon P": 2302,
-          "Kareem Munir": 2172,
-          "Demiii": 1791,
-          "Steven SumwhereU": 1459,
-          "Emily Jagroop": 1439,
-          "Tiffenii Devi": 1108,
-          "Sherrence Phagoo": 994,
-          "Amanda S": 448,
-          "Bindi Budhu": 0,
-          "Ray Sawh U": 0
-        },
-        "21": {
-          "Rodrick Lalloo": 20258,
-          "Goat InYuhThroat": 12573,
-          "Reshy G": 11522,
-          "Kareem Munir": 8081.5,
-          "Tiffenii Devi": 7919,
-          "Vaani": 7133,
-          "Sherrence Phagoo": 6866,
-          "Steven SumwhereU": 6277,
-          "Jeremy Gobardhan": 6026,
-          "Randy Shiv": 5870.5,
-          "Nicholas Ram": 5681,
-          "Demiii": 4726,
-          "Boor Paani": 4285.5,
-          "Amelia Sookoo": 4076,
-          "Leon P": 3046,
-          "Emily Jagroop": 1651,
-          "Sonia Shiv": 1315,
-          "Amanda S": 975,
-          "Bindi Budhu": 0,
-          "Ray Sawh U": 0
-        },
-        "22": {
-          "Rodrick Lalloo": 15306,
-          "Reshy G": 12242,
-          "Nicholas Ram": 10568,
-          "Leon P": 9661,
-          "Vaani": 9652,
-          "Boor Paani": 9068,
-          "Demiii": 8516,
-          "Goat InYuhThroat": 8072,
-          "Amanda S": 6792,
-          "Steven SumwhereU": 6772,
-          "Randy Shiv": 6672,
-          "Tiffenii Devi": 6233,
-          "Sherrence Phagoo": 5071,
-          "Jeremy Gobardhan": 4651,
-          "Amelia Sookoo": 4245,
-          "Kareem Munir": 3175,
-          "Emily Jagroop": 2847,
-          "Sonia Shiv": 2411,
-          "Bindi Budhu": 0,
-          "Ray Sawh U": 0
-        },
-        "23": {
-          "Rodrick Lalloo": 16086,
-          "Leon P": 11808,
-          "Nicholas Ram": 10583,
-          "Vaani": 10261,
-          "Randy Shiv": 9565.5,
-          "Goat InYuhThroat": 8667,
-          "Reshy G": 8447,
-          "Boor Paani": 7178,
-          "Amanda S": 6712,
-          "Steven SumwhereU": 6695,
-          "Amelia Sookoo": 6181,
-          "Tiffenii Devi": 6075,
-          "Sherrence Phagoo": 4102,
-          "Demiii": 3850,
-          "Kareem Munir": 3716,
-          "Emily Jagroop": 2111,
-          "Sonia Shiv": 1893,
-          "Bindi Budhu": 1583,
-          "Jeremy Gobardhan": 1422,
-          "Ray Sawh U": 0
-        },
-        "24": {
-          "Randy Shiv": 15265.5,
-          "Rodrick Lalloo": 14773,
-          "Reshy G": 11889,
-          "Goat InYuhThroat": 11837,
-          "Vaani": 11551,
-          "Leon P": 11017.5,
-          "Nicholas Ram": 9875,
-          "Steven SumwhereU": 8568,
-          "Amanda S": 7004,
-          "Boor Paani": 6982,
-          "Sherrence Phagoo": 6486,
-          "Amelia Sookoo": 5612,
-          "Tiffenii Devi": 5032,
-          "Jeremy Gobardhan": 4887,
-          "Demiii": 3868,
-          "Sonia Shiv": 2238,
-          "Kareem Munir": 1772,
-          "Bindi Budhu": 1525,
-          "Emily Jagroop": 884,
-          "Ray Sawh U": 0
-        },
-        "25": {
-          "Rodrick Lalloo": 17114,
-          "Goat InYuhThroat": 15564.5,
-          "Leon P": 11131,
-          "Randy Shiv": 10620,
-          "Nicholas Ram": 9399.5,
-          "Reshy G": 7587,
-          "Jeremy Gobardhan": 7326,
-          "Amelia Sookoo": 6475,
-          "Steven SumwhereU": 5914,
-          "Tiffenii Devi": 5525,
-          "Boor Paani": 5347,
-          "Vaani": 5329,
-          "Demiii": 4208,
-          "Sherrence Phagoo": 3598,
-          "Emily Jagroop": 3580,
-          "Kareem Munir": 3409,
-          "Sonia Shiv": 3353,
-          "Ray Sawh U": 3082,
-          "Bindi Budhu": 1862,
-          "Amanda S": 931
-        },
-        "26": {
-          "Leon P": 11798,
-          "Goat InYuhThroat": 11318,
-          "Tiffenii Devi": 10334,
-          "Demiii": 6317,
-          "Randy Shiv": 5850,
-          "Amelia Sookoo": 5455,
-          "Nicholas Ram": 5332,
-          "Kareem Munir": 4949,
-          "Sherrence Phagoo": 3831,
-          "Sonia Shiv": 3464,
-          "Rodrick Lalloo": 3413,
-          "Boor Paani": 3394,
-          "Reshy G": 3213,
-          "Jeremy Gobardhan": 2848,
-          "Vaani": 2822,
-          "Emily Jagroop": 2079,
-          "Bindi Budhu": 743,
-          "Steven SumwhereU": 672,
-          "Amanda S": 512,
-          "Ray Sawh U": 0
-        },
-        "27": {
-          "Reshy G": 10392,
-          "Goat InYuhThroat": 7832.5,
-          "Randy Shiv": 6683,
-          "Vaani": 5296,
-          "Nicholas Ram": 4309,
-          "Ray Sawh U": 3874,
-          "Sonia Shiv": 3562,
-          "Tiffenii Devi": 3326,
-          "Rodrick Lalloo": 3206,
-          "Jeremy Gobardhan": 2926,
-          "Boor Paani": 2809,
-          "Kareem Munir": 2684,
-          "Amelia Sookoo": 2244,
-          "Emily Jagroop": 1547,
-          "Sherrence Phagoo": 1445,
-          "Leon P": 1189,
-          "Demiii": 966,
-          "Amanda S": 824,
-          "Steven SumwhereU": 467,
-          "Bindi Budhu": -143
-        },
-        "28": {
-          "Rodrick Lalloo": 14112,
-          "Ray Sawh U": 12331,
-          "Goat InYuhThroat": 9356,
-          "Sherrence Phagoo": 9326,
-          "Reshy G": 8557,
-          "Jeremy Gobardhan": 8328,
-          "Nicholas Ram": 7699.5,
-          "Kareem Munir": 6512,
-          "Tiffenii Devi": 6384,
-          "Randy Shiv": 5541,
-          "Boor Paani": 5248,
-          "Amelia Sookoo": 4035,
-          "Amanda S": 3275,
-          "Vaani": 3183,
-          "Sonia Shiv": 2548,
-          "Leon P": 2393,
-          "Steven SumwhereU": 1336,
-          "Bindi Budhu": 1316,
-          "Emily Jagroop": 887,
-          "Demiii": 789
-        },
-        "29": {
-          "Rodrick Lalloo": 20088,
-          "Goat InYuhThroat": 16290,
-          "Tiffenii Devi": 11988,
-          "Reshy G": 10952,
-          "Randy Shiv": 10467,
-          "Nicholas Ram": 8525.5,
-          "Amanda S": 7846,
-          "Leon P": 6710,
-          "Vaani": 6442,
-          "Jeremy Gobardhan": 5718,
-          "Sherrence Phagoo": 4977,
-          "Steven SumwhereU": 4782,
-          "Amelia Sookoo": 4497,
-          "Boor Paani": 4456,
-          "Sonia Shiv": 4331,
-          "Kareem Munir": 3307,
-          "Demiii": 2959,
-          "Emily Jagroop": 1828,
-          "Bindi Budhu": 1377,
-          "Ray Sawh U": 0
-        },
-        "30": {
-          "Rodrick Lalloo": 16503,
-          "Vaani": 12453,
-          "Randy Shiv": 11606.5,
-          "Goat InYuhThroat": 10816,
-          "Ray Sawh U": 8426,
-          "Steven SumwhereU": 8415,
-          "Leon P": 8084,
-          "Nicholas Ram": 7701,
-          "Reshy G": 6480,
-          "Tiffenii Devi": 6221,
-          "Jeremy Gobardhan": 5759,
-          "Sonia Shiv": 5279,
-          "Amanda S": 4688,
-          "Amelia Sookoo": 4351,
-          "Sherrence Phagoo": 3791,
-          "Boor Paani": 3620,
-          "Kareem Munir": 3014,
-          "Demiii": 2632,
-          "Bindi Budhu": 1207,
-          "Emily Jagroop": 974
-        }
+import React, { useState, useEffect } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { Trophy, TrendingUp, TrendingDown, Award, Zap, Save } from 'lucide-react';
+import Head from 'next/head';
+
+// NYC/Nassau County coordinates
+const NYC_COORDS = { lat: 40.7128, lon: -74.0060 };
+
+// Trinidad distances - show progress as percentage (in feet)
+const UNIQUE_DISTANCES = [
+  // Port of Spain connections
+  { name: 'Port of Spain to San Fernando', distance: 142560 }, // 27 miles
+  { name: 'Port of Spain to Arima', distance: 21120 },
+  { name: 'Port of Spain to Chaguanas', distance: 26400 },
+  { name: 'Port of Spain to Point Fortin', distance: 84480 },
+  { name: 'Port of Spain to Maracas Beach', distance: 26400 },
+  { name: 'Port of Spain to Toco', distance: 73920 },
+  { name: 'Port of Spain to Siparia', distance: 105600 },
+  
+  // San Fernando connections
+  { name: 'San Fernando to Point Fortin', distance: 39600 },
+  { name: 'San Fernando to Siparia', distance: 39600 },
+  { name: 'San Fernando to Princes Town', distance: 68640 },
+  { name: 'San Fernando to Mayaro Beach', distance: 131760 },
+  { name: 'San Fernando to Moruga', distance: 99000 },
+  { name: 'San Fernando to Chaguanas', distance: 58080 },
+  
+  // Arima connections
+  { name: 'Arima to Blanchisseuse', distance: 47520 },
+  { name: 'Arima to Port of Spain', distance: 21120 },
+  { name: 'Arima to Toco', distance: 50160 },
+  { name: 'Arima to Sangre Grande', distance: 42240 },
+  
+  // Other Northern connections
+  { name: 'Port of Spain to Maraval', distance: 13200 },
+  { name: 'Chaguanas to Sangre Grande', distance: 50160 },
+  { name: 'Arouca to Tunapuna', distance: 9240 },
+  
+  // Southern connections
+  { name: 'Point Fortin to Fullerton', distance: 26400 },
+  { name: 'Siparia to Moruga', distance: 63360 },
+  { name: 'Princes Town to Rio Claro', distance: 42240 },
+  { name: 'Rio Claro to Guayaguayare', distance: 39600 },
+  
+  // Cross-island routes
+  { name: 'Arima to San Fernando', distance: 99000 },
+  { name: 'Chaguanas to Point Fortin', distance: 63360 },
+  { name: 'Port of Spain to Moruga', distance: 126720 },
+  
+  // Trinidad to Tobago & Guyana
+  { name: 'Trinidad to Scarborough (Tobago)', distance: 163680 },
+  { name: 'Port of Spain to Georgetown', distance: 316800 },
+  { name: 'San Fernando to Georgetown', distance: 355200 },
+  
+  // Guyana Capital Towns
+  { name: 'Georgetown to Linden', distance: 295680 }, // 56 miles
+  { name: 'Georgetown to New Amsterdam', distance: 306240 }, // 58 miles
+  { name: 'Georgetown to Corriverton', distance: 480480 }, // 91 miles
+  { name: 'Georgetown to Bartica', distance: 221760 }, // 42 miles
+  { name: 'Georgetown to Mahdia', distance: 660000 }, // 125 miles
+  { name: 'Georgetown to Anna Regina', distance: 205920 }, // 39 miles
+  { name: 'Georgetown to Lethem', distance: 1383360 }, // 262 miles
+  { name: 'Linden to Mahdia', distance: 401280 }, // 76 miles
+  { name: 'Linden to Corriverton', distance: 422400 }, // 80 miles
+  { name: 'Linden to Anna Regina', distance: 459360 }, // 87 miles
+  { name: 'Linden to Lethem', distance: 1098240 }, // 208 miles
+  { name: 'New Amsterdam to Corriverton', distance: 174240 }, // 33 miles
+  { name: 'New Amsterdam to Mahdia', distance: 686400 }, // 130 miles
+  { name: 'New Amsterdam to Lethem', distance: 1335840 }, // 253 miles
+  { name: 'Corriverton to Mahdia', distance: 765600 }, // 145 miles
+  { name: 'Corriverton to Anna Regina', distance: 681120 }, // 129 miles
+  { name: 'Bartica to New Amsterdam', distance: 649920 }, // 123 miles (approximate)
+  
+  // Reference standards
+  { name: 'Full Marathon', distance: 138336 },
+  { name: 'Half Marathon', distance: 69168 },
+  { name: '10K Race', distance: 32808 },
+  { name: '5K Race', distance: 16404 },
+  { name: 'One Mile', distance: 5280 },
+];
+
+function getWeatherEmoji(code, isDay) {
+  if (code === 0) return '☀️';
+  if (code === 1 || code === 2) return '⛅';
+  if (code === 3) return '☁️';
+  if (code === 45 || code === 48) return '🌫️';
+  if (code === 51 || code === 53 || code === 55) return '🌧️';
+  if (code === 61 || code === 63 || code === 65) return '🌧️';
+  if (code === 71 || code === 73 || code === 75 || code === 77 || code === 80 || code === 81 || code === 82) return '❄️';
+  if (code === 85 || code === 86) return '❄️';
+  if (code === 95 || code === 96 || code === 99) return '⛈️';
+  return '🌤️';
+}
+
+function getWeatherCondition(code) {
+  if (code === 0) return 'Clear Sky';
+  if (code === 1) return 'Mainly Clear';
+  if (code === 2) return 'Partly Cloudy';
+  if (code === 3) return 'Overcast';
+  if (code === 45 || code === 48) return 'Foggy';
+  if (code === 51 || code === 53 || code === 55) return 'Drizzle';
+  if (code === 61 || code === 63 || code === 65) return 'Rainy';
+  if (code === 71 || code === 73 || code === 75 || code === 77) return 'Snow';
+  if (code === 80 || code === 81 || code === 82) return 'Rain Showers';
+  if (code === 85 || code === 86) return 'Snow Showers';
+  if (code === 95 || code === 96 || code === 99) return 'Thunderstorm';
+  return 'Unknown';
+}
+
+async function fetchCurrentWeather() {
+  try {
+    const response = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${NYC_COORDS.lat}&longitude=${NYC_COORDS.lon}&current=temperature_2m,weather_code,relative_humidity_2m,is_day&temperature_unit=fahrenheit&timezone=America/New_York`
+    );
+    
+    if (!response.ok) throw new Error('Weather fetch failed');
+    
+    const weatherData = await response.json();
+    const current = weatherData.current;
+    
+    return {
+      temp: Math.round(current.temperature_2m),
+      condition: getWeatherCondition(current.weather_code),
+      emoji: getWeatherEmoji(current.weather_code, current.is_day),
+      humidity: current.relative_humidity_2m,
+      location: 'NYC/Nassau County'
+    };
+  } catch (err) {
+    console.error('Weather fetch error:', err);
+    return null;
+  }
+}
+
+function getUniqueDistance(playerIndex, steps) {
+  const feetWalked = steps * 2.5;
+  
+  // Find the first distance under 100%
+  let distanceIndex = playerIndex % UNIQUE_DISTANCES.length;
+  let distance = UNIQUE_DISTANCES[distanceIndex];
+  let percentage = ((feetWalked / distance.distance) * 100);
+  
+  // If over 100%, cycle through distances until we find one under 100%
+  let offset = 0;
+  while (percentage > 100 && offset < UNIQUE_DISTANCES.length) {
+    offset++;
+    distanceIndex = (playerIndex + offset) % UNIQUE_DISTANCES.length;
+    distance = UNIQUE_DISTANCES[distanceIndex];
+    percentage = ((feetWalked / distance.distance) * 100);
+  }
+  
+  const distanceMiles = (distance.distance / 5280).toFixed(1);
+  return `${percentage.toFixed(1)}% of the way to ${distance.name} (${distanceMiles} mi)`;
+}
+
+export default function StompersApp() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentWeather, setCurrentWeather] = useState(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [activeTab, setActiveTab] = useState('today');
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [showCompletedDistances, setShowCompletedDistances] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/stompers_data.json');
+        if (!response.ok) throw new Error('Failed to load data');
+        const jsonData = await response.json();
+        setData(jsonData);
+        const initMonth = jsonData.currentMonth || 'october';
+        setSelectedMonth(initMonth);
+        const monthData = jsonData.months[initMonth];
+        setSelectedDay(monthData.challenge.currentDay);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-    },
-    "october": {
-      "challenge": {
-        "name": "October Stompers",
-        "startDate": "2026-10-01",
-        "endDate": "2026-10-31",
-        "totalDays": 31,
-        "currentDay": 3,
-        "prizePool": 500,
-        "prizes": {
-          "1st": 150,
-          "2nd": 90,
-          "3rd": 60
-        },
-        "payingPlayers": [
-          "Randy Shiv",
-          "Rodrick Lalloo",
-          "Goat InYuhThroat",
-          "Reshma",
-          "Boor Paani",
-          "Sonia Shiv",
-          "Amelia Sookoo",
-          "Ray Sawh U",
-          "Shivaani",
-          "Tiffenii Devi"
-        ]
-      },
-      "weather": {
-        "1": {
-          "temp": 65,
-          "condition": "Partly Cloudy",
-          "emoji": "⛅",
-          "humidity": 60
-        },
-        "2": {
-          "temp": 68,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 58
-        },
-        "3": {
-          "temp": 71,
-          "condition": "Sunny",
-          "emoji": "☀️",
-          "humidity": 62
+    };
+
+    fetchData();
+  }, []);
+  
+  const getMonthData = () => {
+    if (!data || !selectedMonth) return null;
+    return data.months[selectedMonth];
+  };
+  
+  const getDailySteps = (day, playerName) => {
+    const monthData = getMonthData();
+    if (!monthData) return 0;
+    const dailyData = monthData.dailyData[day];
+    if (!dailyData) return 0;
+    
+    // October: use competition branch
+    if (dailyData.competition !== undefined) {
+      return dailyData.competition[playerName] || 0;
+    }
+    
+    // September: flat structure
+    return dailyData[playerName] || 0;
+  };
+  
+  const getDailyStepsForAllPlayers = (day) => {
+    const monthData = getMonthData();
+    if (!monthData) return {};
+    const dailyData = monthData.dailyData[day];
+    if (!dailyData) return {};
+    
+    const allPlayers = getPlayers();
+    const result = {};
+    
+    // October: extract from competition branch
+    if (dailyData.competition !== undefined) {
+      allPlayers.forEach(player => {
+        result[player] = dailyData.competition[player] || 0;
+      });
+    } else {
+      // September: flat structure
+      allPlayers.forEach(player => {
+        result[player] = dailyData[player] || 0;
+      });
+    }
+    
+    return result;
+  };
+  
+  const getPlayers = () => {
+    const monthData = getMonthData();
+    if (!monthData) return [];
+    
+    // October: show only paying competition players
+    if (selectedMonth === 'october') {
+      return monthData.challenge.payingPlayers || [];
+    }
+    
+    // September: show all players
+    return monthData.players || [];
+  };
+
+  useEffect(() => {
+    if (data) {
+      const loadWeather = async () => {
+        setWeatherLoading(true);
+        const weather = await fetchCurrentWeather();
+        if (weather) {
+          setCurrentWeather(weather);
         }
-      },
-      "dailyData": {
-        "1": {
-          "competition": {
-            "Randy Shiv": 18412,
-            "Rodrick Lalloo": 15610.5,
-            "Goat InYuhThroat": 9390,
-            "Reshma": 7904,
-            "Boor Paani": 7611,
-            "Sonia Shiv": 4994,
-            "Amelia Sookoo": 4947,
-            "Ray Sawh U": 4346,
-            "Shivaani": 3174,
-            "Tiffenii Devi": 1071
-          }
-        },
-        "2": {
-          "competition": {
-            "Rodrick Lalloo": 18497.5,
-            "Goat InYuhThroat": 14573,
-            "Reshma": 13340,
-            "Randy Shiv": 12867.5,
-            "Ray Sawh U": 10901,
-            "Amelia Sookoo": 10863,
-            "Boor Paani": 9680,
-            "Tiffenii Devi": 7165,
-            "Shivaani": 6527,
-            "Sonia Shiv": 2084
-          },
-          "justforfun": {
-            "Randy Shiv": 18412,
-            "Rodrick Lalloo": 15610.5,
-            "Goat InYuhThroat": 9390,
-            "Reshma": 7904,
-            "Boor Paani": 7611,
-            "Sonia Shiv": 4994,
-            "Amelia Sookoo": 4947,
-            "Ray Sawh U": 4346,
-            "Shivaani": 3174,
-            "Tiffenii Devi": 1071,
-            "Nicholas Ram": 9595,
-            "Leon P": 7756,
-            "Amanda S": 6884,
-            "Jeremy Gobardhan": 6746,
-            "Emily Jagroop": 5655,
-            "Kareem Munir": 4773,
-            "Steven SumwhereU": 3831,
-            "Demiii": 3746,
-            "Sherrence Phagoo": 3416,
-            "Bindi Budhu": 1754
-          }
-        },
-        "3": {
-          "competition": {
-            "Randy Shiv": 18100.5,
-            "Sonia Shiv": 17226,
-            "Rodrick Lalloo": 16086,
-            "Goat InYuhThroat": 13478,
-            "Tiffenii Devi": 10274,
-            "Amelia Sookoo": 8946,
-            "Reshy G": 7578,
-            "Boor Paani": 7567,
-            "Vaani": 6594,
-            "Ray Sawh U": 2439
-          }
+        setWeatherLoading(false);
+      };
+      
+      loadWeather();
+      const interval = setInterval(loadWeather, 15 * 60 * 1000);
+      return () => clearInterval(interval);
+    }
+  }, [data]);
+
+  const handleRefreshWeather = async () => {
+    setWeatherLoading(true);
+    const weather = await fetchCurrentWeather();
+    if (weather) {
+      setCurrentWeather(weather);
+    }
+    setWeatherLoading(false);
+  };
+
+  if (loading) {
+    return (
+      <>
+        <Head>
+          <title>September Stompers</title>
+        </Head>
+        <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+          <div className="text-white text-2xl">Loading stompers...</div>
+        </div>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Head>
+          <title>September Stompers - Error</title>
+        </Head>
+        <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+          <div className="text-red-400 text-xl">Error: {error}</div>
+        </div>
+      </>
+    );
+  }
+
+  if (!data || !selectedMonth) return null;
+
+  const monthData = getMonthData();
+  const players = getPlayers();
+
+  // Calculate daily payouts ($6.45 per day for winner)
+  const DAILY_PAYOUT = 6.45;
+  
+  const calculatePayouts = () => {
+    const payouts = {};
+    players.forEach(player => {
+      payouts[player] = 0;
+    });
+
+    for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+      // Find daily winner
+      let dayWinner = null;
+      let maxSteps = 0;
+      
+      players.forEach(player => {
+        const steps = getDailySteps(day, player);
+        if (steps > maxSteps) {
+          maxSteps = steps;
+          dayWinner = player;
         }
+      });
+      
+      if (dayWinner && maxSteps > 0) {
+        payouts[dayWinner] += DAILY_PAYOUT;
       }
     }
+
+    return payouts;
+  };
+
+  // Get cumulative totals
+  const calculateCumulatives = () => {
+    const cumulatives = {};
+    players.forEach(player => {
+      cumulatives[player] = 0;
+    });
+
+    for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+      players.forEach(player => {
+        cumulatives[player] += getDailySteps(day, player);
+      });
+    }
+
+    return cumulatives;
+  };
+
+  const cumulatives = calculateCumulatives();
+  const payouts = calculatePayouts();
+
+  // Sort players by cumulative total
+  const rankings = players
+    .map((player) => ({
+      name: player,
+      total: cumulatives[player],
+      dailyPayouts: payouts[player]
+    }))
+    .sort((a, b) => b.total - a.total)
+    .map((player, idx) => ({
+      rank: idx + 1,
+      name: player.name,
+      total: player.total,
+      dailyPayouts: player.dailyPayouts,
+      prize: idx === 0 ? monthData.challenge.prizes['1st'] : idx === 1 ? monthData.challenge.prizes['2nd'] : idx === 2 ? monthData.challenge.prizes['3rd'] : 0
+    }));
+
+  // Get daily data for selected day
+  const dayRankings = players
+    .map((player) => ({
+      name: player,
+      steps: getDailySteps(selectedDay, player),
+      cumulative: cumulatives[player]
+    }))
+    .sort((a, b) => b.steps - a.steps);
+
+  // Prepare cumulative chart data
+  const chartData = [];
+  for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+    const dayData = { day: `Day ${day}` };
+    rankings.forEach(player => {
+      let cumTotal = 0;
+      for (let d = 1; d <= day; d++) {
+        cumTotal += getDailySteps(d, player.name);
+      }
+      dayData[player.name] = cumTotal;
+    });
+    chartData.push(dayData);
   }
+
+  const colors = ['#FFD700', '#C0C0C0', '#CD7F32', '#FF6B6B', '#4ECDC4', '#45B7D1', '#A78BFA', '#F472B6', '#38BDF8', '#34D399'];
+
+  const getMedalEmoji = (rank) => {
+    if (rank === 1) return '🥇';
+    if (rank === 2) return '🥈';
+    if (rank === 3) return '🥉';
+    return `${rank}`;
+  };
+
+  return (
+    <>
+      <Head>
+        <title>{monthData.challenge.name} - Live Leaderboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+        {/* Header */}
+        <div className="border-b border-gray-700 bg-gray-800/50 backdrop-blur">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+            {/* Month Toggle */}
+            <div className="flex gap-2 mb-4">
+              <button
+                onClick={() => {
+                  setSelectedMonth('september');
+                  setSelectedDay(data.months.september.challenge.currentDay);
+                }}
+                className={`px-4 py-2 rounded-lg font-bold transition ${
+                  selectedMonth === 'september'
+                    ? 'bg-yellow-500 text-black'
+                    : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+                }`}
+              >
+                September
+              </button>
+              <button
+                onClick={() => {
+                  setSelectedMonth('october');
+                  setSelectedDay(data.months.october.challenge.currentDay);
+                }}
+                className={`px-4 py-2 rounded-lg font-bold transition ${
+                  selectedMonth === 'october'
+                    ? 'bg-orange-500 text-black'
+                    : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+                }`}
+              >
+                October
+              </button>
+            </div>
+            
+            <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
+              <div className="flex-1">
+                <h1 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+                  {monthData.challenge.name.toUpperCase()}
+                </h1>
+                <p className="text-gray-400 text-sm md:text-lg">
+                  Day {monthData.challenge.currentDay}/{monthData.challenge.totalDays} • {players.length} Players • ${monthData.challenge.prizePool}
+                </p>
+              </div>
+              
+              {/* Weather Display for Selected Day */}
+              {monthData.weather && monthData.weather[selectedDay] && (
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 md:p-6 text-center md:text-right relative group w-full md:w-auto">
+                  <div className="text-3xl md:text-4xl mb-2">{monthData.weather[selectedDay].emoji}</div>
+                  <div className="text-white font-bold text-sm md:text-base mb-1">Day {selectedDay}</div>
+                  <div className="text-white font-bold text-sm md:text-base mb-1">{monthData.weather[selectedDay].condition}</div>
+                  <div className="text-xl md:text-2xl text-blue-100 font-bold">{monthData.weather[selectedDay].temp}°F</div>
+                  <div className="text-xs md:text-sm text-blue-200">Humidity: {monthData.weather[selectedDay].humidity}%</div>
+                </div>
+              )}
+            </div>
+            
+            {/* Prize Breakdown */}
+            <div className="grid grid-cols-3 gap-2 md:flex md:gap-4 mb-4">
+              <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-center gap-2 md:gap-3">
+                <Trophy size={20} className="md:block hidden" />
+                <Trophy size={16} className="md:hidden" />
+                <div>
+                  <div className="text-xs md:text-sm opacity-90">1st</div>
+                  <div className="text-lg md:text-2xl font-bold">${monthData.challenge.prizes['1st']}</div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-gray-400 to-gray-500 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-center gap-2 md:gap-3">
+                <Trophy size={20} className="md:block hidden" />
+                <Trophy size={16} className="md:hidden" />
+                <div>
+                  <div className="text-xs md:text-sm opacity-90">2nd</div>
+                  <div className="text-lg md:text-2xl font-bold">${monthData.challenge.prizes['2nd']}</div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-center gap-2 md:gap-3">
+                <Trophy size={20} className="md:block hidden" />
+                <Trophy size={16} className="md:hidden" />
+                <div>
+                  <div className="text-xs md:text-sm opacity-90">3rd</div>
+                  <div className="text-lg md:text-2xl font-bold">${monthData.challenge.prizes['3rd']}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Calendar Day Selector */}
+            <div className="bg-gray-700/30 rounded-lg p-4 md:p-6">
+              <div className="mb-4">
+                <p className="text-gray-300 font-semibold text-base md:text-lg">Select a Day</p>
+              </div>
+              <div className="bg-gray-800 rounded-lg p-3 md:p-4 overflow-x-auto">
+                <div className="text-center mb-3 md:mb-4">
+                  <h3 className="text-white font-bold text-base md:text-lg">{monthData.challenge.name} 2026</h3>
+                  <p className="text-gray-400 text-xs md:text-sm">Current: Day {monthData.challenge.currentDay}</p>
+                </div>
+                
+                {/* Calendar Grid */}
+                <div className="grid grid-cols-7 gap-1 md:gap-2 min-w-max md:min-w-full">
+                  {/* Day headers */}
+                  {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+                    <div key={day} className="text-center text-gray-400 font-bold text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                      {day}
+                    </div>
+                  ))}
+                  
+                  {/* Calendar days */}
+                  {Array.from({ length: 35 }, (_, i) => {
+                    // September 2026 starts on Tuesday (day 2 of week)
+                    // Days 0-1: Previous month (Aug 30-31)
+                    // Days 2-31: September 1-30
+                    // Days 32-34: Next month (Oct 1-3)
+                    
+                    if (i < 1) {
+                      // Previous month days
+                      return (
+                        <div key={`prev-${i}`} className="text-center text-gray-600 text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                          {30 + i}
+                        </div>
+                      );
+                    } else if (i < monthData.challenge.totalDays + 1) {
+                      // Challenge days
+                      const day = i;
+                      const isAvailable = day <= monthData.challenge.currentDay;
+                      const isSelected = selectedDay === day;
+                      const isToday = day === monthData.challenge.currentDay;
+                      
+                      return (
+                        <button
+                          key={day}
+                          onClick={() => isAvailable && setSelectedDay(day)}
+                          disabled={!isAvailable}
+                          className={`text-center text-xs md:text-sm font-bold w-8 h-8 md:w-10 md:h-10 rounded flex items-center justify-center transition active:scale-95 ${
+                            isSelected
+                              ? 'bg-yellow-500 text-black border-2 border-yellow-400'
+                              : isToday
+                              ? 'bg-blue-500 text-white'
+                              : isAvailable
+                              ? 'bg-gray-700 text-white active:bg-gray-600 cursor-pointer'
+                              : 'bg-gray-900 text-gray-600 cursor-not-allowed'
+                          }`}
+                        >
+                          {day}
+                        </button>
+                      );
+                    } else {
+                      // Next month days
+                      return (
+                        <div key={`next-${i}`} className="text-center text-gray-600 text-xs md:text-sm w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                          {i - 30}
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+                
+                {/* Legend */}
+                <div className="mt-3 md:mt-4 text-xs md:text-sm text-gray-400 space-y-1 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-0">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-yellow-500 rounded"></div>
+                    <span>Selected</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-blue-500 rounded"></div>
+                    <span>Today</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-gray-700 rounded"></div>
+                    <span>Available</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-gray-900 rounded"></div>
+                    <span>Not yet</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="w-full mx-auto px-4 md:px-6 py-6 md:py-8 max-w-7xl">
+          {/* Top 3 Podium */}
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <Trophy className="text-yellow-400" size={24} />
+              Overall Leaders
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
+              {rankings.slice(0, 3).map((player, idx) => (
+                <div
+                  key={player.name}
+                  className={`rounded-lg p-4 md:p-6 border-2 ${
+                    idx === 0
+                      ? 'bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 border-yellow-500 md:scale-105'
+                      : idx === 1
+                      ? 'bg-gradient-to-br from-gray-700/40 to-gray-600/20 border-gray-400'
+                      : 'bg-gradient-to-br from-orange-900/40 to-orange-800/20 border-orange-500'
+                  }`}
+                >
+                  <div className="text-3xl md:text-4xl mb-2">{getMedalEmoji(idx + 1)}</div>
+                  <div className="text-lg md:text-xl font-bold mb-1 break-words">{player.name}</div>
+                  <div className="text-2xl md:text-3xl font-black text-yellow-300 mb-2">
+                    {player.total.toLocaleString()}
+                  </div>
+                  <div className="text-xs md:text-sm text-gray-300 mb-2 leading-tight">
+                    {getUniqueDistance(rankings.indexOf(player), player.total)}
+                  </div>
+                  <div className={`text-base md:text-lg font-bold ${
+                    idx === 0 ? 'text-yellow-400' : idx === 1 ? 'text-gray-300' : 'text-orange-400'
+                  }`}>
+                    ${player.prize}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Gaps Between Ranks */}
+            <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 border border-blue-600 rounded-lg p-4 md:p-6 mb-6 md:mb-8">
+              <h3 className="text-blue-400 font-bold mb-4 text-sm md:text-base">📊 Step Gaps</h3>
+              <div className="space-y-3">
+                {rankings.slice(0, 5).map((player, idx) => (
+                  <div key={player.name}>
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="font-semibold text-sm md:text-base">
+                        {idx + 1}. {player.name}
+                      </div>
+                      <div className="text-yellow-300 font-bold text-sm md:text-base">
+                        {player.total.toLocaleString()}
+                      </div>
+                    </div>
+                    {idx < 4 && rankings[idx + 1] && (
+                      <div className="flex items-center gap-2 ml-4">
+                        <div className="h-1 flex-1 bg-blue-600 rounded"></div>
+                        <div className="text-xs md:text-sm text-blue-300 font-semibold whitespace-nowrap">
+                          +{(rankings[idx].total - rankings[idx + 1].total).toLocaleString()} steps
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Tab Navigation */}
+          <div className="mb-8 flex gap-2 border-b border-gray-700">
+            <button
+              onClick={() => setActiveTab('today')}
+              className={`px-6 py-3 font-semibold text-sm md:text-base transition ${
+                activeTab === 'today'
+                  ? 'text-orange-400 border-b-2 border-orange-400'
+                  : 'text-gray-400 hover:text-gray-300'
+              }`}
+            >
+              📊 Today's Steps & Drama
+            </button>
+            <button
+              onClick={() => setActiveTab('overall')}
+              className={`px-6 py-3 font-semibold text-sm md:text-base transition ${
+                activeTab === 'overall'
+                  ? 'text-blue-400 border-b-2 border-blue-400'
+                  : 'text-gray-400 hover:text-gray-300'
+              }`}
+            >
+              🏆 Overall Steps & Records
+            </button>
+          </div>
+
+          {/* TAB 1: TODAY */}
+          {activeTab === 'today' && (
+          <div>
+
+          {/* Daily Insights */}
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <Zap className="text-orange-400" size={24} />
+              Today's Drama
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Biggest Gainers */}
+              <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 border border-green-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-green-400 font-bold mb-4 flex items-center gap-2">
+                  🚀 Biggest Gainers (vs Yesterday)
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    if (selectedDay === 1) {
+                      return <div className="text-gray-400 text-sm">No previous day to compare</div>;
+                    }
+                    
+                    const todaySteps = getDailyStepsForAllPlayers(selectedDay);
+                    const yesterdaySteps = getDailyStepsForAllPlayers(selectedDay - 1);
+                    
+                    const changes = players.map(player => ({
+                      name: player,
+                      today: todaySteps[player] || 0,
+                      yesterday: yesterdaySteps[player] || 0,
+                      change: (todaySteps[player] || 0) - (yesterdaySteps[player] || 0)
+                    }))
+                    .sort((a, b) => b.change - a.change)
+                    .slice(0, 3);
+                    
+                    return changes.map((player) => (
+                      <div key={player.name} className="flex justify-between items-center">
+                        <div>
+                          <div className="font-semibold text-sm md:text-base">{player.name}</div>
+                          <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
+                        </div>
+                        <div className="text-green-400 font-bold">+{player.change.toLocaleString()}</div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>
+
+              {/* Biggest Losers */}
+              <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
+                  📉 Biggest Fallers (vs Yesterday)
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    if (selectedDay === 1) {
+                      return <div className="text-gray-400 text-sm">No previous day to compare</div>;
+                    }
+                    
+                    const todaySteps = getDailyStepsForAllPlayers(selectedDay);
+                    const yesterdaySteps = getDailyStepsForAllPlayers(selectedDay - 1);
+                    
+                    const changes = players.map(player => ({
+                      name: player,
+                      today: todaySteps[player] || 0,
+                      yesterday: yesterdaySteps[player] || 0,
+                      change: (todaySteps[player] || 0) - (yesterdaySteps[player] || 0)
+                    }))
+                    .sort((a, b) => a.change - b.change)
+                    .slice(0, 3);
+                    
+                    return changes.map((player) => (
+                      <div key={player.name} className="flex justify-between items-center">
+                        <div>
+                          <div className="font-semibold text-sm md:text-base">{player.name}</div>
+                          <div className="text-xs text-gray-400">{player.yesterday.toLocaleString()} → {player.today.toLocaleString()}</div>
+                        </div>
+                        <div className="text-red-400 font-bold">{player.change.toLocaleString()}</div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>
+
+              {/* Rank Climbers */}
+              <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 border border-blue-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-blue-400 font-bold mb-4 flex items-center gap-2">
+                  ⬆️ Rank Climbers
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    // Calculate Day 1 rankings
+                    const day1Data = getDailyStepsForAllPlayers(1);
+                    const day1Rankings = players
+                      .map((player, idx) => ({
+                        name: player,
+                        rank: idx + 1,
+                        total: day1Data[player] || 0
+                      }))
+                      .sort((a, b) => b.total - a.total)
+                      .map((p, idx) => ({ ...p, rank: idx + 1 }));
+
+                    // Find climbers (moved up from Day 1)
+                    const climbers = rankings
+                      .map(r => {
+                        const day1Rank = day1Rankings.find(d => d.name === r.name)?.rank || 999;
+                        const currentRank = rankings.indexOf(r) + 1;
+                        const movement = day1Rank - currentRank;
+                        return { ...r, movement, day1Rank, currentRank };
+                      })
+                      .filter(c => c.movement > 0)
+                      .sort((a, b) => b.movement - a.movement)
+                      .slice(0, 3);
+
+                    return climbers.length > 0 ? (
+                      climbers.map((player, idx) => (
+                        <div key={player.name} className="flex justify-between items-center">
+                          <div>
+                            <div className="font-semibold text-sm md:text-base">{player.name}</div>
+                            <div className="text-xs text-gray-400">#{player.day1Rank} → #{player.currentRank}</div>
+                          </div>
+                          <div className="text-blue-400 font-bold">+{player.movement}</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No changes yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Rank Fallers */}
+              <div className="bg-gradient-to-br from-orange-900/30 to-orange-800/20 border border-orange-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-orange-400 font-bold mb-4 flex items-center gap-2">
+                  ⬇️ Rank Fallers
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    // Calculate Day 1 rankings
+                    const day1Data = getDailyStepsForAllPlayers(1);
+                    const day1Rankings = players
+                      .map((player, idx) => ({
+                        name: player,
+                        rank: idx + 1,
+                        total: day1Data[player] || 0
+                      }))
+                      .sort((a, b) => b.total - a.total)
+                      .map((p, idx) => ({ ...p, rank: idx + 1 }));
+
+                    // Find fallers (moved down from Day 1)
+                    const fallers = rankings
+                      .map(r => {
+                        const day1Rank = day1Rankings.find(d => d.name === r.name)?.rank || 999;
+                        const currentRank = rankings.indexOf(r) + 1;
+                        const movement = day1Rank - currentRank;
+                        return { ...r, movement, day1Rank, currentRank };
+                      })
+                      .filter(c => c.movement < 0)
+                      .sort((a, b) => a.movement - b.movement)
+                      .slice(0, 3);
+
+                    return fallers.length > 0 ? (
+                      fallers.map((player, idx) => (
+                        <div key={player.name} className="flex justify-between items-center">
+                          <div>
+                            <div className="font-semibold text-sm md:text-base">{player.name}</div>
+                            <div className="text-xs text-gray-400">#{player.day1Rank} → #{player.currentRank}</div>
+                          </div>
+                          <div className="text-orange-400 font-bold">{player.movement}</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No changes yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Daily Steps for Selected Day */}
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6">Day {selectedDay} Steps</h2>
+            
+            {/* Mobile: Card View */}
+            <div className="md:hidden space-y-2">
+              {dayRankings.map((player, idx) => (
+                <div key={player.name} className="bg-gray-700/30 rounded-lg p-3 border border-gray-600">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-gray-400 w-6">{idx + 1}</span>
+                      <div>
+                        <div className="font-semibold text-sm truncate max-w-xs">{player.name}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mb-2 text-xs text-gray-400">
+                    {(() => {
+                      const feetWalked = (player.steps || 0) * 2.5;
+                      const distance = UNIQUE_DISTANCES[idx % UNIQUE_DISTANCES.length];
+                      const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
+                      return `${percentage}% to ${distance.name}`;
+                    })()}
+                  </div>
+                  <div className="flex justify-between text-xs md:text-sm">
+                    <div>
+                      <div className="text-gray-400">Today</div>
+                      <div className="text-cyan-400 font-bold">{(player.steps || 0).toLocaleString()}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-gray-400">Total</div>
+                      <div className="text-yellow-300 font-bold">{player.cumulative.toLocaleString()}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-sm md:text-base">
+                <thead>
+                  <tr className="border-b border-gray-700 bg-gray-900/50">
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Name</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Today</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Daily Progress</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dayRankings.map((player, idx) => (
+                    <tr
+                      key={player.name}
+                      className="border-b border-gray-700 hover:bg-gray-700/30 transition"
+                    >
+                      <td className="px-6 py-4">
+                        <span className="font-bold text-gray-300 text-xs md:text-base">{idx + 1}</span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="font-semibold text-sm truncate max-w-xs">{player.name}</div>
+                      </td>
+                      <td className="px-6 py-4 text-right text-cyan-400 font-bold text-xs md:text-base">
+                        {(player.steps || 0).toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-left text-sm text-gray-300">
+                        {(() => {
+                          const feetWalked = (player.steps || 0) * 2.5;
+                          const distance = UNIQUE_DISTANCES[idx % UNIQUE_DISTANCES.length];
+                          const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
+                          return `${percentage}% to ${distance.name}`;
+                        })()}
+                      </td>
+                      <td className="px-6 py-4 text-right text-yellow-300 font-bold text-xs md:text-base">
+                        {player.cumulative.toLocaleString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </div>
+          )}
+
+          {/* TAB 2: OVERALL */}
+          {activeTab === 'overall' && (
+          <div>
+
+          {/* Cumulative Chart */}
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg p-4 md:p-6 mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <TrendingUp className="text-blue-400" size={24} />
+              Progress Trend
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={chartData} margin={{ top: 5, right: 15, left: -20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                <XAxis dataKey="day" stroke="#888" tick={{ fontSize: 10 }} />
+                <YAxis stroke="#888" tick={{ fontSize: 10 }} />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444', borderRadius: '8px', fontSize: '12px' }}
+                  labelStyle={{ color: '#fff' }}
+                />
+                <Legend wrapperStyle={{ fontSize: '12px' }} />
+                {rankings.map((player, idx) => (
+                  <Line
+                    key={player.name}
+                    type="monotone"
+                    dataKey={player.name}
+                    stroke={colors[idx % colors.length]}
+                    strokeWidth={2}
+                    dot={false}
+                    isAnimationActive={true}
+                  />
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+            <p className="text-gray-400 text-xs md:text-sm mt-4">All {players.length} players • Cumulative totals</p>
+          </div>
+
+          {/* Overall Leaderboard */}
+          <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-lg overflow-hidden">
+            <div className="p-4 md:p-6 border-b border-gray-700">
+              <h2 className="text-lg md:text-2xl font-bold">Cumulative Leaderboard</h2>
+            </div>
+            
+            {/* Mobile: Card View */}
+            <div className="md:hidden space-y-2 p-4">
+              {rankings.map((player, idx) => (
+                <div
+                  key={player.name}
+                  onClick={() => {
+                    setSelectedPlayer(selectedPlayer === player.name ? null : player.name);
+                    setShowCompletedDistances(false);
+                  }}
+                  className={`rounded-lg p-4 border cursor-pointer transition ${
+                    idx < 3 ? 'bg-gray-700/40' : 'bg-gray-800/40'
+                  } ${selectedPlayer === player.name ? 'border-blue-500 bg-blue-900/30' : 'border-gray-600'}`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold">{getMedalEmoji(idx + 1)}</span>
+                      <div>
+                        <div className="font-bold text-sm text-white truncate">{player.name}</div>
+                        <div className="text-xs text-gray-400">#{idx + 1}</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      {player.prize > 0 && (
+                        <div className="font-bold text-green-400 text-sm">${player.prize}</div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-yellow-300 font-bold text-base mb-1">
+                    {player.total.toLocaleString()} steps
+                  </div>
+                  <div className="text-xs text-gray-300 mb-2">
+                    {getUniqueDistance(idx, player.total)}
+                  </div>
+                  <div className="text-blue-300 font-semibold text-sm">
+                    Daily Payouts: ${player.dailyPayouts.toFixed(2)}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-sm md:text-base">
+                <thead>
+                  <tr className="border-b border-gray-700 bg-gray-900/50">
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">#</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Steps</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold">Fun Fact</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Daily Payouts</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Prize</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rankings.map((player, idx) => (
+                    <tr
+                      key={player.name}
+                      onClick={() => {
+                        setSelectedPlayer(selectedPlayer === player.name ? null : player.name);
+                        setShowCompletedDistances(false);
+                      }}
+                      className={`border-b border-gray-700 hover:bg-gray-700/30 transition cursor-pointer ${
+                        idx < 3 ? 'bg-gray-700/20' : ''
+                      } ${selectedPlayer === player.name ? 'bg-blue-900/40 border-l-4 border-blue-500' : ''}`}
+                    >
+                      <td className="px-6 py-4">
+                        <span className="text-lg font-bold">
+                          {getMedalEmoji(idx + 1)}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 font-semibold text-blue-300 hover:text-blue-200">{player.name}</td>
+                      <td className="px-6 py-4 text-right text-yellow-300 font-bold">
+                        {player.total.toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-left text-sm text-gray-300">
+                        {getUniqueDistance(idx, player.total)}
+                      </td>
+                      <td className="px-6 py-4 text-right text-blue-300 font-semibold">
+                        ${player.dailyPayouts.toFixed(2)}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        {player.prize > 0 ? (
+                          <span className="font-bold text-green-400">${player.prize}</span>
+                        ) : (
+                          <span className="text-gray-500">-</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            
+            {/* Selected Player Distances */}
+            {selectedPlayer && (
+              <div className="mt-6 p-4 md:p-6 bg-blue-900/20 border border-blue-600 rounded-lg">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-blue-400 font-bold text-lg">
+                    {selectedPlayer}'s Progress to Caribbean Destinations
+                  </h3>
+                  <button
+                    onClick={() => setShowCompletedDistances(!showCompletedDistances)}
+                    className={`px-3 py-1 text-sm rounded font-semibold transition-colors ${
+                      showCompletedDistances
+                        ? 'bg-green-600 text-white'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    }`}
+                  >
+                    {showCompletedDistances ? '✓ Show Completed' : 'Show Completed'}
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {(() => {
+                    const playerData = rankings.find(r => r.name === selectedPlayer);
+                    if (!playerData) return null;
+                    
+                    const feetWalked = playerData.total * 2.5;
+                    
+                    // Create array with distances and percentages, then sort by percentage descending
+                    const distancesWithProgress = UNIQUE_DISTANCES
+                      .map(distance => ({
+                        ...distance,
+                        percentage: parseFloat(((feetWalked / distance.distance) * 100).toFixed(1))
+                      }))
+                      .filter(item => {
+                        const isCompleted = item.percentage > 100;
+                        // Filter: show if under 100%, or if over 100% and showCompletedDistances is true
+                        return isCompleted ? showCompletedDistances : true;
+                      })
+                      .sort((a, b) => b.percentage - a.percentage); // Sort descending by percentage
+                    
+                    return distancesWithProgress.map(distance => {
+                      const isCompleted = distance.percentage > 100;
+                      const distanceMiles = (distance.distance / 5280).toFixed(1);
+                      
+                      let displayText;
+                      if (isCompleted) {
+                        const timesCompleted = (distance.percentage / 100).toFixed(1);
+                        displayText = `Completed ${timesCompleted}× (${distanceMiles} mi)`;
+                      } else {
+                        displayText = `${distance.percentage.toFixed(1)}% (${distanceMiles} mi)`;
+                      }
+                      
+                      return (
+                        <div key={distance.name} className={`p-3 rounded border ${
+                          isCompleted
+                            ? 'bg-green-900/30 border-green-600'
+                            : 'bg-gray-800/50 border-gray-700'
+                        }`}>
+                          <div className="text-sm text-gray-300">{distance.name}</div>
+                          <div className={`text-lg font-bold mt-1 ${
+                            isCompleted ? 'text-green-400' : 'text-blue-300'
+                          }`}>
+                            {displayText}
+                          </div>
+                          <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                            <div 
+                              className={`h-2 rounded-full transition-all ${
+                                isCompleted ? 'bg-green-500' : 'bg-blue-500'
+                              }`}
+                              style={{ width: `${Math.min(distance.percentage, 100)}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Personal Performance Stats */}
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <Zap className="text-red-400" size={24} />
+              Personal Performance
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Current Streaks */}
+              <div className="bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
+                  🔥 Current Streaks (10k+ steps)
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const streaks = {};
+                    
+                    // Calculate current streak for each player
+                    players.forEach(player => {
+                      let currentStreak = 0;
+                      let longestStreak = 0;
+                      let tempStreak = 0;
+                      
+                      // Loop through all days
+                      for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+                        
+                        const daySteps = getDailySteps(day, player);
+                        
+                        if (daySteps >= 10000) {
+                          tempStreak++;
+                          currentStreak = tempStreak;
+                        } else {
+                          if (tempStreak > longestStreak) {
+                            longestStreak = tempStreak;
+                          }
+                          tempStreak = 0;
+                        }
+                      }
+                      if (tempStreak > longestStreak) {
+                        longestStreak = tempStreak;
+                      }
+                      
+                      streaks[player] = { current: currentStreak, longest: longestStreak };
+                    });
+                    
+                    // Sort by current streak
+                    const sortedStreaks = Object.entries(streaks)
+                      .sort((a, b) => b[1].current - a[1].current)
+                      .filter(([_, s]) => s.current > 0)
+                      .slice(0, 8);
+                    
+                    return sortedStreaks.length > 0 ? (
+                      sortedStreaks.map(([name, streak]) => (
+                        <div key={name} className="flex justify-between items-center">
+                          <div>
+                            <div className="font-semibold text-sm md:text-base">{name}</div>
+                            <div className="text-xs text-gray-400">Best: {streak.longest} days</div>
+                          </div>
+                          <div className="text-red-400 font-bold text-lg bg-red-900/40 px-3 py-1 rounded">{streak.current}🔥</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No active streaks yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Personal Bests */}
+              <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 border border-green-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-green-400 font-bold mb-4 flex items-center gap-2">
+                  💪 Personal Bests (Single Day)
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const personalBests = {};
+                    
+                    // Calculate personal best for each player
+                    players.forEach(player => {
+                      let bestDay = 0;
+                      let bestDayNum = 0;
+                      
+                      for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+                        
+                        const daySteps = getDailySteps(day, player);
+                        
+                        if (daySteps > bestDay) {
+                          bestDay = daySteps;
+                          bestDayNum = day;
+                        }
+                      }
+                      
+                      personalBests[player] = { steps: bestDay, day: bestDayNum };
+                    });
+                    
+                    // Sort by personal best
+                    const sortedBests = Object.entries(personalBests)
+                      .sort((a, b) => b[1].steps - a[1].steps)
+                      .slice(0, 8);
+                    
+                    return sortedBests.map(([name, best]) => (
+                      <div key={name} className="flex justify-between items-center">
+                        <div>
+                          <div className="font-semibold text-sm md:text-base">{name}</div>
+                          <div className="text-xs text-gray-400">Day {best.day}</div>
+                        </div>
+                        <div className="text-green-400 font-bold text-lg bg-green-900/40 px-3 py-1 rounded">{best.steps.toLocaleString()}</div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Leaderboard Stats */}
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+              <Award className="text-purple-400" size={24} />
+              Leaderboard Stats
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* 1st Place Most */}
+              <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/20 border border-yellow-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-yellow-400 font-bold mb-4 flex items-center gap-2">
+                  🥇 1st Place Most
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const firstPlaceTally = {};
+                    
+                    // Count how many times each player was 1st
+                    for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+                      const dayRankings = players
+                        .map(player => ({
+                          name: player,
+                          total: getDailySteps(day, player) || 0
+                        }))
+                        .sort((a, b) => b.total - a.total);
+                      
+                      if (dayRankings.length > 0) {
+                        const firstPlace = dayRankings[0].name;
+                        firstPlaceTally[firstPlace] = (firstPlaceTally[firstPlace] || 0) + 1;
+                      }
+                    }
+                    
+                    // Get top 5 most frequent 1st place finishers
+                    const top5First = Object.entries(firstPlaceTally)
+                      .sort((a, b) => b[1] - a[1])
+                      .slice(0, 5);
+                    
+                    return top5First.length > 0 ? (
+                      top5First.map(([name, count]) => (
+                        <div key={name} className="flex justify-between items-center">
+                          <div className="font-semibold text-sm md:text-base">{name}</div>
+                          <div className="text-yellow-400 font-bold bg-yellow-900/40 px-3 py-1 rounded">{count}x</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No data yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Last Place Most */}
+              <div className="bg-gradient-to-br from-gray-900/30 to-gray-800/20 border border-gray-600 rounded-lg p-4 md:p-6">
+                <h3 className="text-gray-400 font-bold mb-4 flex items-center gap-2">
+                  📉 Last Place Most
+                </h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const lastPlaceTally = {};
+                    
+                    // Count how many times each player was last
+                    for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+                      const dayRankings = players
+                        .map(player => ({
+                          name: player,
+                          total: getDailySteps(day, player) || 0
+                        }))
+                        .sort((a, b) => b.total - a.total);
+                      
+                      if (dayRankings.length > 0) {
+                        const lastPlace = dayRankings[dayRankings.length - 1].name;
+                        lastPlaceTally[lastPlace] = (lastPlaceTally[lastPlace] || 0) + 1;
+                      }
+                    }
+                    
+                    // Get top 5 most frequent last place finishers
+                    const top5Last = Object.entries(lastPlaceTally)
+                      .sort((a, b) => b[1] - a[1])
+                      .slice(0, 5);
+                    
+                    return top5Last.length > 0 ? (
+                      top5Last.map(([name, count]) => (
+                        <div key={name} className="flex justify-between items-center">
+                          <div className="font-semibold text-sm md:text-base">{name}</div>
+                          <div className="text-gray-400 font-bold bg-gray-800/40 px-3 py-1 rounded">{count}x</div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-gray-400 text-sm">No data yet</div>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          )}
+
+          {/* Footer */}
+          <div className="mt-8 md:mt-12 text-center text-gray-500 text-xs md:text-sm border-t border-gray-700 pt-6 md:pt-8 pb-4">
+            <p>Day {monthData.challenge.currentDay} • Update: 9:00pm</p>
+            <p className="mt-2">Good luck, Stompers! 👟⚡</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
