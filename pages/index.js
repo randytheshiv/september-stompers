@@ -6,39 +6,32 @@ import Head from 'next/head';
 // NYC/Nassau County coordinates
 const NYC_COORDS = { lat: 40.7128, lon: -74.0060 };
 
-// West Indian distances - show progress as percentage (in feet)
+// Trinidad distances - show progress as percentage (in feet)
 const UNIQUE_DISTANCES = [
+  // Trinidad City to City
+  { name: 'Port of Spain to San Fernando', distance: 77408 },
+  { name: 'San Fernando to Point Fortin', distance: 39600 },
+  { name: 'Port of Spain to Arima', distance: 21120 },
+  { name: 'Arima to Blanchisseuse', distance: 47520 },
+  { name: 'Port of Spain to Chaguanas', distance: 26400 },
+  { name: 'Chaguanas to San Fernando', distance: 58080 },
+  { name: 'San Fernando to Siparia', distance: 39600 },
+  { name: 'Port of Spain to Point Fortin', distance: 84480 },
+  { name: 'Arima to Port of Spain', distance: 21120 },
+  { name: 'Chaguanas to Port of Spain', distance: 26400 },
+  
+  // Trinidad to Tobago
+  { name: 'Trinidad to Scarborough (Tobago)', distance: 163680 },
+  
+  // Trinidad Landmarks & Beaches
+  { name: 'Port of Spain to Maracas Beach', distance: 26400 },
+  { name: 'Port of Spain to Pigeon Point Beach', distance: 163680 },
+  { name: 'Port of Spain to Las Cuevas Bay', distance: 42240 },
+  { name: 'San Fernando to Mayaro Beach', distance: 131760 },
+  
   // Trinidad to Guyana
   { name: 'Port of Spain to Georgetown', distance: 316800 },
   { name: 'San Fernando to Georgetown', distance: 355200 },
-  { name: 'Port of Spain to Linden', distance: 369600 },
-  { name: 'Port of Spain to New Amsterdam', distance: 329600 },
-  
-  // Trinidad Local
-  { name: 'Port of Spain to San Fernando', distance: 77408 },
-  { name: 'Port of Spain to Chaguanas', distance: 26400 },
-  { name: 'Port of Spain to Point Fortin', distance: 84480 },
-  { name: 'Port of Spain to Arima', distance: 21120 },
-  { name: 'San Fernando to Siparia', distance: 39600 },
-  { name: 'Port of Spain to Maracas Beach', distance: 26400 },
-  
-  // Guyana Local
-  { name: 'Georgetown to Linden', distance: 87120 },
-  { name: 'Georgetown to New Amsterdam', distance: 79200 },
-  { name: 'Georgetown to Bartica', distance: 105600 },
-  { name: 'Linden to Ituni', distance: 39600 },
-  { name: 'Georgetown to Corriverton', distance: 184800 },
-  { name: 'Georgetown to Kaieteur Falls', distance: 198000 },
-  
-  // Trinidad to other Caribbean
-  { name: 'Port of Spain to Grenada', distance: 79200 },
-  { name: 'Port of Spain to Barbados', distance: 158400 },
-  { name: 'Port of Spain to St. Lucia', distance: 184800 },
-  { name: 'Port of Spain to Jamaica', distance: 580000 },
-  
-  // Guyana to other Caribbean
-  { name: 'Georgetown to Suriname', distance: 105600 },
-  { name: 'Georgetown to Cayenne, Guadeloupe', distance: 264000 },
   
   // Reference standards
   { name: 'Full Marathon', distance: 138336 },
@@ -117,6 +110,7 @@ export default function StompersApp() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [activeTab, setActiveTab] = useState('today');
   const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -821,6 +815,14 @@ export default function StompersApp() {
                       </div>
                     </div>
                   </div>
+                  <div className="mb-2 text-xs text-gray-400">
+                    {(() => {
+                      const feetWalked = (player.steps || 0) * 2.5 / 12;
+                      const distance = UNIQUE_DISTANCES[idx % UNIQUE_DISTANCES.length];
+                      const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
+                      return `${percentage}% to ${distance.name}`;
+                    })()}
+                  </div>
                   <div className="flex justify-between text-xs md:text-sm">
                     <div>
                       <div className="text-gray-400">Today</div>
@@ -843,6 +845,7 @@ export default function StompersApp() {
                     <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">#</th>
                     <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Name</th>
                     <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Today</th>
+                    <th className="px-6 py-3 text-left text-gray-400 font-semibold text-xs md:text-sm">Daily Progress</th>
                     <th className="px-6 py-3 text-right text-gray-400 font-semibold text-xs md:text-sm">Total</th>
                   </tr>
                 </thead>
@@ -860,6 +863,14 @@ export default function StompersApp() {
                       </td>
                       <td className="px-6 py-4 text-right text-cyan-400 font-bold text-xs md:text-base">
                         {(player.steps || 0).toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-left text-sm text-gray-300">
+                        {(() => {
+                          const feetWalked = (player.steps || 0) * 2.5 / 12;
+                          const distance = UNIQUE_DISTANCES[idx % UNIQUE_DISTANCES.length];
+                          const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
+                          return `${percentage}% to ${distance.name}`;
+                        })()}
                       </td>
                       <td className="px-6 py-4 text-right text-yellow-300 font-bold text-xs md:text-base">
                         {player.cumulative.toLocaleString()}
@@ -968,16 +979,17 @@ export default function StompersApp() {
                   {rankings.map((player, idx) => (
                     <tr
                       key={player.name}
-                      className={`border-b border-gray-700 hover:bg-gray-700/30 transition ${
+                      onClick={() => setSelectedPlayer(selectedPlayer === player.name ? null : player.name)}
+                      className={`border-b border-gray-700 hover:bg-gray-700/30 transition cursor-pointer ${
                         idx < 3 ? 'bg-gray-700/20' : ''
-                      }`}
+                      } ${selectedPlayer === player.name ? 'bg-blue-900/40 border-l-4 border-blue-500' : ''}`}
                     >
                       <td className="px-6 py-4">
                         <span className="text-lg font-bold">
                           {getMedalEmoji(idx + 1)}
                         </span>
                       </td>
-                      <td className="px-6 py-4 font-semibold">{player.name}</td>
+                      <td className="px-6 py-4 font-semibold text-blue-300 hover:text-blue-200">{player.name}</td>
                       <td className="px-6 py-4 text-right text-yellow-300 font-bold">
                         {player.total.toLocaleString()}
                       </td>
@@ -999,6 +1011,38 @@ export default function StompersApp() {
                 </tbody>
               </table>
             </div>
+            
+            {/* Selected Player Distances */}
+            {selectedPlayer && (
+              <div className="mt-6 p-4 md:p-6 bg-blue-900/20 border border-blue-600 rounded-lg">
+                <h3 className="text-blue-400 font-bold mb-4 text-lg">
+                  {selectedPlayer}'s Progress to Caribbean Destinations
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {(() => {
+                    const playerData = rankings.find(r => r.name === selectedPlayer);
+                    if (!playerData) return null;
+                    
+                    return UNIQUE_DISTANCES.map((distance, idx) => {
+                      const feetWalked = playerData.total * 2.5 / 12;
+                      const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
+                      return (
+                        <div key={distance.name} className="p-3 bg-gray-800/50 rounded border border-gray-700">
+                          <div className="text-sm text-gray-300">{distance.name}</div>
+                          <div className="text-lg font-bold text-blue-300 mt-1">{percentage}%</div>
+                          <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
+                            <div 
+                              className="bg-blue-500 h-2 rounded-full transition-all" 
+                              style={{ width: `${Math.min(parseFloat(percentage), 100)}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Personal Performance Stats */}
