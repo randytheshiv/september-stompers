@@ -8,30 +8,68 @@ const NYC_COORDS = { lat: 40.7128, lon: -74.0060 };
 
 // Trinidad distances - show progress as percentage (in feet)
 const UNIQUE_DISTANCES = [
-  // Trinidad City to City
+  // Port of Spain connections
   { name: 'Port of Spain to San Fernando', distance: 142560 }, // 27 miles
-  { name: 'San Fernando to Point Fortin', distance: 39600 },
   { name: 'Port of Spain to Arima', distance: 21120 },
-  { name: 'Arima to Blanchisseuse', distance: 47520 },
   { name: 'Port of Spain to Chaguanas', distance: 26400 },
-  { name: 'Chaguanas to San Fernando', distance: 58080 },
-  { name: 'San Fernando to Siparia', distance: 39600 },
   { name: 'Port of Spain to Point Fortin', distance: 84480 },
-  { name: 'Arima to Port of Spain', distance: 21120 },
-  { name: 'Chaguanas to Port of Spain', distance: 26400 },
-  
-  // Trinidad to Tobago
-  { name: 'Trinidad to Scarborough (Tobago)', distance: 163680 },
-  
-  // Trinidad Landmarks & Beaches
   { name: 'Port of Spain to Maracas Beach', distance: 26400 },
-  { name: 'Port of Spain to Pigeon Point Beach', distance: 163680 },
-  { name: 'Port of Spain to Las Cuevas Bay', distance: 42240 },
-  { name: 'San Fernando to Mayaro Beach', distance: 131760 },
+  { name: 'Port of Spain to Toco', distance: 73920 },
+  { name: 'Port of Spain to Siparia', distance: 105600 },
   
-  // Trinidad to Guyana
+  // San Fernando connections
+  { name: 'San Fernando to Point Fortin', distance: 39600 },
+  { name: 'San Fernando to Siparia', distance: 39600 },
+  { name: 'San Fernando to Princes Town', distance: 68640 },
+  { name: 'San Fernando to Mayaro Beach', distance: 131760 },
+  { name: 'San Fernando to Moruga', distance: 99000 },
+  { name: 'San Fernando to Chaguanas', distance: 58080 },
+  
+  // Arima connections
+  { name: 'Arima to Blanchisseuse', distance: 47520 },
+  { name: 'Arima to Port of Spain', distance: 21120 },
+  { name: 'Arima to Toco', distance: 50160 },
+  { name: 'Arima to Sangre Grande', distance: 42240 },
+  
+  // Other Northern connections
+  { name: 'Port of Spain to Maraval', distance: 13200 },
+  { name: 'Chaguanas to Sangre Grande', distance: 50160 },
+  { name: 'Arouca to Tunapuna', distance: 9240 },
+  
+  // Southern connections
+  { name: 'Point Fortin to Fullerton', distance: 26400 },
+  { name: 'Siparia to Moruga', distance: 63360 },
+  { name: 'Princes Town to Rio Claro', distance: 42240 },
+  { name: 'Rio Claro to Guayaguayare', distance: 39600 },
+  
+  // Cross-island routes
+  { name: 'Arima to San Fernando', distance: 99000 },
+  { name: 'Chaguanas to Point Fortin', distance: 63360 },
+  { name: 'Port of Spain to Moruga', distance: 126720 },
+  
+  // Trinidad to Tobago & Guyana
+  { name: 'Trinidad to Scarborough (Tobago)', distance: 163680 },
   { name: 'Port of Spain to Georgetown', distance: 316800 },
   { name: 'San Fernando to Georgetown', distance: 355200 },
+  
+  // Guyana Capital Towns
+  { name: 'Georgetown to Linden', distance: 295680 }, // 56 miles
+  { name: 'Georgetown to New Amsterdam', distance: 306240 }, // 58 miles
+  { name: 'Georgetown to Corriverton', distance: 480480 }, // 91 miles
+  { name: 'Georgetown to Bartica', distance: 221760 }, // 42 miles
+  { name: 'Georgetown to Mahdia', distance: 660000 }, // 125 miles
+  { name: 'Georgetown to Anna Regina', distance: 205920 }, // 39 miles
+  { name: 'Georgetown to Lethem', distance: 1383360 }, // 262 miles
+  { name: 'Linden to Mahdia', distance: 401280 }, // 76 miles
+  { name: 'Linden to Corriverton', distance: 422400 }, // 80 miles
+  { name: 'Linden to Anna Regina', distance: 459360 }, // 87 miles
+  { name: 'Linden to Lethem', distance: 1098240 }, // 208 miles
+  { name: 'New Amsterdam to Corriverton', distance: 174240 }, // 33 miles
+  { name: 'New Amsterdam to Mahdia', distance: 686400 }, // 130 miles
+  { name: 'New Amsterdam to Lethem', distance: 1335840 }, // 253 miles
+  { name: 'Corriverton to Mahdia', distance: 765600 }, // 145 miles
+  { name: 'Corriverton to Anna Regina', distance: 681120 }, // 129 miles
+  { name: 'Bartica to New Amsterdam', distance: 649920 }, // 123 miles (approximate)
   
   // Reference standards
   { name: 'Full Marathon', distance: 138336 },
