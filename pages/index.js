@@ -133,10 +133,22 @@ async function fetchCurrentWeather() {
 
 function getUniqueDistance(playerIndex, steps) {
   const feetWalked = steps * 2.5;
-  const distance = UNIQUE_DISTANCES[playerIndex % UNIQUE_DISTANCES.length];
-  const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
   
-  return `${percentage}% of the way to ${distance.name}`;
+  // Find the first distance under 100%
+  let distanceIndex = playerIndex % UNIQUE_DISTANCES.length;
+  let distance = UNIQUE_DISTANCES[distanceIndex];
+  let percentage = ((feetWalked / distance.distance) * 100);
+  
+  // If over 100%, cycle through distances until we find one under 100%
+  let offset = 0;
+  while (percentage > 100 && offset < UNIQUE_DISTANCES.length) {
+    offset++;
+    distanceIndex = (playerIndex + offset) % UNIQUE_DISTANCES.length;
+    distance = UNIQUE_DISTANCES[distanceIndex];
+    percentage = ((feetWalked / distance.distance) * 100);
+  }
+  
+  return `${percentage.toFixed(1)}% of the way to ${distance.name}`;
 }
 
 export default function StompersApp() {
