@@ -320,6 +320,36 @@ export default function StompersApp() {
   const monthData = getMonthData();
   const players = getPlayers();
 
+  // Calculate daily payouts ($6.45 per day for winner)
+  const DAILY_PAYOUT = 6.45;
+  
+  const calculatePayouts = () => {
+    const payouts = {};
+    players.forEach(player => {
+      payouts[player] = 0;
+    });
+
+    for (let day = 1; day <= monthData.challenge.currentDay; day++) {
+      // Find daily winner
+      let dayWinner = null;
+      let maxSteps = 0;
+      
+      players.forEach(player => {
+        const steps = getDailySteps(day, player);
+        if (steps > maxSteps) {
+          maxSteps = steps;
+          dayWinner = player;
+        }
+      });
+      
+      if (dayWinner && maxSteps > 0) {
+        payouts[dayWinner] += DAILY_PAYOUT;
+      }
+    }
+
+    return payouts;
+  };
+
   // Get cumulative totals
   const calculateCumulatives = () => {
     const cumulatives = {};
@@ -337,18 +367,21 @@ export default function StompersApp() {
   };
 
   const cumulatives = calculateCumulatives();
+  const payouts = calculatePayouts();
 
   // Sort players by cumulative total
   const rankings = players
     .map((player) => ({
       name: player,
-      total: cumulatives[player]
+      total: cumulatives[player],
+      dailyPayouts: payouts[player]
     }))
     .sort((a, b) => b.total - a.total)
     .map((player, idx) => ({
       rank: idx + 1,
       name: player.name,
       total: player.total,
+      dailyPayouts: player.dailyPayouts,
       prize: idx === 0 ? monthData.challenge.prizes['1st'] : idx === 1 ? monthData.challenge.prizes['2nd'] : idx === 2 ? monthData.challenge.prizes['3rd'] : 0
     }));
 
@@ -975,8 +1008,11 @@ export default function StompersApp() {
                   <div className="text-yellow-300 font-bold text-base mb-1">
                     {player.total.toLocaleString()} steps
                   </div>
-                  <div className="text-xs text-gray-300">
+                  <div className="text-xs text-gray-300 mb-2">
                     {getUniqueDistance(idx, player.total)}
+                  </div>
+                  <div className="text-blue-300 font-semibold text-sm">
+                    Daily Payouts: ${player.dailyPayouts.toFixed(2)}
                   </div>
                 </div>
               ))}
@@ -991,6 +1027,7 @@ export default function StompersApp() {
                     <th className="px-6 py-3 text-left text-gray-400 font-semibold">Player</th>
                     <th className="px-6 py-3 text-right text-gray-400 font-semibold">Steps</th>
                     <th className="px-6 py-3 text-left text-gray-400 font-semibold">Fun Fact</th>
+                    <th className="px-6 py-3 text-right text-gray-400 font-semibold">Daily Payouts</th>
                     <th className="px-6 py-3 text-right text-gray-400 font-semibold">Prize</th>
                   </tr>
                 </thead>
@@ -1013,6 +1050,9 @@ export default function StompersApp() {
                       </td>
                       <td className="px-6 py-4 text-left text-sm text-gray-300">
                         {getUniqueDistance(idx, player.total)}
+                      </td>
+                      <td className="px-6 py-4 text-right text-blue-300 font-semibold">
+                        ${player.dailyPayouts.toFixed(2)}
                       </td>
                       <td className="px-6 py-4 text-right">
                         {player.prize > 0 ? (
