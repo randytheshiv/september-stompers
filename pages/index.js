@@ -94,7 +94,7 @@ async function fetchCurrentWeather() {
 }
 
 function getUniqueDistance(playerIndex, steps) {
-  const feetWalked = steps * 2.5 / 12;
+  const feetWalked = steps * 2.5;
   const distance = UNIQUE_DISTANCES[playerIndex % UNIQUE_DISTANCES.length];
   const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
   
@@ -817,7 +817,7 @@ export default function StompersApp() {
                   </div>
                   <div className="mb-2 text-xs text-gray-400">
                     {(() => {
-                      const feetWalked = (player.steps || 0) * 2.5 / 12;
+                      const feetWalked = (player.steps || 0) * 2.5;
                       const distance = UNIQUE_DISTANCES[idx % UNIQUE_DISTANCES.length];
                       const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
                       return `${percentage}% to ${distance.name}`;
@@ -866,7 +866,7 @@ export default function StompersApp() {
                       </td>
                       <td className="px-6 py-4 text-left text-sm text-gray-300">
                         {(() => {
-                          const feetWalked = (player.steps || 0) * 2.5 / 12;
+                          const feetWalked = (player.steps || 0) * 2.5;
                           const distance = UNIQUE_DISTANCES[idx % UNIQUE_DISTANCES.length];
                           const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
                           return `${percentage}% to ${distance.name}`;
@@ -1024,7 +1024,7 @@ export default function StompersApp() {
                     if (!playerData) return null;
                     
                     return UNIQUE_DISTANCES.map((distance, idx) => {
-                      const feetWalked = playerData.total * 2.5 / 12;
+                      const feetWalked = playerData.total * 2.5;
                       const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
                       return (
                         <div key={distance.name} className="p-3 bg-gray-800/50 rounded border border-gray-700">
