@@ -148,7 +148,8 @@ function getUniqueDistance(playerIndex, steps) {
     percentage = ((feetWalked / distance.distance) * 100);
   }
   
-  return `${percentage.toFixed(1)}% of the way to ${distance.name}`;
+  const distanceMiles = (distance.distance / 5280).toFixed(1);
+  return `${percentage.toFixed(1)}% of the way to ${distance.name} (${distanceMiles} mi)`;
 }
 
 export default function StompersApp() {
@@ -1106,6 +1107,15 @@ export default function StompersApp() {
                     
                     return distancesWithProgress.map(distance => {
                       const isCompleted = distance.percentage > 100;
+                      const distanceMiles = (distance.distance / 5280).toFixed(1);
+                      
+                      let displayText;
+                      if (isCompleted) {
+                        const timesCompleted = (distance.percentage / 100).toFixed(1);
+                        displayText = `Completed ${timesCompleted}× (${distanceMiles} mi)`;
+                      } else {
+                        displayText = `${distance.percentage.toFixed(1)}% (${distanceMiles} mi)`;
+                      }
                       
                       return (
                         <div key={distance.name} className={`p-3 rounded border ${
@@ -1117,7 +1127,7 @@ export default function StompersApp() {
                           <div className={`text-lg font-bold mt-1 ${
                             isCompleted ? 'text-green-400' : 'text-blue-300'
                           }`}>
-                            {distance.percentage.toFixed(1)}%
+                            {displayText}
                           </div>
                           <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
                             <div 
