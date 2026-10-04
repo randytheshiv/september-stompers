@@ -111,6 +111,7 @@ export default function StompersApp() {
   const [activeTab, setActiveTab] = useState('today');
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [showCompletedDistances, setShowCompletedDistances] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -979,7 +980,10 @@ export default function StompersApp() {
                   {rankings.map((player, idx) => (
                     <tr
                       key={player.name}
-                      onClick={() => setSelectedPlayer(selectedPlayer === player.name ? null : player.name)}
+                      onClick={() => {
+                        setSelectedPlayer(selectedPlayer === player.name ? null : player.name);
+                        setShowCompletedDistances(false);
+                      }}
                       className={`border-b border-gray-700 hover:bg-gray-700/30 transition cursor-pointer ${
                         idx < 3 ? 'bg-gray-700/20' : ''
                       } ${selectedPlayer === player.name ? 'bg-blue-900/40 border-l-4 border-blue-500' : ''}`}
@@ -1015,9 +1019,21 @@ export default function StompersApp() {
             {/* Selected Player Distances */}
             {selectedPlayer && (
               <div className="mt-6 p-4 md:p-6 bg-blue-900/20 border border-blue-600 rounded-lg">
-                <h3 className="text-blue-400 font-bold mb-4 text-lg">
-                  {selectedPlayer}'s Progress to Caribbean Destinations
-                </h3>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-blue-400 font-bold text-lg">
+                    {selectedPlayer}'s Progress to Caribbean Destinations
+                  </h3>
+                  <button
+                    onClick={() => setShowCompletedDistances(!showCompletedDistances)}
+                    className={`px-3 py-1 text-sm rounded font-semibold transition-colors ${
+                      showCompletedDistances
+                        ? 'bg-green-600 text-white'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    }`}
+                  >
+                    {showCompletedDistances ? '✓ Show Completed' : 'Show Completed'}
+                  </button>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {(() => {
                     const playerData = rankings.find(r => r.name === selectedPlayer);
@@ -1025,20 +1041,35 @@ export default function StompersApp() {
                     
                     return UNIQUE_DISTANCES.map((distance, idx) => {
                       const feetWalked = playerData.total * 2.5;
-                      const percentage = ((feetWalked / distance.distance) * 100).toFixed(1);
+                      const percentage = parseFloat(((feetWalked / distance.distance) * 100).toFixed(1));
+                      const isCompleted = percentage > 100;
+                      
+                      // Filter: show if under 100%, or if over 100% and showCompletedDistances is true
+                      if (isCompleted && !showCompletedDistances) return null;
+                      
                       return (
-                        <div key={distance.name} className="p-3 bg-gray-800/50 rounded border border-gray-700">
+                        <div key={distance.name} className={`p-3 rounded border ${
+                          isCompleted
+                            ? 'bg-green-900/30 border-green-600'
+                            : 'bg-gray-800/50 border-gray-700'
+                        }`}>
                           <div className="text-sm text-gray-300">{distance.name}</div>
-                          <div className="text-lg font-bold text-blue-300 mt-1">{percentage}%</div>
+                          <div className={`text-lg font-bold mt-1 ${
+                            isCompleted ? 'text-green-400' : 'text-blue-300'
+                          }`}>
+                            {percentage.toFixed(1)}%
+                          </div>
                           <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
                             <div 
-                              className="bg-blue-500 h-2 rounded-full transition-all" 
-                              style={{ width: `${Math.min(parseFloat(percentage), 100)}%` }}
+                              className={`h-2 rounded-full transition-all ${
+                                isCompleted ? 'bg-green-500' : 'bg-blue-500'
+                              }`}
+                              style={{ width: `${Math.min(percentage, 100)}%` }}
                             ></div>
                           </div>
                         </div>
                       );
-                    });
+                    }).filter(Boolean);
                   })()}
                 </div>
               </div>
